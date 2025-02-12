@@ -1,4 +1,4 @@
 
-# opensrp-client-chw-skeleton
-OpenSRP client SKELETON module library
+# opensrp-client-chw-hps
+OpenSRP client HPS module library
 
