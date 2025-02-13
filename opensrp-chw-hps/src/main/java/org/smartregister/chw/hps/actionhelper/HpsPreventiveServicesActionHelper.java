@@ -15,7 +15,7 @@ import java.util.Map;
 
 import timber.log.Timber;
 
-public class HpsOtherServicesActionHelper implements BaseHpsVisitAction.HpsVisitActionHelper {
+public class HpsPreventiveServicesActionHelper implements BaseHpsVisitAction.HpsVisitActionHelper {
 
     protected String jsonPayload;
 
@@ -28,7 +28,7 @@ public class HpsOtherServicesActionHelper implements BaseHpsVisitAction.HpsVisit
     protected MemberObject memberObject;
 
 
-    public HpsOtherServicesActionHelper(Context context, MemberObject memberObject) {
+    public HpsPreventiveServicesActionHelper(Context context, MemberObject memberObject) {
         this.context = context;
         this.memberObject = memberObject;
     }

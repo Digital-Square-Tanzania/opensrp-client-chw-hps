@@ -11,7 +11,7 @@ import org.smartregister.chw.hps.R;
 import org.smartregister.chw.hps.actionhelper.HpsClientCriteriaActionHelper;
 import org.smartregister.chw.hps.actionhelper.HpsCurativeServicesActionHelper;
 import org.smartregister.chw.hps.actionhelper.HpsEducationOnBehaviouralChangeActionHelper;
-import org.smartregister.chw.hps.actionhelper.HpsOtherServicesActionHelper;
+import org.smartregister.chw.hps.actionhelper.HpsPreventiveServicesActionHelper;
 import org.smartregister.chw.hps.actionhelper.HpsReferralServicesActionHelper;
 import org.smartregister.chw.hps.contract.BaseHpsVisitContract;
 import org.smartregister.chw.hps.domain.VisitDetail;
@@ -102,14 +102,14 @@ public class BaseHpsServiceVisitInteractor extends BaseHpsVisitInteractor {
 
     private void evaluateOtherHpsServices(Map<String, List<VisitDetail>> details) throws BaseHpsVisitAction.ValidationException {
 
-        HpsOtherServicesActionHelper actionHelper = new HpsOtherServicesActionHelper(mContext, memberObject);
-        BaseHpsVisitAction action = getBuilder(context.getString(R.string.hps_other_services))
+        HpsPreventiveServicesActionHelper actionHelper = new HpsPreventiveServicesActionHelper(mContext, memberObject);
+        BaseHpsVisitAction action = getBuilder(context.getString(R.string.hps_preventive_services))
                 .withOptional(false)
                 .withDetails(details)
                 .withHelper(actionHelper)
-                .withFormName(Constants.HPS_FOLLOWUP_FORMS.HPS_OTHER_SERVICES)
+                .withFormName(Constants.HPS_FOLLOWUP_FORMS.HPS_PREVENTIVE_SERVICES)
                 .build();
-        actionList.put(context.getString(R.string.hps_other_services), action);
+        actionList.put(context.getString(R.string.hps_preventive_services), action);
     }
 
     private void evaluateCurativeServices(Map<String, List<VisitDetail>> details) throws BaseHpsVisitAction.ValidationException {

@@ -68,7 +68,7 @@
 
     <string name="client_criteria">Kigezo cha Mteja</string>
     <string name="hps_education_on_behavioural_change">Elimu ya Mabadiliko ya Tabia</string>
-    <string name="hps_other_services">Huduma nyinginezo</string>
+    <string name="hps_preventive_services">Huduma Kinga</string>
     <string name="hps_curative_services">Huduma za Tiba</string>
     <string name="hps_referral_services">Huduma za Rufaa</string>
     <string name="hps_contraindication">Tatua vizuizi kwanza , kuendelea na upasuaji wa tohara</string>
