@@ -69,6 +69,7 @@
     <string name="hps_medical_history">Historia ya kitibabu</string>
     <string name="hps_physical_examination">Uchunguzi wa kimwili</string>
     <string name="hps_hts">Huduma za upimaji wa VVU</string>
+    <string name="hps_education_behavioral_change">Elimu za Mabadiliko ya tabia</string>
     <string name="hps_contraindication">Tatua vizuizi kwanza , kuendelea na upasuaji wa tohara</string>
     <string name="no_phone_number">Hakuna nambari ya simu</string>
     <string name="return_to_hps_clients">Rudi kwenye wateja wote wa tohara</string>

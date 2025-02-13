@@ -26,6 +26,7 @@
     <string name="hps_followup_visit">Follow Up Visit</string>
     <string name="hps_physical_examination">Physical Examination</string>
     <string name="hps_hts">HTS</string>
+    <string name="hps_education_behavioral_change">Behavioral Change Education</string>
 
     <string name="optional">Optional</string>
     <string name="error_unable_save_visit">Unable to save visit</string>
