@@ -33,6 +33,7 @@ public interface Constants {
         String MEDICAL_HISTORY = "hps_service_medical_history";
         String PHYSICAL_EXAMINATION = "hps_service_physical_examination";
         String HTS = "hps_service_hts";
+        String HPS_EDUCATION_BEHAVIORAL_CHANGE = "hps_education_behavioral_change";
     }
 
     interface TABLES {
