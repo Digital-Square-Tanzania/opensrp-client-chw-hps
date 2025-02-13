@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.smartregister.chw.hps.R;
 import org.smartregister.chw.hps.HpsLibrary;
 import org.smartregister.chw.hps.actionhelper.HpsActionHelper;
+import org.smartregister.chw.hps.actionhelper.HpsBehavioralChangeEducationActionHelper;
 import org.smartregister.chw.hps.actionhelper.HpsMedicalHistoryActionHelper;
 import org.smartregister.chw.hps.contract.BaseHpsVisitContract;
 import org.smartregister.chw.hps.domain.MemberObject;
@@ -65,6 +66,7 @@ public class BaseHpsServiceVisitInteractor extends BaseHpsVisitInteractor {
                 evaluateHpsMedicalHistory(details);
                 evaluateHpsPhysicalExam(details);
                 evaluateHpsHTS(details);
+                evaluateHpsBehavioralChangeEducation(details);
 
             } catch (BaseHpsVisitAction.ValidationException e) {
                 Timber.e(e);
@@ -111,6 +113,17 @@ public class BaseHpsServiceVisitInteractor extends BaseHpsVisitInteractor {
                 .withFormName(Constants.HPS_FOLLOWUP_FORMS.HTS)
                 .build();
         actionList.put(context.getString(R.string.hps_hts), action);
+    }
+    private void evaluateHpsBehavioralChangeEducation(Map<String, List<VisitDetail>> details) throws BaseHpsVisitAction.ValidationException {
+
+        HpsBehavioralChangeEducationActionHelper actionHelper = new HpsBehavioralChangeEducationActionHelper(mContext, memberObject);
+        BaseHpsVisitAction action = getBuilder(context.getString(R.string.hps_education_behavioral_change))
+                .withOptional(true)
+                .withDetails(details)
+                .withHelper(actionHelper)
+                .withFormName(Constants.HPS_FOLLOWUP_FORMS.HPS_EDUCATION_BEHAVIORAL_CHANGE)
+                .build();
+        actionList.put(context.getString(R.string.hps_education_behavioral_change), action);
     }
 
     @Override
