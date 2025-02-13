@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,13 +16,14 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.Period;
-import org.smartregister.chw.hps.R;
 import org.smartregister.chw.hps.HpsLibrary;
+import org.smartregister.chw.hps.R;
 import org.smartregister.chw.hps.contract.HpsProfileContract;
 import org.smartregister.chw.hps.custom_views.BaseHpsFloatingMenu;
 import org.smartregister.chw.hps.dao.HpsDao;
@@ -48,6 +48,7 @@ import timber.log.Timber;
 
 public abstract class BaseHpsProfileActivity extends BaseProfileActivity implements HpsProfileContract.View, HpsProfileContract.InteractorCallBack {
 
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM", Locale.getDefault());
     protected MemberObject memberObject;
     protected HpsProfileContract.Presenter profilePresenter;
     protected CircleImageView imageView;
@@ -83,7 +84,6 @@ public abstract class BaseHpsProfileActivity extends BaseProfileActivity impleme
     protected BaseHpsFloatingMenu baseHpsFloatingMenu;
     private TextView tvUpComingServices;
     private TextView tvFamilyStatus;
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM", Locale.getDefault());
     private ProgressBar progressBar;
 
     public static void startProfileActivity(Activity activity, String baseEntityId) {
@@ -103,16 +103,16 @@ public abstract class BaseHpsProfileActivity extends BaseProfileActivity impleme
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-            Drawable upArrow = getResources().getDrawable(R.drawable.ic_arrow_back_white_24dp);
-            upArrow.setColorFilter(getResources().getColor(R.color.text_blue), PorterDuff.Mode.SRC_ATOP);
+            Drawable upArrow = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_arrow_back_white_24dp, null);
+            if (upArrow != null) {
+                upArrow.setColorFilter(getResources().getColor(R.color.text_blue), PorterDuff.Mode.SRC_ATOP);
+            }
             actionBar.setHomeAsUpIndicator(upArrow);
         }
 
         toolbar.setNavigationOnClickListener(v -> BaseHpsProfileActivity.this.finish());
         appBarLayout = this.findViewById(R.id.collapsing_toolbar_appbarlayout);
-        if (Build.VERSION.SDK_INT >= 21) {
-            appBarLayout.setOutlineProvider(null);
-        }
+        appBarLayout.setOutlineProvider(null);
 
         textViewName = findViewById(R.id.textview_name);
         textViewGender = findViewById(R.id.textview_gender);
@@ -301,15 +301,11 @@ public abstract class BaseHpsProfileActivity extends BaseProfileActivity impleme
         if (StringUtils.isNotBlank(memberObject.getPrimaryCareGiver()) && memberObject.getPrimaryCareGiver().equals(memberObject.getBaseEntityId())) {
             findViewById(R.id.primary_hps_caregiver).setVisibility(View.GONE);
         }
-        if (memberObject.getHpsTestDate() != null) {
-            textview_positive_date.setText(getString(R.string.hps_positive) + " " + formatTime(memberObject.getHpsTestDate()));
-        }
     }
 
     @Override
     public void setOverDueColor() {
-        textViewRecordHps.setBackground(getResources().getDrawable(R.drawable.record_btn_selector_overdue));
-
+        ResourcesCompat.getDrawable(getResources(), R.drawable.record_btn_selector_overdue, null);
     }
 
     @Override
@@ -388,7 +384,7 @@ public abstract class BaseHpsProfileActivity extends BaseProfileActivity impleme
     @Nullable
     private String formatTime(Date dateTime) {
         try {
-            SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+            SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
             return formatter.format(dateTime);
         } catch (Exception e) {
             Timber.d(e);

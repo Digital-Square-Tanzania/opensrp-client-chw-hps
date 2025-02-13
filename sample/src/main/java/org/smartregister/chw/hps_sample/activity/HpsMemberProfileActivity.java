@@ -38,7 +38,7 @@ public class HpsMemberProfileActivity extends BaseHpsProfileActivity {
     @Override
     public void openFollowupVisit() {
         try {
-            startForm("hps_enrollment");
+            HpsServiceActivity.startHpsVisitActivity(this, "12345", false);
         } catch (Exception e) {
             Timber.e(e);
         }

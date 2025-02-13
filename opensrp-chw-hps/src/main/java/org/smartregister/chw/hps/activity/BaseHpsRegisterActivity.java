@@ -7,7 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.MenuRes;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.material.bottomnavigation.LabelVisibilityMode;
+import com.google.android.material.navigation.NavigationBarView;
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 import com.vijay.jsonwizard.domain.Form;
 
@@ -16,6 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.AllConstants;
 import org.smartregister.Context;
+import org.smartregister.chw.hps.R;
 import org.smartregister.chw.hps.contract.HpsRegisterContract;
 import org.smartregister.chw.hps.fragment.BaseHpsRegisterFragment;
 import org.smartregister.chw.hps.interactor.BaseHpsRegisterInteractor;
@@ -32,7 +33,6 @@ import org.smartregister.repository.BaseRepository;
 import org.smartregister.util.Utils;
 import org.smartregister.view.activity.BaseRegisterActivity;
 import org.smartregister.view.fragment.BaseRegisterFragment;
-import org.smartregister.chw.hps.R;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -120,7 +120,7 @@ public class BaseHpsRegisterActivity extends BaseRegisterActivity implements Hps
         bottomNavigationView = findViewById(org.smartregister.R.id.bottom_navigation);
 
         if (bottomNavigationView != null) {
-            bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
+            bottomNavigationView.setLabelVisibilityMode(NavigationBarView.LABEL_VISIBILITY_LABELED);
             bottomNavigationView.getMenu().removeItem(org.smartregister.R.id.action_clients);
             bottomNavigationView.getMenu().removeItem(R.id.action_register);
             bottomNavigationView.getMenu().removeItem(org.smartregister.R.id.action_search);
@@ -159,13 +159,14 @@ public class BaseHpsRegisterActivity extends BaseRegisterActivity implements Hps
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK && requestCode == Constants.REQUEST_CODE_GET_JSON) {
 
             try {
                 String jsonString = data.getStringExtra(Constants.JSON_FORM_EXTRA.JSON);
                 JSONObject form = new JSONObject(jsonString);
                 JSONArray fieldsOne = HpsJsonFormUtils.fields(form, Constants.STEP_ONE);
-                updateFormField(fieldsOne, DBConstants.KEY.RELATIONAL_ID, FAMILY_BASE_ENTITY_ID);
+                updateFormField(fieldsOne, FAMILY_BASE_ENTITY_ID);
                 presenter().saveForm(form.toString());
             } catch (JSONException e) {
                 Timber.e(e);
@@ -175,9 +176,9 @@ public class BaseHpsRegisterActivity extends BaseRegisterActivity implements Hps
         }
     }
 
-    private void updateFormField(JSONArray formFieldArrays, String formFieldKey, String updateValue) {
+    private void updateFormField(JSONArray formFieldArrays, String updateValue) {
         if (updateValue != null) {
-            JSONObject formObject = org.smartregister.util.JsonFormUtils.getFieldJSONObject(formFieldArrays, formFieldKey);
+            JSONObject formObject = org.smartregister.util.JsonFormUtils.getFieldJSONObject(formFieldArrays, DBConstants.KEY.RELATIONAL_ID);
             if (formObject != null) {
                 try {
                     formObject.remove(org.smartregister.util.JsonFormUtils.VALUE);
