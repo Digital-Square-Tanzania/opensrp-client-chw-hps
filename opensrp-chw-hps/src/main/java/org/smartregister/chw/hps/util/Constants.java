@@ -30,9 +30,11 @@ public interface Constants {
     }
 
     interface HPS_FOLLOWUP_FORMS {
-        String MEDICAL_HISTORY = "hps_service_medical_history";
-        String PHYSICAL_EXAMINATION = "hps_service_physical_examination";
-        String HTS = "hps_service_hts";
+        String CLIENT_CRITERIA = "hps_client_criteria";
+        String EDUCATION_ON_BEHAVIOURAL_CHANGE = "hps_education_on_behavioural_change";
+        String HPS_OTHER_SERVICES = "hps_other_services";
+        String HPS_CURATIVE_SERVICES = "hps_curative_services";
+        String HPS_REFERRAL_SERVICES = "hps_referral_services";
     }
 
     interface TABLES {
