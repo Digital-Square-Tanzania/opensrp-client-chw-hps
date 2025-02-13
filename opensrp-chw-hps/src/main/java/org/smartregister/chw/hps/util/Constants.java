@@ -38,7 +38,7 @@ public interface Constants {
     }
 
     interface TABLES {
-        String HPS_ENROLLMENT = "ec_hps_enrollment";
+        String HPS_ENROLLMENT = "ec_hps_register";
         String HPS_SERVICE = "ec_hps_services";
     }
 
