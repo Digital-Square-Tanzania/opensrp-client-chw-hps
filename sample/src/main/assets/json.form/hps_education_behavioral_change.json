@@ -82,6 +82,9 @@
         "text_color": "#000000",
         "type": "check_box",
         "combine_checkbox_option_values": "true",
+        "exclusive": [
+          "other_educations"
+        ],
         "options": [
           {
             "key": "nutrition",
@@ -290,6 +293,13 @@
         "v_required": {
           "value": "true",
           "err": "Please select an answer"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "hps_education_behavioral_change.yml"
+            }
+          }
         }
       },
       {
@@ -302,6 +312,13 @@
         "v_required": {
           "value": "true",
           "err": "Please specify"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "hps_education_behavioral_change.yml"
+            }
+          }
         }
       }
     ]
