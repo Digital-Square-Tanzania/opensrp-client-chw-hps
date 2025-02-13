@@ -1,6 +1,6 @@
 {
   "count": "1",
-  "encounter_type": "Hps Behavioral Change Education",
+  "encounter_type": "HPS Behavioral Change Education",
   "entity_id": "",
   "metadata": {
     "start": {
@@ -67,16 +67,21 @@
             "openmrs_entity": "concept",
             "openmrs_entity_id": "no_provided"
           }
-        ]
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "Please select an answer"
+        }
       },
       {
         "key": "type_of_education_provided",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "type_of_education_provided",
-        "label": "Service delivery approach",
+        "label": "Type of Education provided",
         "text_color": "#000000",
         "type": "check_box",
+        "combine_checkbox_option_values": "true",
         "options": [
           {
             "key": "nutrition",
@@ -285,6 +290,18 @@
         "v_required": {
           "value": "true",
           "err": "Please select an answer"
+        }
+      },
+      {
+        "key": "other_education_provided",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "other_education_provided",
+        "type": "edit_text",
+        "hint": "Other(Specify)",
+        "v_required": {
+          "value": "true",
+          "err": "Please specify"
         }
       }
     ]
