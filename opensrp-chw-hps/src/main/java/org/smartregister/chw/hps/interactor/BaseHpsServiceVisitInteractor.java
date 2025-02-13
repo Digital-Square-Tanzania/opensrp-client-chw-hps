@@ -6,18 +6,19 @@ import android.content.Context;
 import androidx.annotation.VisibleForTesting;
 
 import org.apache.commons.lang3.StringUtils;
-import org.smartregister.chw.hps.R;
 import org.smartregister.chw.hps.HpsLibrary;
-import org.smartregister.chw.hps.actionhelper.HpsActionHelper;
-import org.smartregister.chw.hps.actionhelper.HpsMedicalHistoryActionHelper;
+import org.smartregister.chw.hps.R;
+import org.smartregister.chw.hps.actionhelper.HpsClientCriteriaActionHelper;
+import org.smartregister.chw.hps.actionhelper.HpsCurativeServicesActionHelper;
+import org.smartregister.chw.hps.actionhelper.HpsEducationOnBehaviouralChangeActionHelper;
+import org.smartregister.chw.hps.actionhelper.HpsOtherServicesActionHelper;
+import org.smartregister.chw.hps.actionhelper.HpsReferralServicesActionHelper;
 import org.smartregister.chw.hps.contract.BaseHpsVisitContract;
-import org.smartregister.chw.hps.domain.MemberObject;
 import org.smartregister.chw.hps.domain.VisitDetail;
 import org.smartregister.chw.hps.model.BaseHpsVisitAction;
 import org.smartregister.chw.hps.util.AppExecutors;
 import org.smartregister.chw.hps.util.Constants;
 import org.smartregister.sync.helper.ECSyncHelper;
-
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,12 +27,11 @@ import timber.log.Timber;
 
 public class BaseHpsServiceVisitInteractor extends BaseHpsVisitInteractor {
 
-    protected BaseHpsVisitContract.InteractorCallBack callBack;
-
-    String visitType;
     private final HpsLibrary hpsLibrary;
     private final LinkedHashMap<String, BaseHpsVisitAction> actionList;
+    protected BaseHpsVisitContract.InteractorCallBack callBack;
     protected AppExecutors appExecutors;
+    String visitType;
     private ECSyncHelper syncHelper;
     private Context mContext;
 
@@ -62,10 +62,11 @@ public class BaseHpsServiceVisitInteractor extends BaseHpsVisitInteractor {
         this.callBack = callBack;
         final Runnable runnable = () -> {
             try {
-                evaluateHpsMedicalHistory(details);
-                evaluateHpsPhysicalExam(details);
-                evaluateHpsHTS(details);
-
+                evaluateHpsClientCriteria(details);
+                evaluateHpsEducationOnBehavioralChange(details);
+                evaluateOtherHpsServices(details);
+                evaluateCurativeServices(details);
+                evaluateReferralServices(details);
             } catch (BaseHpsVisitAction.ValidationException e) {
                 Timber.e(e);
             }
@@ -76,41 +77,63 @@ public class BaseHpsServiceVisitInteractor extends BaseHpsVisitInteractor {
         appExecutors.diskIO().execute(runnable);
     }
 
-    private void evaluateHpsMedicalHistory(Map<String, List<VisitDetail>> details) throws BaseHpsVisitAction.ValidationException {
-
-        HpsMedicalHistoryActionHelper actionHelper = new HpsMedicalHistory(mContext, memberObject);
-        BaseHpsVisitAction action = getBuilder(context.getString(R.string.hps_medical_history))
-                .withOptional(true)
+    private void evaluateHpsClientCriteria(Map<String, List<VisitDetail>> details) throws BaseHpsVisitAction.ValidationException {
+        HpsClientCriteriaActionHelper actionHelper = new HpsClientCriteriaActionHelper(mContext, memberObject);
+        BaseHpsVisitAction action = getBuilder(context.getString(R.string.client_criteria))
+                .withOptional(false)
                 .withDetails(details)
                 .withHelper(actionHelper)
-                .withFormName(Constants.HPS_FOLLOWUP_FORMS.MEDICAL_HISTORY)
+                .withFormName(Constants.HPS_FOLLOWUP_FORMS.CLIENT_CRITERIA)
                 .build();
-        actionList.put(context.getString(R.string.hps_medical_history), action);
-
+        actionList.put(context.getString(R.string.client_criteria), action);
     }
 
-    private void evaluateHpsPhysicalExam(Map<String, List<VisitDetail>> details) throws BaseHpsVisitAction.ValidationException {
+    private void evaluateHpsEducationOnBehavioralChange(Map<String, List<VisitDetail>> details) throws BaseHpsVisitAction.ValidationException {
 
-        HpsPhysicalExamActionHelper actionHelper = new HpsPhysicalExamActionHelper(mContext, memberObject);
-        BaseHpsVisitAction action = getBuilder(context.getString(R.string.hps_physical_examination))
-                .withOptional(true)
+        HpsEducationOnBehaviouralChangeActionHelper actionHelper = new HpsEducationOnBehaviouralChangeActionHelper(mContext, memberObject);
+        BaseHpsVisitAction action = getBuilder(context.getString(R.string.hps_education_on_behavioural_change))
+                .withOptional(false)
                 .withDetails(details)
                 .withHelper(actionHelper)
-                .withFormName(Constants.HPS_FOLLOWUP_FORMS.PHYSICAL_EXAMINATION)
+                .withFormName(Constants.HPS_FOLLOWUP_FORMS.EDUCATION_ON_BEHAVIOURAL_CHANGE)
                 .build();
-        actionList.put(context.getString(R.string.hps_physical_examination), action);
+        actionList.put(context.getString(R.string.hps_education_on_behavioural_change), action);
     }
 
-    private void evaluateHpsHTS(Map<String, List<VisitDetail>> details) throws BaseHpsVisitAction.ValidationException {
+    private void evaluateOtherHpsServices(Map<String, List<VisitDetail>> details) throws BaseHpsVisitAction.ValidationException {
 
-        HpsActionHelper actionHelper = new HpsActionHelper(mContext, memberObject);
-        BaseHpsVisitAction action = getBuilder(context.getString(R.string.hps_hts))
-                .withOptional(true)
+        HpsOtherServicesActionHelper actionHelper = new HpsOtherServicesActionHelper(mContext, memberObject);
+        BaseHpsVisitAction action = getBuilder(context.getString(R.string.hps_other_services))
+                .withOptional(false)
                 .withDetails(details)
                 .withHelper(actionHelper)
-                .withFormName(Constants.HPS_FOLLOWUP_FORMS.HTS)
+                .withFormName(Constants.HPS_FOLLOWUP_FORMS.HPS_OTHER_SERVICES)
                 .build();
-        actionList.put(context.getString(R.string.hps_hts), action);
+        actionList.put(context.getString(R.string.hps_other_services), action);
+    }
+
+    private void evaluateCurativeServices(Map<String, List<VisitDetail>> details) throws BaseHpsVisitAction.ValidationException {
+
+        HpsCurativeServicesActionHelper actionHelper = new HpsCurativeServicesActionHelper(mContext, memberObject);
+        BaseHpsVisitAction action = getBuilder(context.getString(R.string.hps_curative_services))
+                .withOptional(false)
+                .withDetails(details)
+                .withHelper(actionHelper)
+                .withFormName(Constants.HPS_FOLLOWUP_FORMS.HPS_CURATIVE_SERVICES)
+                .build();
+        actionList.put(context.getString(R.string.hps_curative_services), action);
+    }
+
+    private void evaluateReferralServices(Map<String, List<VisitDetail>> details) throws BaseHpsVisitAction.ValidationException {
+
+        HpsReferralServicesActionHelper actionHelper = new HpsReferralServicesActionHelper(mContext, memberObject);
+        BaseHpsVisitAction action = getBuilder(context.getString(R.string.hps_referral_services))
+                .withOptional(false)
+                .withDetails(details)
+                .withHelper(actionHelper)
+                .withFormName(Constants.HPS_FOLLOWUP_FORMS.HPS_REFERRAL_SERVICES)
+                .build();
+        actionList.put(context.getString(R.string.hps_referral_services), action);
     }
 
     @Override
@@ -121,50 +144,6 @@ public class BaseHpsServiceVisitInteractor extends BaseHpsVisitInteractor {
     @Override
     protected String getTableName() {
         return Constants.TABLES.HPS_SERVICE;
-    }
-
-    private class HpsMedicalHistory extends org.smartregister.chw.hps.actionhelper.HpsMedicalHistoryActionHelper {
-
-
-        public HpsMedicalHistory(Context context, MemberObject memberObject) {
-            super(context, memberObject);
-        }
-
-        @Override
-        public String postProcess(String s) {
-            if (StringUtils.isNotBlank(medical_history)) {
-                try {
-                    evaluateHpsPhysicalExam(details);
-                    evaluateHpsHTS(details);
-                } catch (BaseHpsVisitAction.ValidationException e) {
-                    e.printStackTrace();
-                }
-            }
-            new AppExecutors().mainThread().execute(() -> callBack.preloadActions(actionList));
-            return super.postProcess(s);
-        }
-
-    }
-
-    private class HpsPhysicalExamActionHelper extends org.smartregister.chw.hps.actionhelper.HpsPhysicalExamActionHelper {
-
-        public HpsPhysicalExamActionHelper(Context context, MemberObject memberObject) {
-            super(context, memberObject);
-        }
-
-        @Override
-        public String postProcess(String s) {
-            if (StringUtils.isNotBlank(medical_history)) {
-                try {
-                    evaluateHpsHTS(details);
-                } catch (BaseHpsVisitAction.ValidationException e) {
-                    e.printStackTrace();
-                }
-            }
-            new AppExecutors().mainThread().execute(() -> callBack.preloadActions(actionList));
-            return super.postProcess(s);
-        }
-
     }
 
 }
