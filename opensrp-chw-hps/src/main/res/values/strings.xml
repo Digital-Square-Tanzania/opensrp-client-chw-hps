@@ -22,10 +22,12 @@
 
     <string name="hps_profile">HPS Profile</string>
 
-    <string name="hps_medical_history">Medical History</string>
+    <string name="client_criteria">Client Criteria</string>
     <string name="hps_followup_visit">Follow Up Visit</string>
-    <string name="hps_physical_examination">Physical Examination</string>
-    <string name="hps_hts">HTS</string>
+    <string name="hps_education_on_behavioural_change">Education on Behavioural Change</string>
+    <string name="hps_other_services">Other Services</string>
+    <string name="hps_curative_services">Curative Services</string>
+    <string name="hps_referral_services">Referral Services</string>
 
     <string name="optional">Optional</string>
     <string name="error_unable_save_visit">Unable to save visit</string>
