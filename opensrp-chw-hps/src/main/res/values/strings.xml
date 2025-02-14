@@ -2,7 +2,7 @@
     <string name="app_name" translatable="false">hps</string>
     <string name="error_unable_to_start_form">An error occurred when starting the form</string>
     <string name="error_unable_to_save_form">An error occurred when saving the form</string>
-    <string name="hps">Hps</string>
+    <string name="hps">HPS</string>
     <string name="add_member">Add Member</string>
     <string name="sort">Sort</string>
     <string name="home">Home</string>
@@ -48,7 +48,6 @@
     <string name="call_hps_client">Hps Client</string>
     <string name="head_of_family">Head of family</string>
     <string name="hps_client">Hps Client</string>
-    <string name="hps_contraindication">Clear Contraindication first, to proceed with MC procedure</string>
     <string name="copy_to_clipboard">Copy to clipboard</string>
     <string name="copied_phone_number">PhoneNumber copied to clipboard</string>
     <string name="call">Call</string>
@@ -73,5 +72,6 @@
     <string name="female">Female</string>
     <string name="return_to_hps_clients">Return to HPS Clients</string>
     <string name="number_not_filled">client phone number, not filled</string>
+    <string name="hps_visit">HPS Visit</string>
 
 </resources>

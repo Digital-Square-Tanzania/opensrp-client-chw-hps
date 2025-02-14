@@ -1,7 +1,7 @@
 <resources>
     <string name="error_unable_to_start_form">Hitilafu imetokea wakati wa kuanzisha fomu</string>
     <string name="error_unable_to_save_form">Hitilafu imetokea wakati wa kuhifadhi fomu</string>
-    <string name="hps">Hps</string>
+    <string name="hps">Elimu ya Afya kwa Umma</string>
     <string name="add_member">Sajili mwanafamilia</string>
     <string name="sort">Panga</string>
     <string name="home">Nyumbani</string>
@@ -71,9 +71,9 @@
     <string name="hps_preventive_services">Huduma Kinga</string>
     <string name="hps_curative_services">Huduma za Tiba</string>
     <string name="hps_referral_services">Huduma za Rufaa</string>
-    <string name="hps_contraindication">Tatua vizuizi kwanza , kuendelea na upasuaji wa tohara</string>
     <string name="no_phone_number">Hakuna nambari ya simu</string>
     <string name="return_to_hps_clients">Rudi kwenye wateja wote wa tohara</string>
     <string name="number_not_filled">Nambari ya simu ya mteja, haijajazwa</string>
+    <string name="hps_visit">Tembeleo la kutoa elimu ya Afya kwa Umma</string>
 
 </resources>
