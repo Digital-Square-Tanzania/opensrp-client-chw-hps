@@ -53,7 +53,7 @@ public class HpsPreventiveServicesActionHelper implements BaseHpsVisitAction.Hps
     public void onPayloadReceived(String jsonPayload) {
         try {
             JSONObject jsonObject = new JSONObject(jsonPayload);
-            ecMaterialsDistributed = JsonFormUtils.getValue(jsonObject, "ec_materials_distributed");
+            ecMaterialsDistributed = JsonFormUtils.getValue(jsonObject, "provide_iec_materials");
         } catch (JSONException e) {
             Timber.e(e);
         }
