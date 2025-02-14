@@ -55,7 +55,7 @@ public class HpsReferralServicesActionHelper implements BaseHpsVisitAction.HpsVi
     public void onPayloadReceived(String jsonPayload) {
         try {
             JSONObject jsonObject = new JSONObject(jsonPayload);
-            wereReferralServicesProvided = JsonFormUtils.getValue(jsonObject, "were_referral_services_provided");
+            wereReferralServicesProvided = JsonFormUtils.getValue(jsonObject, "provide_referral_services");
         } catch (JSONException e) {
             Timber.e(e);
         }

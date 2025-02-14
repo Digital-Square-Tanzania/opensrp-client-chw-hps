@@ -18,7 +18,7 @@ public interface Constants {
     interface EVENT_TYPE {
         String HPS_CLIENT_ENROLLMENT = "HPS Client Enrollment";
         String HPS_HOUSEHOLD_ENROLLMENT = "HPS Household Enrollment";
-        String HPS_CLIENT_FOLLOW_UP_VISIT = "Hps Client Follow-up Visit";
+        String HPS_CLIENT_FOLLOW_UP_VISIT = "HPS Client Follow-up Visit";
         String VOID_EVENT = "Void Event";
         String CLOSE_HPS_SERVICE = "Close Hps Service";
 

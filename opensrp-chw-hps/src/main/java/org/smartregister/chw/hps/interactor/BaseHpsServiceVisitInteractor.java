@@ -80,7 +80,7 @@ public class BaseHpsServiceVisitInteractor extends BaseHpsVisitInteractor {
     private void evaluateHpsClientCriteria(Map<String, List<VisitDetail>> details) throws BaseHpsVisitAction.ValidationException {
         HpsClientCriteriaActionHelper actionHelper = new HpsClientCriteriaActionHelper(mContext, memberObject);
         BaseHpsVisitAction action = getBuilder(context.getString(R.string.client_criteria))
-                .withOptional(true)
+                .withOptional(false)
                 .withDetails(details)
                 .withHelper(actionHelper)
                 .withFormName(Constants.HPS_FOLLOWUP_FORMS.CLIENT_CRITERIA)
@@ -92,7 +92,7 @@ public class BaseHpsServiceVisitInteractor extends BaseHpsVisitInteractor {
 
         HpsEducationOnBehaviouralChangeActionHelper actionHelper = new HpsEducationOnBehaviouralChangeActionHelper(mContext, memberObject);
         BaseHpsVisitAction action = getBuilder(context.getString(R.string.hps_education_on_behavioural_change))
-                .withOptional(true)
+                .withOptional(false)
                 .withDetails(details)
                 .withHelper(actionHelper)
                 .withFormName(Constants.HPS_FOLLOWUP_FORMS.EDUCATION_ON_BEHAVIOURAL_CHANGE)
@@ -104,7 +104,7 @@ public class BaseHpsServiceVisitInteractor extends BaseHpsVisitInteractor {
 
         HpsPreventiveServicesActionHelper actionHelper = new HpsPreventiveServicesActionHelper(mContext, memberObject);
         BaseHpsVisitAction action = getBuilder(context.getString(R.string.hps_preventive_services))
-                .withOptional(true)
+                .withOptional(false)
                 .withDetails(details)
                 .withHelper(actionHelper)
                 .withFormName(Constants.HPS_FOLLOWUP_FORMS.HPS_PREVENTIVE_SERVICES)
@@ -128,7 +128,7 @@ public class BaseHpsServiceVisitInteractor extends BaseHpsVisitInteractor {
 
         HpsReferralServicesActionHelper actionHelper = new HpsReferralServicesActionHelper(mContext, memberObject);
         BaseHpsVisitAction action = getBuilder(context.getString(R.string.hps_referral_services))
-                .withOptional(true)
+                .withOptional(false)
                 .withDetails(details)
                 .withHelper(actionHelper)
                 .withFormName(Constants.HPS_FOLLOWUP_FORMS.HPS_REFERRAL_SERVICES)
