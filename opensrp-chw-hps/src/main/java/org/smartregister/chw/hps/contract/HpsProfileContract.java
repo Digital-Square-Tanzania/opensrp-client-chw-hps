@@ -62,8 +62,5 @@ public interface HpsProfileContract {
 
         void continueService();
 
-
-        void continueDischarge();
-
     }
 }

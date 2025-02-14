@@ -38,7 +38,7 @@ public class BaseHpsRegisterFragmentPresenterTest {
 
     @Test
     public void getMainCondition() {
-        Assert.assertEquals(" ec_hps_enrollment.is_closed = 0 ", baseHpsRegisterFragmentPresenter.getMainCondition());
+        Assert.assertEquals(" ec_hps_client_register.is_closed = 0 ", baseHpsRegisterFragmentPresenter.getMainCondition());
     }
 
     @Test
@@ -48,20 +48,20 @@ public class BaseHpsRegisterFragmentPresenterTest {
 
     @Test
     public void getDefaultSortQuery() {
-        Assert.assertEquals(Constants.TABLES.HPS_ENROLLMENT + "." + DBConstants.KEY.LAST_INTERACTED_WITH + " DESC ", baseHpsRegisterFragmentPresenter.getDefaultSortQuery());
+        Assert.assertEquals(Constants.TABLES.HPS_CLIENT_REGISTER + "." + DBConstants.KEY.LAST_INTERACTED_WITH + " DESC ", baseHpsRegisterFragmentPresenter.getDefaultSortQuery());
     }
 
     @Test
     public void getMainTable() {
-        Assert.assertEquals(Constants.TABLES.HPS_ENROLLMENT, baseHpsRegisterFragmentPresenter.getMainTable());
+        Assert.assertEquals(Constants.TABLES.HPS_CLIENT_REGISTER, baseHpsRegisterFragmentPresenter.getMainTable());
     }
 
     @Test
     public void initializeQueries() {
         Set<View> visibleColumns = new TreeSet<>();
         baseHpsRegisterFragmentPresenter.initializeQueries(null);
-        Mockito.doNothing().when(view).initializeQueryParams(Constants.TABLES.HPS_ENROLLMENT, null, null);
-        Mockito.verify(view).initializeQueryParams(Constants.TABLES.HPS_ENROLLMENT, null, null);
+        Mockito.doNothing().when(view).initializeQueryParams(Constants.TABLES.HPS_CLIENT_REGISTER, null, null);
+        Mockito.verify(view).initializeQueryParams(Constants.TABLES.HPS_CLIENT_REGISTER, null, null);
         Mockito.verify(view).initializeAdapter(visibleColumns);
         Mockito.verify(view).countExecute();
         Mockito.verify(view).filterandSortInInitializeQueries();

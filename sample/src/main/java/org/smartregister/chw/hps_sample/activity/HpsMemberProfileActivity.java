@@ -86,12 +86,6 @@ public class HpsMemberProfileActivity extends BaseHpsProfileActivity {
 
     }
 
-
-    @Override
-    public void continueDischarge() {
-
-    }
-
     @Override
     protected Visit getServiceVisit() {
         return serviceVisit;

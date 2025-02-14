@@ -90,10 +90,10 @@ public class HpsJsonFormUtils extends org.smartregister.util.JsonFormUtils {
         String entityId = getString(jsonForm, ENTITY_ID);
         String encounter_type = jsonForm.optString(Constants.JSON_FORM_EXTRA.ENCOUNTER_TYPE);
 
-        if (Constants.EVENT_TYPE.HPS_ENROLLMENT.equals(encounter_type)) {
-            encounter_type = Constants.TABLES.HPS_ENROLLMENT;
-        } else if (Constants.EVENT_TYPE.HPS_SERVICES.equals(encounter_type)) {
-            encounter_type = Constants.TABLES.HPS_SERVICE;
+        if (Constants.EVENT_TYPE.HPS_CLIENT_ENROLLMENT.equals(encounter_type)) {
+            encounter_type = Constants.TABLES.HPS_CLIENT_REGISTER;
+        } else if (Constants.EVENT_TYPE.HPS_CLIENT_FOLLOW_UP_VISIT.equals(encounter_type)) {
+            encounter_type = Constants.TABLES.HPS_CLIENT_SERVICES;
         }
         return org.smartregister.util.JsonFormUtils.createEvent(fields, getJSONObject(jsonForm, METADATA), formTag(allSharedPreferences), entityId, getString(jsonForm, ENCOUNTER_TYPE), encounter_type);
     }
@@ -151,7 +151,7 @@ public class HpsJsonFormUtils extends org.smartregister.util.JsonFormUtils {
             Triple<Boolean, JSONObject, JSONArray> registrationFormParams = validateParameters(map.getValue());
 
             if (!registrationFormParams.getLeft()) {
-                return null;
+                 continue;
             }
 
             if (jsonForm == null) {

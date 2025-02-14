@@ -227,13 +227,12 @@ public abstract class BaseHpsProfileActivity extends BaseProfileActivity impleme
     }
 
     protected Visit getServiceVisit() {
-        return HpsLibrary.getInstance().visitRepository().getLatestVisit(memberObject.getBaseEntityId(), Constants.EVENT_TYPE.HPS_SERVICES);
+        return HpsLibrary.getInstance().visitRepository().getLatestVisit(memberObject.getBaseEntityId(), Constants.EVENT_TYPE.HPS_CLIENT_FOLLOW_UP_VISIT);
     }
 
 
     protected void processHpsService() {
         rlLastVisit.setVisibility(View.VISIBLE);
-        findViewById(R.id.family_hps_head).setVisibility(View.VISIBLE);
     }
 
 
@@ -256,8 +255,6 @@ public abstract class BaseHpsProfileActivity extends BaseProfileActivity impleme
             this.openFollowupVisit();
         } else if (id == R.id.continue_hps_service) {
             this.continueService();
-        } else if (id == R.id.textview_continue) {
-            this.continueDischarge();
         }
     }
 
@@ -291,7 +288,7 @@ public abstract class BaseHpsProfileActivity extends BaseProfileActivity impleme
     @SuppressLint("DefaultLocale")
     @Override
     public void setProfileViewWithData() {
-        int age = new Period(new DateTime(memberObject.getAge()), new DateTime()).getYears();
+        int age = memberObject.getAge();
         textViewName.setText(String.format("%s %s %s, %d", memberObject.getFirstName(), memberObject.getMiddleName(), memberObject.getLastName(), age));
         textViewGender.setText(HpsUtil.getGenderTranslated(this, memberObject.getGender()));
         textViewLocation.setText(memberObject.getAddress());
@@ -397,7 +394,6 @@ public abstract class BaseHpsProfileActivity extends BaseProfileActivity impleme
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Constants.REQUEST_CODE_GET_JSON && resultCode == RESULT_OK) {
             profilePresenter.saveForm(data.getStringExtra(Constants.JSON_FORM_EXTRA.JSON));
-            finish();
         }
     }
 

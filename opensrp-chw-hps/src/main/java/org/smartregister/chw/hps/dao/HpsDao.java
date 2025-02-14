@@ -4,7 +4,6 @@ import org.smartregister.chw.hps.domain.MemberObject;
 import org.smartregister.dao.AbstractDao;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -57,39 +56,14 @@ public class HpsDao extends AbstractDao {
         return memberObject;
     };
 
-    public static Date getHpsTestDate(String baseEntityID) {
-        String sql = "select hps_test_date from ec_hps_enrollment where base_entity_id = '" + baseEntityID + "'";
-
-        DataMap<Date> dataMap = cursor -> getCursorValueAsDate(cursor, "hps_test_date", getNativeFormsDateFormat());
-
-        List<Date> res = readData(sql, dataMap);
-        if (res == null || res.size() != 1)
-            return null;
-
-        return res.get(0);
-    }
-
-    public static String getClientHpsID(String baseEntityId) {
-        String sql = "SELECT hps_client_id FROM ec_hps_enrollment p " +
-                " WHERE p.base_entity_id = '" + baseEntityId + "' ORDER BY enrollment_date DESC LIMIT 1";
-
-        DataMap<String> dataMap = cursor -> getCursorValue(cursor, "hps_client_id");
-
-        List<String> res = readData(sql, dataMap);
-        if (res != null && res.size() != 0 && res.get(0) != null) {
-            return res.get(0);
-        }
-        return "";
-    }
-
     public static String getEnrollmentDate(String baseEntityId) {
-        String sql = "SELECT enrollment_date FROM ec_hps_enrollment p " +
+        String sql = "SELECT enrollment_date FROM ec_hps_client_register p " +
                 " WHERE p.base_entity_id = '" + baseEntityId + "' ORDER BY enrollment_date DESC LIMIT 1";
 
         DataMap<String> dataMap = cursor -> getCursorValue(cursor, "enrollment_date");
 
         List<String> res = readData(sql, dataMap);
-        if (res != null && res.size() != 0 && res.get(0) != null) {
+        if (res != null && !res.isEmpty() && res.get(0) != null) {
             return res.get(0);
         }
         return "";
@@ -100,14 +74,14 @@ public class HpsDao extends AbstractDao {
         DataMap<Integer> map = cursor -> getCursorIntValue(cursor, "visit_number");
         List<Integer> res = readData(sql, map);
 
-        if (res != null && res.size() > 0 && res.get(0) != null) {
+        if (res != null && !res.isEmpty() && res.get(0) != null) {
             return res.get(0) + 1;
         } else
             return 0;
     }
 
     public static boolean isRegisteredForHps(String baseEntityID) {
-        String sql = "SELECT count(p.base_entity_id) count FROM ec_hps_enrollment p " +
+        String sql = "SELECT count(p.base_entity_id) count FROM ec_hps_client_register p " +
                 "WHERE p.base_entity_id = '" + baseEntityID + "' AND p.is_closed = 0 ";
 
         DataMap<Integer> dataMap = cursor -> getCursorIntValue(cursor, "count");
@@ -120,7 +94,7 @@ public class HpsDao extends AbstractDao {
     }
 
     public static Integer getHpsFamilyMembersCount(String familyBaseEntityId) {
-        String sql = "SELECT count(emc.base_entity_id) count FROM ec_hps_enrollment emc " +
+        String sql = "SELECT count(emc.base_entity_id) count FROM ec_hps_client_register emc " +
                 "INNER Join ec_family_member fm on fm.base_entity_id = emc.base_entity_id " +
                 "WHERE fm.relational_id = '" + familyBaseEntityId + "' AND fm.is_closed = 0 " +
                 "AND emc.is_closed = 0 AND emc.hps = 1";
@@ -128,7 +102,7 @@ public class HpsDao extends AbstractDao {
         DataMap<Integer> dataMap = cursor -> getCursorIntValue(cursor, "count");
 
         List<Integer> res = readData(sql, dataMap);
-        if (res == null || res.size() == 0)
+        if (res == null || res.isEmpty())
             return 0;
         return res.get(0);
     }
@@ -161,7 +135,7 @@ public class HpsDao extends AbstractDao {
                 "mr.* " +
                 "from ec_family_member m " +
                 "inner join ec_family f on m.relational_id = f.base_entity_id " +
-                "inner join ec_hps_enrollment mr on mr.base_entity_id = m.base_entity_id " +
+                "inner join ec_hps_client_register mr on mr.base_entity_id = m.base_entity_id " +
                 "left join ec_family_member fh on fh.base_entity_id = f.family_head " +
                 "left join ec_family_member pcg on pcg.base_entity_id = f.primary_caregiver " +
                 "where mr.is_closed = 0 AND m.base_entity_id ='" + baseEntityID + "' ";
@@ -200,7 +174,7 @@ public class HpsDao extends AbstractDao {
                 "mr.* " +
                 "from ec_family_member m " +
                 "inner join ec_family f on m.relational_id = f.base_entity_id " +
-                "inner join ec_hps_enrollment mr on mr.base_entity_id = m.base_entity_id " +
+                "inner join ec_hps_client_register mr on mr.base_entity_id = m.base_entity_id " +
                 "left join ec_family_member fh on fh.base_entity_id = f.family_head " +
                 "left join ec_family_member pcg on pcg.base_entity_id = f.primary_caregiver " +
                 "where mr.is_closed = 0 ";

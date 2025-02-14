@@ -34,7 +34,7 @@ public class HpsDaoTest extends HpsDao {
     public void testIsRegisteredForHps() {
         Mockito.doReturn(database).when(repository).getReadableDatabase();
         boolean registered = HpsDao.isRegisteredForHps("12345");
-        Mockito.verify(database).rawQuery(Mockito.contains("SELECT count(p.base_entity_id) count FROM ec_hps_enrollment p WHERE p.base_entity_id = '12345' AND p.is_closed = 0"), Mockito.any());
+        Mockito.verify(database).rawQuery(Mockito.contains("SELECT count(p.base_entity_id) count FROM ec_hps_client_register p WHERE p.base_entity_id = '12345' AND p.is_closed = 0"), Mockito.any());
         Assert.assertFalse(registered);
     }
 
@@ -42,7 +42,7 @@ public class HpsDaoTest extends HpsDao {
     public void testGetHpsTestDate() {
         Mockito.doReturn(database).when(repository).getReadableDatabase();
         Date testDate = HpsDao.getHpsTestDate("34233");
-        Mockito.verify(database).rawQuery(Mockito.contains("select hps_test_date from ec_hps_enrollment where base_entity_id = '34233'"), Mockito.any());
+        Mockito.verify(database).rawQuery(Mockito.contains("select hps_test_date from ec_hps_client_register where base_entity_id = '34233'"), Mockito.any());
     }
 
 

@@ -69,7 +69,7 @@ public class BaseHpsVisitInteractor implements BaseHpsVisitContract.Interactor {
         if(StringUtils.isNotBlank(visitType)){
             return visitType;
         }
-        return Constants.EVENT_TYPE.HPS_ENROLLMENT;
+        return Constants.EVENT_TYPE.HPS_CLIENT_ENROLLMENT;
     }
 
     @Override
@@ -374,10 +374,10 @@ public class BaseHpsVisitInteractor implements BaseHpsVisitContract.Interactor {
     }
 
     protected String getEncounterType() {
-        return Constants.EVENT_TYPE.HPS_ENROLLMENT;
+        return Constants.EVENT_TYPE.HPS_CLIENT_ENROLLMENT;
     }
 
     protected String getTableName() {
-        return Constants.TABLES.HPS_ENROLLMENT;
+        return Constants.TABLES.HPS_CLIENT_REGISTER;
     }
 }

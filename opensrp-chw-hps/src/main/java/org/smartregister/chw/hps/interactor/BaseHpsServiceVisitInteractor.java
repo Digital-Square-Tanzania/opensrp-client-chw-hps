@@ -80,7 +80,7 @@ public class BaseHpsServiceVisitInteractor extends BaseHpsVisitInteractor {
     private void evaluateHpsClientCriteria(Map<String, List<VisitDetail>> details) throws BaseHpsVisitAction.ValidationException {
         HpsClientCriteriaActionHelper actionHelper = new HpsClientCriteriaActionHelper(mContext, memberObject);
         BaseHpsVisitAction action = getBuilder(context.getString(R.string.client_criteria))
-                .withOptional(false)
+                .withOptional(true)
                 .withDetails(details)
                 .withHelper(actionHelper)
                 .withFormName(Constants.HPS_FOLLOWUP_FORMS.CLIENT_CRITERIA)
@@ -92,7 +92,7 @@ public class BaseHpsServiceVisitInteractor extends BaseHpsVisitInteractor {
 
         HpsEducationOnBehaviouralChangeActionHelper actionHelper = new HpsEducationOnBehaviouralChangeActionHelper(mContext, memberObject);
         BaseHpsVisitAction action = getBuilder(context.getString(R.string.hps_education_on_behavioural_change))
-                .withOptional(false)
+                .withOptional(true)
                 .withDetails(details)
                 .withHelper(actionHelper)
                 .withFormName(Constants.HPS_FOLLOWUP_FORMS.EDUCATION_ON_BEHAVIOURAL_CHANGE)
@@ -104,7 +104,7 @@ public class BaseHpsServiceVisitInteractor extends BaseHpsVisitInteractor {
 
         HpsPreventiveServicesActionHelper actionHelper = new HpsPreventiveServicesActionHelper(mContext, memberObject);
         BaseHpsVisitAction action = getBuilder(context.getString(R.string.hps_preventive_services))
-                .withOptional(false)
+                .withOptional(true)
                 .withDetails(details)
                 .withHelper(actionHelper)
                 .withFormName(Constants.HPS_FOLLOWUP_FORMS.HPS_PREVENTIVE_SERVICES)
@@ -116,7 +116,7 @@ public class BaseHpsServiceVisitInteractor extends BaseHpsVisitInteractor {
 
         HpsCurativeServicesActionHelper actionHelper = new HpsCurativeServicesActionHelper(mContext, memberObject);
         BaseHpsVisitAction action = getBuilder(context.getString(R.string.hps_curative_services))
-                .withOptional(false)
+                .withOptional(true)
                 .withDetails(details)
                 .withHelper(actionHelper)
                 .withFormName(Constants.HPS_FOLLOWUP_FORMS.HPS_CURATIVE_SERVICES)
@@ -128,7 +128,7 @@ public class BaseHpsServiceVisitInteractor extends BaseHpsVisitInteractor {
 
         HpsReferralServicesActionHelper actionHelper = new HpsReferralServicesActionHelper(mContext, memberObject);
         BaseHpsVisitAction action = getBuilder(context.getString(R.string.hps_referral_services))
-                .withOptional(false)
+                .withOptional(true)
                 .withDetails(details)
                 .withHelper(actionHelper)
                 .withFormName(Constants.HPS_FOLLOWUP_FORMS.HPS_REFERRAL_SERVICES)
@@ -138,12 +138,12 @@ public class BaseHpsServiceVisitInteractor extends BaseHpsVisitInteractor {
 
     @Override
     protected String getEncounterType() {
-        return Constants.EVENT_TYPE.HPS_SERVICES;
+        return Constants.EVENT_TYPE.HPS_CLIENT_FOLLOW_UP_VISIT;
     }
 
     @Override
     protected String getTableName() {
-        return Constants.TABLES.HPS_SERVICE;
+        return Constants.TABLES.HPS_CLIENT_SERVICES;
     }
 
 }

@@ -83,6 +83,10 @@ public class MemberObject implements Serializable {
         this.dob = dob;
     }
 
+    public String getDob() {
+        return dob;
+    }
+
     public String getAddress() {
         return address;
     }
@@ -114,7 +118,7 @@ public class MemberObject implements Serializable {
         this.uniqueId = uniqueId;
     }
 
-    public String getRelationalid() {
+    public String getRelationald() {
         return relationalid;
     }
 

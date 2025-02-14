@@ -19,11 +19,10 @@ import com.vijay.jsonwizard.constants.JsonFormConstants;
 import com.vijay.jsonwizard.domain.Form;
 
 import org.apache.commons.lang3.StringUtils;
-import org.joda.time.DateTime;
-import org.joda.time.Period;
 import org.json.JSONObject;
 import org.smartregister.AllConstants;
 import org.smartregister.chw.hps.HpsLibrary;
+import org.smartregister.chw.hps.R;
 import org.smartregister.chw.hps.adapter.BaseHpsVisitAdapter;
 import org.smartregister.chw.hps.contract.BaseHpsVisitContract;
 import org.smartregister.chw.hps.dao.HpsDao;
@@ -33,7 +32,6 @@ import org.smartregister.chw.hps.model.BaseHpsVisitAction;
 import org.smartregister.chw.hps.presenter.BaseHpsVisitPresenter;
 import org.smartregister.chw.hps.util.Constants;
 import org.smartregister.view.activity.SecuredActivity;
-import org.smartregister.chw.hps.R;
 
 import java.text.MessageFormat;
 import java.util.LinkedHashMap;
@@ -44,6 +42,7 @@ import timber.log.Timber;
 public class BaseHpsVisitActivity extends SecuredActivity implements BaseHpsVisitContract.View, View.OnClickListener {
 
     private static final String TAG = BaseHpsVisitActivity.class.getCanonicalName();
+    protected static String profileType;
     protected Map<String, BaseHpsVisitAction> actionList = new LinkedHashMap<>();
     protected BaseHpsVisitContract.Presenter presenter;
     protected MemberObject memberObject;
@@ -56,7 +55,6 @@ public class BaseHpsVisitActivity extends SecuredActivity implements BaseHpsVisi
     protected String current_action;
     protected String confirmCloseTitle;
     protected String confirmCloseMessage;
-    protected static String profileType;
 
     public static void startMe(Activity activity, String baseEntityID, Boolean isEditMode) {
         Intent intent = new Intent(activity, BaseHpsVisitActivity.class);
@@ -224,8 +222,7 @@ public class BaseHpsVisitActivity extends SecuredActivity implements BaseHpsVisi
 
     @Override
     public void redrawHeader(MemberObject memberObject) {
-        int age = new Period(new DateTime(memberObject.getAge()),
-                new DateTime()).getYears();
+        int age = memberObject.getAge();
         tvTitle.setText(MessageFormat.format("{0}, {1}",
                 memberObject.getFullName(),
                 String.valueOf(age)));
@@ -233,7 +230,7 @@ public class BaseHpsVisitActivity extends SecuredActivity implements BaseHpsVisi
 
     @Override
     public void redrawVisitUI() {
-        boolean valid = actionList.size() > 0;
+        boolean valid = !actionList.isEmpty();
         for (Map.Entry<String, BaseHpsVisitAction> entry : actionList.entrySet()) {
             BaseHpsVisitAction action = entry.getValue();
             if (

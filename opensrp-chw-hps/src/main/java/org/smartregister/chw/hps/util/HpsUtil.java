@@ -138,7 +138,7 @@ public class HpsUtil {
         Event closeHpsEvent = new Gson().
                 fromJson(jsonString, Event.class);
 
-        closeHpsEvent.setEntityType(Constants.TABLES.HPS_ENROLLMENT);
+        closeHpsEvent.setEntityType(Constants.TABLES.HPS_CLIENT_REGISTER);
         closeHpsEvent.setEventType(Constants.EVENT_TYPE.CLOSE_HPS_SERVICE);
         closeHpsEvent.setBaseEntityId(baseEntityId);
         closeHpsEvent.setFormSubmissionId(JsonFormUtils.

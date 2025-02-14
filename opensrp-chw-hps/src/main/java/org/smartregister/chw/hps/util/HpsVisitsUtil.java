@@ -39,7 +39,7 @@ public class HpsVisitsUtil extends VisitUtils {
             Date updatedAtDate = new Date(v.getUpdatedAt().getTime());
             int daysDiff = TimeUtils.getElapsedDays(updatedAtDate);
             if (daysDiff > 1) {
-                if (v.getVisitType().equalsIgnoreCase(Constants.EVENT_TYPE.HPS_FOLLOW_UP_VISIT) && getHpsVisitStatus(v).equals(Complete)) {
+                if (v.getVisitType().equalsIgnoreCase(Constants.EVENT_TYPE.HPS_CLIENT_FOLLOW_UP_VISIT) && getHpsVisitStatus(v).equals(Complete)) {
                     prepFollowupVisit.add(v);
                 }
             }
@@ -94,7 +94,9 @@ public class HpsVisitsUtil extends VisitUtils {
         } catch (Exception e) {
             Timber.e(e);
         }
-        return getActionStatus(completionObject);
+        //TODO implement this if required
+//        return getActionStatus(completionObject);
+        return Complete;
     }
 
     public static String getHpsProcedureVisitStatus(Visit lastVisit) {
