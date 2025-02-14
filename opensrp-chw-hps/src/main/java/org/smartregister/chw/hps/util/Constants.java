@@ -16,16 +16,17 @@ public interface Constants {
     }
 
     interface EVENT_TYPE {
-        String HPS_ENROLLMENT = "Hps Enrollment";
-        String HPS_SERVICES = "Hps Services";
-        String HPS_FOLLOW_UP_VISIT = "Hps Follow-up Visit";
+        String HPS_CLIENT_ENROLLMENT = "HPS Client Enrollment";
+        String HPS_HOUSEHOLD_ENROLLMENT = "HPS Household Enrollment";
+        String HPS_CLIENT_FOLLOW_UP_VISIT = "Hps Client Follow-up Visit";
         String VOID_EVENT = "Void Event";
         String CLOSE_HPS_SERVICE = "Close Hps Service";
 
     }
 
     interface FORMS {
-        String HPS_REGISTRATION = "hps_enrollment";
+        String HPS_CLIENT_ENROLLMENT = "hps_individual_enrollment";
+        String HPS_HOUSEHOLD_ENROLLMENT = "hps_household_enrollment";
         String HPS_FOLLOW_UP_VISIT = "hps_followup_visit";
     }
 
@@ -38,8 +39,9 @@ public interface Constants {
     }
 
     interface TABLES {
-        String HPS_ENROLLMENT = "ec_hps_register";
-        String HPS_SERVICE = "ec_hps_services";
+        String HPS_CLIENT_REGISTER = "ec_hps_client_register";
+        String HPS_HOUSEHOLD_REGISTER = "ec_hps_household_register";
+        String HPS_CLIENT_SERVICES = "ec_hps_client_services";
     }
 
     interface ACTIVITY_PAYLOAD {
@@ -49,7 +51,7 @@ public interface Constants {
         String MEMBER_PROFILE_OBJECT = "MemberObject";
         String EDIT_MODE = "editMode";
         String PROFILE_TYPE = "profile_type";
-
+        String ACTION = "ACTION";
     }
 
     interface ACTIVITY_PAYLOAD_TYPE {
