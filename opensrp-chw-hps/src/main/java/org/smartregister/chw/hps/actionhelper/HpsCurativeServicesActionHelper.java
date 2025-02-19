@@ -53,7 +53,7 @@ public class HpsCurativeServicesActionHelper implements BaseHpsVisitAction.HpsVi
     public void onPayloadReceived(String jsonPayload) {
         try {
             JSONObject jsonObject = new JSONObject(jsonPayload);
-            wereCurativeServicesProvided = JsonFormUtils.getValue(jsonObject, "were_curative_services_provided");
+            wereCurativeServicesProvided = JsonFormUtils.getValue(jsonObject, "provision_of_curative_services");
 
         } catch (JSONException e) {
             Timber.e(e);

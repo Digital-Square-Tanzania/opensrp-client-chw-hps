@@ -116,7 +116,7 @@ public class BaseHpsServiceVisitInteractor extends BaseHpsVisitInteractor {
 
         HpsCurativeServicesActionHelper actionHelper = new HpsCurativeServicesActionHelper(mContext, memberObject);
         BaseHpsVisitAction action = getBuilder(context.getString(R.string.hps_curative_services))
-                .withOptional(true)
+                .withOptional(false)
                 .withDetails(details)
                 .withHelper(actionHelper)
                 .withFormName(Constants.HPS_FOLLOWUP_FORMS.HPS_CURATIVE_SERVICES)
