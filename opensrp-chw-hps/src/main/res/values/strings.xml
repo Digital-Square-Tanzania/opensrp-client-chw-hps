@@ -6,6 +6,8 @@
     <string name="add_member">Add Member</string>
     <string name="sort">Sort</string>
     <string name="home">Home</string>
+    <string name="household_service">Household Services</string>
+    <string name="hps_edit_home_visit">Edit Visit</string>
     <string name="add_family">Add family</string>
     <string name="scan_qr">Scan QR</string>
     <string name="job_aids">Job Aids</string>

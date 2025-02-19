@@ -75,5 +75,6 @@
     <string name="return_to_hps_clients">Rudi kwenye wateja wote wa tohara</string>
     <string name="number_not_filled">Nambari ya simu ya mteja, haijajazwa</string>
     <string name="hps_visit">Tembeleo la kutoa elimu ya Afya kwa Umma</string>
+    <string name="hps_edit_home_visit">Hariri</string>
 
 </resources>

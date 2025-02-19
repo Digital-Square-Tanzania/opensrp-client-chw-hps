@@ -85,6 +85,7 @@ public abstract class BaseHpsProfileActivity extends BaseProfileActivity impleme
     private TextView tvUpComingServices;
     private TextView tvFamilyStatus;
     private ProgressBar progressBar;
+    protected String baseEntityId;
 
     public static void startProfileActivity(Activity activity, String baseEntityId) {
         Intent intent = new Intent(activity, BaseHpsProfileActivity.class);
@@ -97,7 +98,7 @@ public abstract class BaseHpsProfileActivity extends BaseProfileActivity impleme
         setContentView(R.layout.activity_hps_profile);
         Toolbar toolbar = findViewById(R.id.collapsing_toolbar);
         setSupportActionBar(toolbar);
-        String baseEntityId = getIntent().getStringExtra(Constants.ACTIVITY_PAYLOAD.BASE_ENTITY_ID);
+        baseEntityId = getIntent().getStringExtra(Constants.ACTIVITY_PAYLOAD.BASE_ENTITY_ID);
         profileType = getIntent().getStringExtra(Constants.ACTIVITY_PAYLOAD.PROFILE_TYPE);
 
         ActionBar actionBar = getSupportActionBar();

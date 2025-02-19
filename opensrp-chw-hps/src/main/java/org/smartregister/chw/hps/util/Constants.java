@@ -19,6 +19,7 @@ public interface Constants {
         String HPS_CLIENT_ENROLLMENT = "HPS Client Enrollment";
         String HPS_HOUSEHOLD_ENROLLMENT = "HPS Household Enrollment";
         String HPS_CLIENT_FOLLOW_UP_VISIT = "HPS Client Follow-up Visit";
+        String HPS_HOUSEHOLD_VISIT = "HPS Household Services";
         String VOID_EVENT = "Void Event";
         String CLOSE_HPS_SERVICE = "Close Hps Service";
 
@@ -28,6 +29,7 @@ public interface Constants {
         String HPS_CLIENT_ENROLLMENT = "hps_individual_enrollment";
         String HPS_HOUSEHOLD_ENROLLMENT = "hps_household_enrollment";
         String HPS_FOLLOW_UP_VISIT = "hps_followup_visit";
+        String HPS_HOUSEHOLD_VISIT = "hps_household_services";
     }
 
     interface HPS_FOLLOWUP_FORMS {
@@ -42,6 +44,7 @@ public interface Constants {
         String HPS_CLIENT_REGISTER = "ec_hps_client_register";
         String HPS_HOUSEHOLD_REGISTER = "ec_hps_household_register";
         String HPS_CLIENT_SERVICES = "ec_hps_client_services";
+        String HPS_HOUSEHOLD_SERVICES = "ec_hps_household_services";
     }
 
     interface ACTIVITY_PAYLOAD {

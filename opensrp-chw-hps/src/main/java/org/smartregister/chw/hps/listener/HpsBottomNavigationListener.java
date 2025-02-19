@@ -5,9 +5,9 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 
+import org.smartregister.chw.hps.R;
 import org.smartregister.listener.BottomNavigationListener;
 import org.smartregister.view.activity.BaseRegisterActivity;
-import org.smartregister.chw.hps.R;
 
 public class HpsBottomNavigationListener extends BottomNavigationListener {
     private Activity context;
@@ -23,8 +23,10 @@ public class HpsBottomNavigationListener extends BottomNavigationListener {
 
         BaseRegisterActivity baseRegisterActivity = (BaseRegisterActivity) context;
 
-        if (item.getItemId() == R.id.action_family) {
+        if (item.getItemId() == R.id.action_home) {
             baseRegisterActivity.switchToBaseFragment();
+        } else if (item.getItemId() == R.id.action_household_services) {
+            baseRegisterActivity.switchToFragment(1);
         }
 
         return true;
