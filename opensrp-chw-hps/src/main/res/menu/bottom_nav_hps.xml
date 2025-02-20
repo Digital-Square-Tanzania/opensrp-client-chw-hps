@@ -13,5 +13,17 @@
         android:icon="@mipmap/ic_family"
         android:title="@string/household_service"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_mobilization_session"
+        android:enabled="true"
+        android:icon="@mipmap/ic_jobaids"
+        android:title="@string/hps_mobilization_sessions"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_death_register"
+        android:enabled="true"
+        android:icon="@mipmap/ic_jobaids"
+        android:title="@string/death_register"
+        app:showAsAction="ifRoom" />
 
 </menu>

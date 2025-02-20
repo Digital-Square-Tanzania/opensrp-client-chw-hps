@@ -1,5 +1,9 @@
 package org.smartregister.chw.hps.dao;
 
+import android.annotation.SuppressLint;
+
+import org.smartregister.chw.hps.domain.HpsDeathRegisterModel;
+import org.smartregister.chw.hps.domain.HpsMobilizationSessionModel;
 import org.smartregister.chw.hps.domain.MemberObject;
 import org.smartregister.chw.hps.util.Constants;
 import org.smartregister.dao.AbstractDao;
@@ -220,6 +224,90 @@ public class HpsDao extends AbstractDao {
                 "where mr.is_closed = 0 ";
 
         return readData(sql, memberObjectMap);
+    }
+
+
+    public static List<HpsMobilizationSessionModel> getHpsMobilizationSessions() {
+        String sql = "SELECT * FROM " + Constants.TABLES.HPS_MOBILIZATION_SESSIONS;
+
+        @SuppressLint("Range")
+        DataMap<HpsMobilizationSessionModel> dataMap = cursor -> {
+            HpsMobilizationSessionModel model = new HpsMobilizationSessionModel();
+            model.setSessionId(cursor.getString(cursor.getColumnIndex("id")));
+            model.setDateOfGathering(cursor.getString(cursor.getColumnIndex("mobilization_date")));
+            model.setTheMethodOfEducationAndAwarenessUsed(
+                    cursor.getString(cursor.getColumnIndex("the_method_of_education_and_awareness_used"))
+            );
+            model.setAreaWhereMobilizationTookPlace(
+                    cursor.getString(cursor.getColumnIndex("area_where_mobilization_took_place"))
+            );
+            model.setNumberOfFemalesWhoAttended(
+                    cursor.getString(cursor.getColumnIndex("number_of_females_who_attended"))
+            );
+            model.setNumberOfMalesWhoAttended(
+                    cursor.getString(cursor.getColumnIndex("number_of_males_who_attended"))
+            );
+            model.setWasEducationProvided(
+                    cursor.getString(cursor.getColumnIndex("was_education_provided"))
+            );
+            model.setEducationProvided(
+                    cursor.getString(cursor.getColumnIndex("education_provided"))
+            );
+            model.setInformationEducationAndCommunicationMaterials(
+                    cursor.getString(cursor.getColumnIndex("information_education_and_communication_materials"))
+            );
+            model.setBrochureMaterials(
+                    cursor.getString(cursor.getColumnIndex("brochure_materials"))
+            );
+            model.setNumberOfBrochuresProvided(
+                    cursor.getString(cursor.getColumnIndex("number_of_brochures_provided"))
+            );
+            model.setPosterMaterials(
+                    cursor.getString(cursor.getColumnIndex("poster_materials"))
+            );
+            model.setNumberOfPostersProvided(
+                    cursor.getString(cursor.getColumnIndex("number_of_posters_provided"))
+            );
+            model.setLeafletMaterials(
+                    cursor.getString(cursor.getColumnIndex("leaflet_materials"))
+            );
+            model.setNumberOfLeafletProvided(
+                    cursor.getString(cursor.getColumnIndex("number_of_leaflet_provided"))
+            );
+            model.setOtherIecMaterials(
+                    cursor.getString(cursor.getColumnIndex("other_iec_materials"))
+            );
+            model.setNumberOfOtherIecProvided(
+                    cursor.getString(cursor.getColumnIndex("number_of_other_iec_provided"))
+            );
+            return model;
+        };
+
+        List<HpsMobilizationSessionModel> res = readData(sql, dataMap);
+        if (res == null || res.isEmpty()) return null;
+        return res;
+    }
+
+
+    public static List<HpsDeathRegisterModel> getHpsDeathRegisterRecords() {
+        String sql = "SELECT * FROM " + Constants.TABLES.HPS_DEATH_REGISTER;
+
+        @SuppressLint("Range")
+        DataMap<HpsDeathRegisterModel> dataMap = cursor -> {
+            HpsDeathRegisterModel model = new HpsDeathRegisterModel();
+            model.setDeathId(cursor.getString(cursor.getColumnIndex("death_id")));
+            model.setFirstName(cursor.getString(cursor.getColumnIndex("first_name")));
+            model.setMiddleName(cursor.getString(cursor.getColumnIndex("middle_name")));
+            model.setLastName(cursor.getString(cursor.getColumnIndex("last_name")));
+            model.setDob(cursor.getString(cursor.getColumnIndex("dob")));
+            model.setSex(cursor.getString(cursor.getColumnIndex("sex")));
+            model.setCauseOfDeath(cursor.getString(cursor.getColumnIndex("cause_of_death")));
+            return model;
+        };
+
+        List<HpsDeathRegisterModel> res = readData(sql, dataMap);
+        if (res == null || res.isEmpty()) return null;
+        return res;
     }
 
 }

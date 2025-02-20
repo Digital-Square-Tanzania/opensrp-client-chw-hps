@@ -75,5 +75,14 @@
     <string name="return_to_hps_clients">Return to HPS Clients</string>
     <string name="number_not_filled">client phone number, not filled</string>
     <string name="hps_visit">HPS Visit</string>
+    <string name="hps_client_register">HPS Clients</string>
+    <string name="hps_household_register">HPS Households</string>
+    <string name="hps_mobilization_sessions_title">HPS Mobilization Sessions</string>
+    <string name="hps_death_register_title">HPS Death Register</string>
+    <string name="hps_death_register_death_date">Date of Death : %s</string>
+    <string name="hps_death_register_name_of_the_client">Name of the Client : %s</string>
+    <string name="hps_death_register_cause_of_death">Cause of Death : %s</string>
+    <string name="death_register">Death Register</string>
+    <string name="hps_mobilization_sessions">Mobilization Sessions</string>
 
 </resources>

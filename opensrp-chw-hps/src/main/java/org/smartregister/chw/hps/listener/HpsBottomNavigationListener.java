@@ -27,6 +27,10 @@ public class HpsBottomNavigationListener extends BottomNavigationListener {
             baseRegisterActivity.switchToBaseFragment();
         } else if (item.getItemId() == R.id.action_household_services) {
             baseRegisterActivity.switchToFragment(1);
+        } else if (item.getItemId() == R.id.action_mobilization_session) {
+            baseRegisterActivity.switchToFragment(2);
+        } else if (item.getItemId() == R.id.action_death_register) {
+            baseRegisterActivity.switchToFragment(3);
         }
 
         return true;

@@ -30,6 +30,8 @@ public interface Constants {
         String HPS_HOUSEHOLD_ENROLLMENT = "hps_household_enrollment";
         String HPS_FOLLOW_UP_VISIT = "hps_followup_visit";
         String HPS_HOUSEHOLD_VISIT = "hps_household_services";
+        String HPS_DEATH_REGISTRATION = "hps_death_registration";
+        String HPS_MOBILIZATION = "hps_mobilization";
     }
 
     interface HPS_FOLLOWUP_FORMS {
@@ -45,6 +47,8 @@ public interface Constants {
         String HPS_HOUSEHOLD_REGISTER = "ec_hps_household_register";
         String HPS_CLIENT_SERVICES = "ec_hps_client_services";
         String HPS_HOUSEHOLD_SERVICES = "ec_hps_household_services";
+        String HPS_MOBILIZATION_SESSIONS = "ec_hps_mobilization";
+        String HPS_DEATH_REGISTER = "ec_hps_death_register";
     }
 
     interface ACTIVITY_PAYLOAD {
