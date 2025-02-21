@@ -236,7 +236,7 @@ public class HpsDao extends AbstractDao {
             model.setSessionId(cursor.getString(cursor.getColumnIndex("id")));
             model.setDateOfGathering(cursor.getString(cursor.getColumnIndex("date_of_gathering")));
             model.setTheMethodOfEducationAndAwarenessUsed(
-                    cursor.getString(cursor.getColumnIndex("the_method_of_education_and_awareness_used"))
+                    cursor.getString(cursor.getColumnIndex("method_of_education_and_awareness_used"))
             );
             model.setAreaWhereMobilizationTookPlace(
                     cursor.getString(cursor.getColumnIndex("area_where_mobilization_took_place"))
@@ -331,7 +331,7 @@ public class HpsDao extends AbstractDao {
                                            long lastInteractedWith) {
 
         String sql = "INSERT INTO ec_hps_mobilization " +
-                "    (id, base_entity_id, date_of_gathering, the_method_of_education_and_awareness_used, " +
+                "    (id, base_entity_id, date_of_gathering, method_of_education_and_awareness_used, " +
                 "     area_where_mobilization_took_place, number_of_females_who_attended, number_of_males_who_attended, " +
                 "     was_education_provided, education_provided, information_education_and_communication_materials, " +
                 "     brochure_materials, number_of_brochures_provided, poster_materials, number_of_posters_provided, " +
@@ -345,7 +345,7 @@ public class HpsDao extends AbstractDao {
                 otherIecMaterials + "', '" + numberOfOtherIecProvided + "', " + lastInteractedWith + ") " +
                 "ON CONFLICT (id) DO UPDATE " +
                 "SET date_of_gathering = '" + dateOfGathering + "', " +
-                "    the_method_of_education_and_awareness_used = '" + methodOfEducationAndAwarenessUsed + "', " +
+                "    method_of_education_and_awareness_used = '" + methodOfEducationAndAwarenessUsed + "', " +
                 "    area_where_mobilization_took_place = '" + areaWhereMobilizationTookPlace + "', " +
                 "    number_of_females_who_attended = '" + numberOfFemalesWhoAttended + "', " +
                 "    number_of_males_who_attended = '" + numberOfMalesWhoAttended + "', " +
