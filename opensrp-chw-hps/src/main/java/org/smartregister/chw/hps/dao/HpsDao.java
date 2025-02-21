@@ -310,5 +310,89 @@ public class HpsDao extends AbstractDao {
         return res;
     }
 
+    public static void saveHpsMobilization(String baseEntityId,
+                                             String dateOfGathering,
+                                             String methodOfEducationAndAwarenessUsed,
+                                             String areaWhereMobilizationTookPlace,
+                                             String numberOfFemalesWhoAttended,
+                                             String numberOfMalesWhoAttended,
+                                             String wasEducationProvided,
+                                             String educationProvided,
+                                             String informationEducationAndCommunicationMaterial,
+                                             String brochureMaterials,
+                                             String numberOfBrochuresProvided,
+                                             String posterMaterials,
+                                             String numberOfPostersProvided,
+                                             String leafletMaterials,
+                                             String numberOfLeafletProvided,
+                                             String otherIecMaterials,
+                                             String numberOfOtherIecProvided,
+                                             long lastInteractedWith) {
+
+        String sql = "INSERT INTO ec_hps_mobilization " +
+                "    (base_entity_id, date_of_gathering, the_method_of_education_and_awareness_used, " +
+                "     area_where_mobilization_took_place, number_of_females_who_attended, number_of_males_who_attended, " +
+                "     was_education_provided, education_provided, information_education_and_communication_material, " +
+                "     brochure_materials, number_of_brochures_provided, poster_materials, number_of_posters_provided, " +
+                "     leaflet_materials, number_of_leaflet_provided, other_iec_materials, number_of_other_iec_provided, " +
+                "     last_interacted_with) " +
+                "VALUES ('" + baseEntityId + "', '" + dateOfGathering + "', '" + methodOfEducationAndAwarenessUsed + "', '" +
+                areaWhereMobilizationTookPlace + "', '" + numberOfFemalesWhoAttended + "', '" + numberOfMalesWhoAttended + "', '" +
+                wasEducationProvided + "', '" + educationProvided + "', '" + informationEducationAndCommunicationMaterial + "', '" +
+                brochureMaterials + "', '" + numberOfBrochuresProvided + "', '" + posterMaterials + "', '" +
+                numberOfPostersProvided + "', '" + leafletMaterials + "', '" + numberOfLeafletProvided + "', '" +
+                otherIecMaterials + "', '" + numberOfOtherIecProvided + "', " + lastInteractedWith + ") " +
+                "ON CONFLICT (base_entity_id) DO UPDATE " +
+                "SET date_of_gathering = '" + dateOfGathering + "', " +
+                "    the_method_of_education_and_awareness_used = '" + methodOfEducationAndAwarenessUsed + "', " +
+                "    area_where_mobilization_took_place = '" + areaWhereMobilizationTookPlace + "', " +
+                "    number_of_females_who_attended = '" + numberOfFemalesWhoAttended + "', " +
+                "    number_of_males_who_attended = '" + numberOfMalesWhoAttended + "', " +
+                "    was_education_provided = '" + wasEducationProvided + "', " +
+                "    education_provided = '" + educationProvided + "', " +
+                "    information_education_and_communication_material = '" + informationEducationAndCommunicationMaterial + "', " +
+                "    brochure_materials = '" + brochureMaterials + "', " +
+                "    number_of_brochures_provided = '" + numberOfBrochuresProvided + "', " +
+                "    poster_materials = '" + posterMaterials + "', " +
+                "    number_of_posters_provided = '" + numberOfPostersProvided + "', " +
+                "    leaflet_materials = '" + leafletMaterials + "', " +
+                "    number_of_leaflet_provided = '" + numberOfLeafletProvided + "', " +
+                "    other_iec_materials = '" + otherIecMaterials + "', " +
+                "    number_of_other_iec_provided = '" + numberOfOtherIecProvided + "', " +
+                "    last_interacted_with = " + lastInteractedWith;
+
+        updateDB(sql);
+    }
+
+
+    public static void saveHpsDeathRegister(String baseEntityId,
+                                              String dod,
+                                              String firstName,
+                                              String middleName,
+                                              String lastName,
+                                              String dob,
+                                              String sex,
+                                              String causeOfDeath,
+                                              String causeOfDeathSpecify,
+                                              long lastInteractedWith) {
+
+        String sql = "INSERT INTO ec_hps_death_register " +
+                "    (base_entity_id, dod, first_name, middle_name, last_name, dob, sex, cause_of_death, cause_of_death_specify, last_interacted_with) " +
+                "VALUES ('" + baseEntityId + "', '" + dod + "', '" + firstName + "', '" + middleName + "', '" + lastName + "', '" + dob + "', '" + sex + "', '" + causeOfDeath + "', '" + causeOfDeathSpecify + "', " + lastInteractedWith + ") " +
+                "ON CONFLICT (base_entity_id) DO UPDATE " +
+                "SET dod = '" + dod + "', " +
+                "    first_name = '" + firstName + "', " +
+                "    middle_name = '" + middleName + "', " +
+                "    last_name = '" + lastName + "', " +
+                "    dob = '" + dob + "', " +
+                "    sex = '" + sex + "', " +
+                "    cause_of_death = '" + causeOfDeath + "', " +
+                "    cause_of_death_specify = '" + causeOfDeathSpecify + "', " +
+                "    last_interacted_with = " + lastInteractedWith;
+
+        updateDB(sql);
+    }
+
+
 }
 
