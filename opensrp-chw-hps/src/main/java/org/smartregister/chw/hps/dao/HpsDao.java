@@ -234,7 +234,7 @@ public class HpsDao extends AbstractDao {
         DataMap<HpsMobilizationSessionModel> dataMap = cursor -> {
             HpsMobilizationSessionModel model = new HpsMobilizationSessionModel();
             model.setSessionId(cursor.getString(cursor.getColumnIndex("id")));
-            model.setDateOfGathering(cursor.getString(cursor.getColumnIndex("mobilization_date")));
+            model.setDateOfGathering(cursor.getString(cursor.getColumnIndex("date_of_gathering")));
             model.setTheMethodOfEducationAndAwarenessUsed(
                     cursor.getString(cursor.getColumnIndex("the_method_of_education_and_awareness_used"))
             );
@@ -295,11 +295,12 @@ public class HpsDao extends AbstractDao {
         @SuppressLint("Range")
         DataMap<HpsDeathRegisterModel> dataMap = cursor -> {
             HpsDeathRegisterModel model = new HpsDeathRegisterModel();
-            model.setDeathId(cursor.getString(cursor.getColumnIndex("death_id")));
+            model.setDeathId(cursor.getString(cursor.getColumnIndex("id")));
             model.setFirstName(cursor.getString(cursor.getColumnIndex("first_name")));
             model.setMiddleName(cursor.getString(cursor.getColumnIndex("middle_name")));
             model.setLastName(cursor.getString(cursor.getColumnIndex("last_name")));
             model.setDob(cursor.getString(cursor.getColumnIndex("dob")));
+            model.setDod(cursor.getString(cursor.getColumnIndex("dod")));
             model.setSex(cursor.getString(cursor.getColumnIndex("sex")));
             model.setCauseOfDeath(cursor.getString(cursor.getColumnIndex("cause_of_death")));
             return model;
@@ -311,38 +312,38 @@ public class HpsDao extends AbstractDao {
     }
 
     public static void saveHpsMobilization(String baseEntityId,
-                                             String dateOfGathering,
-                                             String methodOfEducationAndAwarenessUsed,
-                                             String areaWhereMobilizationTookPlace,
-                                             String numberOfFemalesWhoAttended,
-                                             String numberOfMalesWhoAttended,
-                                             String wasEducationProvided,
-                                             String educationProvided,
-                                             String informationEducationAndCommunicationMaterial,
-                                             String brochureMaterials,
-                                             String numberOfBrochuresProvided,
-                                             String posterMaterials,
-                                             String numberOfPostersProvided,
-                                             String leafletMaterials,
-                                             String numberOfLeafletProvided,
-                                             String otherIecMaterials,
-                                             String numberOfOtherIecProvided,
-                                             long lastInteractedWith) {
+                                           String dateOfGathering,
+                                           String methodOfEducationAndAwarenessUsed,
+                                           String areaWhereMobilizationTookPlace,
+                                           String numberOfFemalesWhoAttended,
+                                           String numberOfMalesWhoAttended,
+                                           String wasEducationProvided,
+                                           String educationProvided,
+                                           String informationEducationAndCommunicationMaterial,
+                                           String brochureMaterials,
+                                           String numberOfBrochuresProvided,
+                                           String posterMaterials,
+                                           String numberOfPostersProvided,
+                                           String leafletMaterials,
+                                           String numberOfLeafletProvided,
+                                           String otherIecMaterials,
+                                           String numberOfOtherIecProvided,
+                                           long lastInteractedWith) {
 
         String sql = "INSERT INTO ec_hps_mobilization " +
-                "    (base_entity_id, date_of_gathering, the_method_of_education_and_awareness_used, " +
+                "    (id, base_entity_id, date_of_gathering, the_method_of_education_and_awareness_used, " +
                 "     area_where_mobilization_took_place, number_of_females_who_attended, number_of_males_who_attended, " +
-                "     was_education_provided, education_provided, information_education_and_communication_material, " +
+                "     was_education_provided, education_provided, information_education_and_communication_materials, " +
                 "     brochure_materials, number_of_brochures_provided, poster_materials, number_of_posters_provided, " +
                 "     leaflet_materials, number_of_leaflet_provided, other_iec_materials, number_of_other_iec_provided, " +
                 "     last_interacted_with) " +
-                "VALUES ('" + baseEntityId + "', '" + dateOfGathering + "', '" + methodOfEducationAndAwarenessUsed + "', '" +
+                "VALUES ('" + baseEntityId + "', '" + baseEntityId + "', '" + dateOfGathering + "', '" + methodOfEducationAndAwarenessUsed + "', '" +
                 areaWhereMobilizationTookPlace + "', '" + numberOfFemalesWhoAttended + "', '" + numberOfMalesWhoAttended + "', '" +
                 wasEducationProvided + "', '" + educationProvided + "', '" + informationEducationAndCommunicationMaterial + "', '" +
                 brochureMaterials + "', '" + numberOfBrochuresProvided + "', '" + posterMaterials + "', '" +
                 numberOfPostersProvided + "', '" + leafletMaterials + "', '" + numberOfLeafletProvided + "', '" +
                 otherIecMaterials + "', '" + numberOfOtherIecProvided + "', " + lastInteractedWith + ") " +
-                "ON CONFLICT (base_entity_id) DO UPDATE " +
+                "ON CONFLICT (id) DO UPDATE " +
                 "SET date_of_gathering = '" + dateOfGathering + "', " +
                 "    the_method_of_education_and_awareness_used = '" + methodOfEducationAndAwarenessUsed + "', " +
                 "    area_where_mobilization_took_place = '" + areaWhereMobilizationTookPlace + "', " +
@@ -350,7 +351,7 @@ public class HpsDao extends AbstractDao {
                 "    number_of_males_who_attended = '" + numberOfMalesWhoAttended + "', " +
                 "    was_education_provided = '" + wasEducationProvided + "', " +
                 "    education_provided = '" + educationProvided + "', " +
-                "    information_education_and_communication_material = '" + informationEducationAndCommunicationMaterial + "', " +
+                "    information_education_and_communication_materials = '" + informationEducationAndCommunicationMaterial + "', " +
                 "    brochure_materials = '" + brochureMaterials + "', " +
                 "    number_of_brochures_provided = '" + numberOfBrochuresProvided + "', " +
                 "    poster_materials = '" + posterMaterials + "', " +
@@ -365,21 +366,22 @@ public class HpsDao extends AbstractDao {
     }
 
 
+
     public static void saveHpsDeathRegister(String baseEntityId,
-                                              String dod,
-                                              String firstName,
-                                              String middleName,
-                                              String lastName,
-                                              String dob,
-                                              String sex,
-                                              String causeOfDeath,
-                                              String causeOfDeathSpecify,
-                                              long lastInteractedWith) {
+                                            String dod,
+                                            String firstName,
+                                            String middleName,
+                                            String lastName,
+                                            String dob,
+                                            String sex,
+                                            String causeOfDeath,
+                                            String causeOfDeathSpecify,
+                                            long lastInteractedWith) {
 
         String sql = "INSERT INTO ec_hps_death_register " +
-                "    (base_entity_id, dod, first_name, middle_name, last_name, dob, sex, cause_of_death, cause_of_death_specify, last_interacted_with) " +
-                "VALUES ('" + baseEntityId + "', '" + dod + "', '" + firstName + "', '" + middleName + "', '" + lastName + "', '" + dob + "', '" + sex + "', '" + causeOfDeath + "', '" + causeOfDeathSpecify + "', " + lastInteractedWith + ") " +
-                "ON CONFLICT (base_entity_id) DO UPDATE " +
+                "    (id, base_entity_id, dod, first_name, middle_name, last_name, dob, sex, cause_of_death, cause_of_death_specify, last_interacted_with) " +
+                "VALUES ('" + baseEntityId + "', '" + baseEntityId + "', '" + dod + "', '" + firstName + "', '" + middleName + "', '" + lastName + "', '" + dob + "', '" + sex + "', '" + causeOfDeath + "', '" + causeOfDeathSpecify + "', " + lastInteractedWith + ") " +
+                "ON CONFLICT (id) DO UPDATE " +
                 "SET dod = '" + dod + "', " +
                 "    first_name = '" + firstName + "', " +
                 "    middle_name = '" + middleName + "', " +

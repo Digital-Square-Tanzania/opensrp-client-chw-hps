@@ -85,4 +85,8 @@
     <string name="death_register">Death Register</string>
     <string name="hps_mobilization_sessions">Mobilization Sessions</string>
 
+    <string name="hps_mobilization_session_details">HPS Mobilization Session Details</string>
+    <string name="hps_death_registration_details">Death Registration Details</string>
+    <string name="hps_back_to_all_mobilization_sessions">Back to Death register</string>
+
 </resources>

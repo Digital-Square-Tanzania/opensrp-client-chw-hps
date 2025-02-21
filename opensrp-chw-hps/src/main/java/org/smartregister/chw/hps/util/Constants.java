@@ -22,6 +22,8 @@ public interface Constants {
         String HPS_HOUSEHOLD_VISIT = "HPS Household Services";
         String VOID_EVENT = "Void Event";
         String CLOSE_HPS_SERVICE = "Close Hps Service";
+        String HPS_MOBILIZATION = "HPS Mobilization";
+        String HPS_DEATH_REGISTRATION = "HPS Death Registration";
 
     }
 

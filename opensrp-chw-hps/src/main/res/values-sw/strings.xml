@@ -75,6 +75,19 @@
     <string name="return_to_hps_clients">Rudi kwenye wateja wote wa tohara</string>
     <string name="number_not_filled">Nambari ya simu ya mteja, haijajazwa</string>
     <string name="hps_visit">Tembeleo la kutoa elimu ya Afya kwa Umma</string>
+    <string name="household_service">Huduma za Ngazi ya Kaya</string>
     <string name="hps_edit_home_visit">Hariri</string>
+    <string name="hps_client_register">Wateja wa HPS</string>
+    <string name="hps_household_register">Kaya za HPS</string>
+    <string name="hps_mobilization_sessions_title">Mazoezi ya uhamasishaji wa HPS</string>
+    <string name="hps_death_register_title">Rejesta ya Vifo</string>
+    <string name="hps_death_register_death_date">Tarehe ya Kifo : %</string>
+    <string name="hps_death_register_name_of_the_client">Jina la mteja : %</string>
+    <string name="hps_death_register_cause_of_death">Sababu ya kifo : %</string>
+    <string name="death_register">Rejesta ya Vifo</string>
+    <string name="hps_mobilization_sessions">Mazoezi ya uhamasishaji</string>
+    <string name="hps_mobilization_session_details">Taarifa za zoezi la uhamasishaji wa HPS</string>
+    <string name="hps_death_registration_details">Taarifa za usajili wa Kifo</string>
+    <string name="hps_back_to_all_mobilization_sessions">Rudi  kwenye rejesta ya vifo</string>
 
 </resources>
