@@ -153,9 +153,10 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="0dp"
                         android:paddingTop="@dimen/register_list_top_bottom_min_padding"
-                        android:textColor="@color/alert_urgent_red"
-                        android:textSize="@dimen/hps_register_list_due_size"
-                        android:visibility="gone" />
+                        android:textSize="@dimen/register_list_desc_size"
+                        android:textAllCaps="true"
+                        android:visibility="gone"
+                        android:layout_marginBottom="16dp"/>
 
                     <org.smartregister.view.customcontrols.CustomFontTextView
                         android:id="@+id/primary_hps_caregiver"

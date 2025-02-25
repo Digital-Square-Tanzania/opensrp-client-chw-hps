@@ -35,7 +35,7 @@
     <string name="error_unable_save_visit">Unable to save visit</string>
     <string name="return_to_previous_page">Return all Hps Clients</string>
     <string name="last_visit_40_days_ago">Last visit %1$s ago</string>
-    <string name="view_medical_history">View visit history</string>
+    <string name="hps_view_visit_history">View visit history</string>
     <string name="call_no_number_provided">(no number provided)</string>
     <string name="view_upcoming_services">View upcoming services</string>
     <string name="family_has_nothing_due">Family has nothing due</string>
@@ -88,5 +88,6 @@
     <string name="hps_mobilization_session_details">HPS Mobilization Session Details</string>
     <string name="hps_death_registration_details">Death Registration Details</string>
     <string name="hps_back_to_all_mobilization_sessions">Back to Death register</string>
+    <string name="record_hps_household_services">Provide HPS Household Services</string>
 
 </resources>

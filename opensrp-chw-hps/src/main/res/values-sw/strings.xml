@@ -17,7 +17,7 @@
     <string name="error_unable_save_visit">Imeshindwa kuitunza hii visit</string>
     <string name="return_to_previous_page">Rudi kwenye wateja wote wa hps</string>
     <string name="last_visit_40_days_ago">Tembeleo la mwisho %1$s uliyopita</string>
-    <string name="view_medical_history">Angalia historia ya huduma</string>
+    <string name="hps_view_visit_history">Angalia historia ya huduma</string>
     <string name="call_no_number_provided">(Hakuna namba iliyotolewa)</string>
     <string name="view_upcoming_services">Angalia huduma zinazokaribia</string>
     <string name="family_has_nothing_due">Muda wa huduma kwenye kaya haujafika</string>
@@ -89,5 +89,6 @@
     <string name="hps_mobilization_session_details">Taarifa za zoezi la uhamasishaji wa HPS</string>
     <string name="hps_death_registration_details">Taarifa za usajili wa Kifo</string>
     <string name="hps_back_to_all_mobilization_sessions">Rudi  kwenye rejesta ya vifo</string>
+    <string name="record_hps_household_services">Rekodi tembeleo la kutoa huduma za Ngazi ya Kaya</string>
 
 </resources>
