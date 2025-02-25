@@ -57,7 +57,7 @@ public class DBConstants {
 
         public static final String DATE_OF_GATHERING = "date_of_gathering";
 
-        public static final String THE_METHOD_OF_EDUCATION_AND_AWARENESS_USED = "method_of_education_and_awareness_used";
+        public static final String METHOD_OF_EDUCATION_AND_AWARENESS_USED = "method_of_education_and_awareness_used";
 
         public static final String AREA_WHERE_MOBILIZATION_TAKES_PLACE = "area_where_mobilization_takes_place";
 
