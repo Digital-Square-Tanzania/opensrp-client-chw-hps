@@ -1,4 +1,4 @@
-package org.smartregister.chw.hps_sample.activity;
+package org.smartregister.chw.hps.activity;
 
 import android.content.Intent;
 
@@ -7,7 +7,6 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.powermock.reflect.Whitebox;
-import org.smartregister.chw.hps.activity.BaseHpsRegisterActivity;
 
 public class BaseHpsRegisterActivityTest {
     @Mock

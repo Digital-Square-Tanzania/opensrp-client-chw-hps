@@ -1,4 +1,4 @@
-package org.smartregister.chw.hps_sample.dao;
+package org.smartregister.chw.hps.dao;
 
 import net.sqlcipher.database.SQLiteDatabase;
 
@@ -10,7 +10,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.smartregister.chw.hps.dao.HpsDao;
 import org.smartregister.repository.Repository;
 
 import java.util.Date;

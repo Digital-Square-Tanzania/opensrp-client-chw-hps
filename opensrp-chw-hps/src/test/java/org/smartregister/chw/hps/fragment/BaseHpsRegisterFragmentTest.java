@@ -1,4 +1,6 @@
-package org.smartregister.chw.hps_sample.fragment;
+package org.smartregister.chw.hps.fragment;
+
+import static org.mockito.Mockito.times;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -7,10 +9,7 @@ import org.mockito.MockitoAnnotations;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.reflect.Whitebox;
 import org.smartregister.chw.hps.activity.BaseHpsProfileActivity;
-import org.smartregister.chw.hps.fragment.BaseHpsRegisterFragment;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
-
-import static org.mockito.Mockito.times;
 
 public class BaseHpsRegisterFragmentTest {
     @Mock

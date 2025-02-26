@@ -1,4 +1,6 @@
-package org.smartregister.chw.hps_sample.provider;
+package org.smartregister.chw.hps.provider;
+
+import static org.mockito.Mockito.validateMockitoUsage;
 
 import android.app.Activity;
 import android.content.res.Resources;
@@ -14,15 +16,12 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.internal.stubbing.answers.DoesNothing;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.reflect.Whitebox;
-import org.smartregister.chw.hps.provider.HpsRegisterProvider;
+import org.smartregister.chw.hps.R;
 import org.smartregister.chw.hps.util.DBConstants;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
-import org.smartregister.chw.hps.R;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.mockito.Mockito.validateMockitoUsage;
 
 public class BaseHpsRegisterProviderTest {
     @Mock

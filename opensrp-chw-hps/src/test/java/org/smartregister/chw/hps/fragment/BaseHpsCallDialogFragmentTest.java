@@ -1,4 +1,4 @@
-package org.smartregister.chw.hps_sample.fragment;
+package org.smartregister.chw.hps.fragment;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +15,6 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.reflect.Whitebox;
 import org.smartregister.chw.hps.domain.MemberObject;
-import org.smartregister.chw.hps.fragment.BaseHpsCallDialogFragment;
 
 @PrepareForTest(BaseHpsCallDialogFragment.class)
 public class BaseHpsCallDialogFragmentTest {

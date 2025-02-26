@@ -1,14 +1,13 @@
-package org.smartregister.chw.hps_sample.presenter;
+package org.smartregister.chw.hps.presenter;
+
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.smartregister.chw.hps.contract.HpsProfileContract;
 import org.smartregister.chw.hps.domain.MemberObject;
-import org.smartregister.chw.hps.presenter.BaseHpsProfilePresenter;
-
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
 
 public class BaseHpsProfilePresenterTest {
 

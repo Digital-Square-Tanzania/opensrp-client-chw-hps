@@ -1,6 +1,4 @@
-package org.smartregister.chw.hps_sample.activity;
-
-import org.smartregister.chw.hps.activity.BaseHpsProfileActivity;
+package org.smartregister.chw.hps.activity;
 
 public class BaseTestHpsProfileActivity extends BaseHpsProfileActivity {
 

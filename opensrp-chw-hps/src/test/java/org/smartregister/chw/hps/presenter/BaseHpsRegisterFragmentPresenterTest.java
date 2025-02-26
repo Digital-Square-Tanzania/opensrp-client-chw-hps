@@ -1,4 +1,4 @@
-package org.smartregister.chw.hps_sample.presenter;
+package org.smartregister.chw.hps.presenter;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -7,7 +7,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.smartregister.chw.hps.contract.HpsRegisterFragmentContract;
-import org.smartregister.chw.hps.presenter.BaseHpsRegisterFragmentPresenter;
 import org.smartregister.chw.hps.util.Constants;
 import org.smartregister.chw.hps.util.DBConstants;
 import org.smartregister.configurableviews.model.View;

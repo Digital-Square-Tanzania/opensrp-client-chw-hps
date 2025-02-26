@@ -1,4 +1,4 @@
-package org.smartregister.chw.hps_sample.activity;
+package org.smartregister.chw.hps.activity;
 
 import static org.mockito.Mockito.validateMockitoUsage;
 
@@ -13,7 +13,6 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.powermock.reflect.Whitebox;
 import org.smartregister.chw.hps.R;
-import org.smartregister.chw.hps.activity.BaseHpsProfileActivity;
 import org.smartregister.chw.hps.contract.HpsProfileContract;
 
 public class BaseHpsProfileActivityTest {

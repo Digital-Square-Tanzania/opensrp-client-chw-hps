@@ -1,4 +1,4 @@
-package org.smartregister.chw.hps_sample.presenter;
+package org.smartregister.chw.hps.presenter;
 
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -10,7 +10,6 @@ import org.mockito.MockitoAnnotations;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.reflect.Whitebox;
 import org.smartregister.chw.hps.contract.HpsRegisterContract;
-import org.smartregister.chw.hps.presenter.BaseHpsRegisterPresenter;
 
 @PrepareForTest(BaseHpsRegisterPresenter.class)
 public class BaseHpsRegisterPresenterTest {

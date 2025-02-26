@@ -1,4 +1,4 @@
-package org.smartregister.chw.hps_sample.model;
+package org.smartregister.chw.hps.model;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -6,7 +6,6 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.smartregister.chw.hps.model.BaseHpsRegisterFragmentModel;
 import org.smartregister.configurableviews.model.RegisterConfiguration;
 import org.smartregister.configurableviews.model.View;
 import org.smartregister.configurableviews.model.ViewConfiguration;
