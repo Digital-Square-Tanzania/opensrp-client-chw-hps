@@ -1,5 +1,16 @@
 package org.smartregister.chw.hps.domain;
 
+import org.joda.time.DateTime;
+import org.joda.time.Period;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
+import timber.log.Timber;
+
 public class HpsDeathRegisterModel {
     private String deathId;
     private String firstName;
@@ -77,5 +88,30 @@ public class HpsDeathRegisterModel {
 
     public String getFullName(){
         return firstName+" "+middleName+" "+lastName;
+    }
+
+    public int getAge() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        try {
+            Date birthDate = sdf.parse(dob);
+            Calendar birthCal = Calendar.getInstance();
+            birthCal.setTime(birthDate);
+
+            Calendar today = Calendar.getInstance();
+            int age = today.get(Calendar.YEAR) - birthCal.get(Calendar.YEAR);
+
+            // Adjust age if today's date is before the birth date this year
+            int currentMonth = today.get(Calendar.MONTH);
+            int birthMonth = birthCal.get(Calendar.MONTH);
+            if (currentMonth < birthMonth ||
+                    (currentMonth == birthMonth && today.get(Calendar.DAY_OF_MONTH) < birthCal.get(Calendar.DAY_OF_MONTH))) {
+                age--;
+            }
+            return age;
+        } catch (ParseException e) {
+            // Handle exception if date format is invalid
+            Timber.e(e);
+            return -1;
+        }
     }
 }
