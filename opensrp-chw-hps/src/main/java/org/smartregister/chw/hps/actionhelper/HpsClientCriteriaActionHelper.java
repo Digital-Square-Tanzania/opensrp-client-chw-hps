@@ -73,11 +73,6 @@ public class HpsClientCriteriaActionHelper implements BaseHpsVisitAction.HpsVisi
     }
 
     @Override
-    public void onJsonFormLoaded(String jsonPayload, Context context, Map<String, List<VisitDetail>> map) {
-        this.jsonPayload = jsonPayload;
-    }
-
-    @Override
     public void onPayloadReceived(BaseHpsVisitAction baseHpsVisitAction) {
         //overridden
     }
