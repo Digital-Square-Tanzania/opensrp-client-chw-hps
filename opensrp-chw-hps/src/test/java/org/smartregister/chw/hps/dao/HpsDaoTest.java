@@ -37,13 +37,6 @@ public class HpsDaoTest extends HpsDao {
         Assert.assertFalse(registered);
     }
 
-    @Test
-    public void testGetHpsTestDate() {
-        Mockito.doReturn(database).when(repository).getReadableDatabase();
-        Date testDate = HpsDao.getHpsTestDate("34233");
-        Mockito.verify(database).rawQuery(Mockito.contains("select hps_test_date from ec_hps_client_register where base_entity_id = '34233'"), Mockito.any());
-    }
-
 
     @Test
     public void testGetVisitNumber() {

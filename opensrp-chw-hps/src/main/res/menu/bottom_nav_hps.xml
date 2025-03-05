@@ -25,5 +25,11 @@
         android:icon="@mipmap/ic_jobaids"
         android:title="@string/death_register"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_annual_census_register"
+        android:enabled="true"
+        android:icon="@mipmap/ic_jobaids"
+        android:title="@string/annual_census"
+        app:showAsAction="ifRoom" />
 
 </menu>

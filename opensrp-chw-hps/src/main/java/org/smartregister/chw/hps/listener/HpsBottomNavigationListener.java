@@ -31,6 +31,8 @@ public class HpsBottomNavigationListener extends BottomNavigationListener {
             baseRegisterActivity.switchToFragment(2);
         } else if (item.getItemId() == R.id.action_death_register) {
             baseRegisterActivity.switchToFragment(3);
+        } else if (item.getItemId() == R.id.action_annual_census_register) {
+            baseRegisterActivity.switchToFragment(4);
         }
 
         return true;

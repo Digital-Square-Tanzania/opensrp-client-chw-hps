@@ -39,23 +39,29 @@ public class HpsJsonFormUtils extends org.smartregister.util.JsonFormUtils {
         JSONObject jsonForm = toJSONObject(jsonString);
         JSONArray fields = hpsFormFields(jsonForm);
 
-        Triple<Boolean, JSONObject, JSONArray> registrationFormParams = Triple.of(jsonForm != null && fields != null, jsonForm, fields);
+        Triple<Boolean, JSONObject, JSONArray> registrationFormParams = Triple.of(fields != null, jsonForm, fields);
         return registrationFormParams;
     }
 
-    public static JSONArray hpsFormFields(JSONObject jsonForm) {
+   public static JSONArray hpsFormFields(JSONObject jsonForm) {
         try {
-            JSONArray fieldsOne = fields(jsonForm, STEP_ONE);
-            JSONArray fieldsTwo = fields(jsonForm, STEP_TWO);
-            if (fieldsTwo != null) {
-                for (int i = 0; i < fieldsTwo.length(); i++) {
-                    fieldsOne.put(fieldsTwo.get(i));
+            JSONArray mergedFields = new JSONArray();
+            // Retrieve the count of steps from the jsonForm
+            int count = jsonForm.has("count") ? jsonForm.getInt("count") : 0;
+            // Iterate over each step based on the count value
+            for (int step = 1; step <= count; step++) {
+                String stepKey = "step" + step;
+                JSONArray stepFields = fields(jsonForm, stepKey);
+                if (stepFields != null) {
+                    // Merge each field from the current step into the mergedFields array
+                    for (int i = 0; i < stepFields.length(); i++) {
+                        mergedFields.put(stepFields.get(i));
+                    }
                 }
             }
-            return fieldsOne;
-
+            return mergedFields;
         } catch (JSONException e) {
-            Log.e(TAG, "", e);
+            Timber.e(e);
         }
         return null;
     }
@@ -71,7 +77,7 @@ public class HpsJsonFormUtils extends org.smartregister.util.JsonFormUtils {
             return step1.has(FIELDS) ? step1.getJSONArray(FIELDS) : null;
 
         } catch (JSONException e) {
-            Log.e(TAG, "", e);
+            Timber.e(e);
         }
         return null;
     }
