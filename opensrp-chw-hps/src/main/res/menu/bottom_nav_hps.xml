@@ -17,7 +17,7 @@
         android:id="@+id/action_mobilization_session"
         android:enabled="true"
         android:icon="@mipmap/ic_jobaids"
-        android:title="@string/hps_mobilization_sessions"
+        android:title="@string/hps_mobilization_sessions_menu"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_death_register"
@@ -29,7 +29,7 @@
         android:id="@+id/action_annual_census_register"
         android:enabled="true"
         android:icon="@mipmap/ic_jobaids"
-        android:title="@string/annual_census"
+        android:title="@string/hps_annual_census_menu"
         app:showAsAction="ifRoom" />
 
 </menu>

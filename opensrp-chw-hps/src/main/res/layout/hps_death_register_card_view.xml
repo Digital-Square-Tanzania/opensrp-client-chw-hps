@@ -16,87 +16,63 @@
             android:layout_height="50dp"
             android:layout_centerVertical="true"
             android:layout_marginEnd="10dp"
-            android:src="@mipmap/sidemenu_updates"
+            android:src="@mipmap/menu_updates"
             android:contentDescription="sbcc session"/>
 
-
-        <LinearLayout
-            android:id="@+id/sbcc_session_details"
-            android:layout_width="match_parent"
+        <RelativeLayout
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/sbc_session_date"
             android:layout_toEndOf="@id/iv_sbcc_session">
-
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/sbc_activity_provided"
+                android:id="@+id/hps_death_date"
+                style="@style/CustomFontTextViewStyle.ListView.Normal.MultipleLines"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:ellipsize="none"
+                android:scrollHorizontally="false"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:visibility="visible"
+                tools:text="@string/hps_death_register_death_date" />
+            <org.smartregister.view.customcontrols.CustomFontTextView
+                android:id="@+id/client_name"
+                android:layout_below="@id/hps_death_date"
                 style="@style/CustomFontTextViewStyle.ListView.Normal.MultipleLines"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="5dp"
+                android:ellipsize="none"
                 android:scrollHorizontally="false"
+                android:singleLine="true"
                 android:textColor="@android:color/black"
+                android:textStyle="bold"
                 android:textSize="16sp"
-                android:visibility="visible"/>
+                android:visibility="visible"
+                tools:text="@string/hps_death_register_name_of_the_client" />
+            <org.smartregister.view.customcontrols.CustomFontTextView
+                android:id="@+id/cause_of_death"
+                android:layout_below="@id/client_name"
+                style="@style/CustomFontTextViewStyle.ListView.Normal.MultipleLines"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="5dp"
+                android:ellipsize="none"
+                android:scrollHorizontally="false"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:visibility="visible"
+                tools:text="@string/hps_death_register_cause_of_death" />
+        </RelativeLayout>
 
 
-
-        </LinearLayout>
-
-        <org.smartregister.view.customcontrols.CustomFontTextView
-            android:id="@+id/hps_death_date"
-            android:layout_toEndOf="@id/iv_sbcc_session"
-            style="@style/CustomFontTextViewStyle.ListView.Normal.MultipleLines"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="5dp"
-            android:ellipsize="none"
-            android:scrollHorizontally="false"
-            android:singleLine="true"
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:visibility="visible"
-            tools:text="@string/hps_death_register_death_date" />
-
-
-        <org.smartregister.view.customcontrols.CustomFontTextView
-            android:id="@+id/client_name"
-            android:layout_toEndOf="@id/iv_sbcc_session"
-            android:layout_below="@id/hps_death_date"
-            style="@style/CustomFontTextViewStyle.ListView.Normal.MultipleLines"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="5dp"
-            android:ellipsize="none"
-            android:scrollHorizontally="false"
-            android:singleLine="true"
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:visibility="visible"
-            tools:text="@string/hps_death_register_name_of_the_client" />
-
-
-        <org.smartregister.view.customcontrols.CustomFontTextView
-            android:id="@+id/cause_of_death"
-            android:layout_toEndOf="@id/iv_sbcc_session"
-            android:layout_below="@id/client_name"
-            style="@style/CustomFontTextViewStyle.ListView.Normal.MultipleLines"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="5dp"
-            android:ellipsize="none"
-            android:scrollHorizontally="false"
-            android:singleLine="true"
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:visibility="visible"
-            tools:text="@string/hps_death_register_cause_of_death" />
 
     </RelativeLayout>
 
