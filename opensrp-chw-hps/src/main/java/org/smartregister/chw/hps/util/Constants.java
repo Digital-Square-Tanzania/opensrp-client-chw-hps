@@ -24,6 +24,7 @@ public interface Constants {
         String CLOSE_HPS_SERVICE = "Close Hps Service";
         String HPS_MOBILIZATION = "HPS Mobilization";
         String HPS_DEATH_REGISTRATION = "HPS Death Registration";
+        String HPS_ANNUAL_CENSUS = "HPS Annual Census";
 
     }
 
@@ -34,6 +35,7 @@ public interface Constants {
         String HPS_HOUSEHOLD_VISIT = "hps_household_services";
         String HPS_DEATH_REGISTRATION = "hps_death_registration";
         String HPS_MOBILIZATION = "hps_mobilization";
+        String HPS_ANNUAL_CENSUS = "hps_annual_census";
     }
 
     interface HPS_FOLLOWUP_FORMS {
@@ -51,6 +53,7 @@ public interface Constants {
         String HPS_HOUSEHOLD_SERVICES = "ec_hps_household_services";
         String HPS_MOBILIZATION_SESSIONS = "ec_hps_mobilization";
         String HPS_DEATH_REGISTER = "ec_hps_death_register";
+        String HPS_ANNUAL_CENSUS_REGISTER = "ec_hps_annual_census_register";
     }
 
     interface ACTIVITY_PAYLOAD {
