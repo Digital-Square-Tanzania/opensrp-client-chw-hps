@@ -2,6 +2,7 @@ package org.smartregister.chw.hps.dao;
 
 import android.annotation.SuppressLint;
 
+import org.smartregister.chw.hps.domain.HpsAnnualCensusRegisterModel;
 import org.smartregister.chw.hps.domain.HpsDeathRegisterModel;
 import org.smartregister.chw.hps.domain.HpsMobilizationSessionModel;
 import org.smartregister.chw.hps.domain.MemberObject;
@@ -393,6 +394,966 @@ public class HpsDao extends AbstractDao {
                 "    last_interacted_with = " + lastInteractedWith;
 
         updateDB(sql);
+    }
+
+
+    public static void saveHpsAnnualCensusRegisterModel(
+            String baseEntityId,
+            String year,
+            String selectAgeGroup,
+            Integer numberOfMaleByAgeGroupUnder1,
+            Integer numberOfFemaleByAgeGroupUnder1,
+            Integer numberOfMaleByAgeGroup1_4,
+            Integer numberOfFemaleByAgeGroup1_4,
+            Integer numberOfMaleByAgeGroup5_14,
+            Integer numberOfFemaleByAgeGroup5_14,
+            Integer numberOfMaleByAgeGroup15_49,
+            Integer numberOfFemaleByAgeGroup15_49,
+            Integer numberOfMaleByAgeGroup50_59,
+            Integer numberOfFemaleByAgeGroup50_59,
+            Integer numberOfMaleByAgeGroup60Plus,
+            Integer numberOfFemaleByAgeGroup60Plus,
+            Integer numberOfHouseHoldWithRoadAccess,
+            Integer numberOfHouseHoldsWithAtLeastOneLandlineOrMobilePhone,
+            Integer numberOfHouseHoldWithBasicNutritionSourceVegetable,
+            Integer numberOfHouseHoldWithBasicNutritionSourceFruitTrees,
+            Integer numberOfHouseHoldWithBasicNutritionSourceDomesticAnimal,
+            String selectCentersCategory,
+            Integer numberOfPreSchoolsGovernment,
+            Integer numberOfPrimarySchoolsGovernment,
+            Integer numberOfSecondarySchoolsGovernment,
+            Integer numberOfUniversitiesGovernment,
+            Integer numberOfSpecialNeedsSchoolsGovernment,
+            Integer numberOfDispensaryGovernment,
+            Integer numberOfHealthCentersGovernment,
+            Integer numberOfHospitalGovernment,
+            Integer numberOfSpecialClinicsGovernment,
+            Integer numberOfLaboratoryGovernment,
+            Integer numberOfPharmacyGovernment,
+            Integer numberOfADDOGovernment,
+            Integer numberOfMaternityHomeGovernment,
+            Integer numberOfOrphanCareCentersGovernment,
+            Integer numberOfCentersForChildrenWithDisabilitiesGovernment,
+            Integer numberOfCbecdcRehabilitationCentreGovernment,
+            Integer numberOfDayCareCentersGovernment,
+            Integer numberOfElderlyCareCentersGovernment,
+            Integer numberOfPreSchoolsFaithBasedOrganisation,
+            Integer numberOfPrimarySchoolsFaithBasedOrganisation,
+            Integer numberOfSecondarySchoolsFaithBasedOrganisation,
+            Integer numberOfUniversitiesFaithBasedOrganisation,
+            Integer numberOfSpecialNeedsSchoolsFaithBasedOrganisation,
+            Integer numberOfDispensaryFaithBasedOrganisation,
+            Integer numberOfHealthCentersFaithBasedOrganisation,
+            Integer numberOfHospitalFaithBasedOrganisation,
+            Integer numberOfSpecialClinicsFaithBasedOrganisation,
+            Integer numberOfLaboratoryFaithBasedOrganisation,
+            Integer numberOfPharmacyFaithBasedOrganisation,
+            Integer numberOfADDOFaithBasedOrganisation,
+            Integer numberOfMaternityHomeFaithBasedOrganisation,
+            Integer numberOfOrphanCareCentersFaithBasedOrganisation,
+            Integer numberOfCentersForChildrenWithDisabilitiesFaithBasedOrganisation,
+            Integer numberOfCbecdcRehabilitationCentreFaithBasedOrganisation,
+            Integer numberOfDayCareCentersFaithBasedOrganisation,
+            Integer numberOfElderlyCareCentersFaithBasedOrganisation,
+            Integer numberOfPreSchoolsPublic,
+            Integer numberOfPrimarySchoolsPublic,
+            Integer numberOfSecondarySchoolsPublic,
+            Integer numberOfUniversitiesPublic,
+            Integer numberOfSpecialNeedsSchoolsPublic,
+            Integer numberOfDispensaryPublic,
+            Integer numberOfHealthCentersPublic,
+            Integer numberOfHospitalPublic,
+            Integer numberOfSpecialClinicsPublic,
+            Integer numberOfLaboratoryPublic,
+            Integer numberOfPharmacyPublic,
+            Integer numberOfADDOPublic,
+            Integer numberOfMaternityHomePublic,
+            Integer numberOfOrphanCareCentersPublic,
+            Integer numberOfCentersForChildrenWithDisabilitiesPublic,
+            Integer numberOfCbecdcRehabilitationCentrePublic,
+            Integer numberOfDayCareCentersPublic,
+            Integer numberOfElderlyCareCentersPublic,
+            Integer numberOfPreSchoolsPrivate,
+            Integer numberOfPrimarySchoolsPrivate,
+            Integer numberOfSecondarySchoolsPrivate,
+            Integer numberOfUniversitiesPrivate,
+            Integer numberOfSpecialNeedsSchoolsPrivate,
+            Integer numberOfDispensaryPrivate,
+            Integer numberOfHealthCentersPrivate,
+            Integer numberOfHospitalPrivate,
+            Integer numberOfSpecialClinicsPrivate,
+            Integer numberOfLaboratoryPrivate,
+            Integer numberOfPharmacyPrivate,
+            Integer numberOfADDOPrivate,
+            Integer numberOfMaternityHomePrivate,
+            Integer numberOfOrphanCareCentersPrivate,
+            Integer numberOfCentersForChildrenWithDisabilitiesPrivate,
+            Integer numberOfCbecdcRehabilitationCentrePrivate,
+            Integer numberOfDayCareCentersPrivate,
+            Integer numberOfElderlyCareCentersPrivate,
+            Integer numberOfFoodShopVisited,
+            Integer numberOfRestaurantsVisited,
+            Integer numberOfButcheriesVisited,
+            Integer numberOfBarAndClubsVisited,
+            Integer numberOfGuestHouseVisited,
+            Integer numberOfLocaFoodVendorsVisited,
+            Integer numberOfMarketsVisited,
+            Integer numberOfPublicToiletsVisited,
+            Integer numberOfBusStationsVisited,
+            Integer numberOfPrimarySchoolsVisited,
+            Integer numberOfSecondarySchoolsVisited,
+            Integer numberOfHospitalVisited,
+            Integer numberOfHealthCentersVisited,
+            Integer numberOfDispensariesVisited,
+            Integer numberOfOfficesVisited,
+            Integer numberOfUniversitiesCollegeVisited,
+            Integer numberOfFoodShopThatMetTheStandards,
+            Integer numberOfRestaurantsThatMetTheStandards,
+            Integer numberOfButcheriesThatMetTheStandards,
+            Integer numberOfBarAndClubsThatMetTheStandards,
+            Integer numberOfGuestHouseThatMetTheStandards,
+            Integer numberOfLocaFoodVendorsThatMetTheStandards,
+            Integer numberOfMarketsThatMetTheStandards,
+            Integer numberOfPublicToiletsThatMetTheStandards,
+            Integer numberOfBusStationsThatMetTheStandards,
+            Integer numberOfPrimarySchoolsThatMetTheStandards,
+            Integer numberOfSecondarySchoolsThatMetTheStandards,
+            Integer numberOfHospitalThatMetTheStandards,
+            Integer numberOfHealthCentersThatMetTheStandards,
+            Integer numberOfDispensariesThatMetTheStandards,
+            Integer numberOfOfficesThatMetTheStandards,
+            Integer numberOfUniversitiesCollegeThatMetTheStandards,
+            Integer numberOfInspectedAgricultureAreas,
+            Integer numberOfInspectedLivestockKeepingAreas,
+            Integer numberOfInspectedFishingAreas,
+            Integer numberOfInspectedIndustriesAreas,
+            Integer numberOfInspectedOfficesAreas,
+            Integer numberOfInspectedTransportationAreas,
+            Integer numberOfOtherInspectedAreas,
+            Integer numberOfAgricultureAreasInspectedWithRiskIndicators,
+            Integer numberOfLivestockKeepingAreasInspectedWithRiskIndicators,
+            Integer numberOfFishingAreasInspectedWithRiskIndicators,
+            Integer numberOfIndustriesAreasInspectedWithRiskIndicators,
+            Integer numberOfOfficesAreasInspectedWithRiskIndicators,
+            Integer numberOfTransportationAreasInspectedWithRiskIndicators,
+            Integer numberOfOtherAreasInspectedWithRiskIndicators,
+            Integer numberOfInspectedGrains,
+            Integer numberOfInspectedLegumes,
+            Integer numberOfInspectedMeat,
+            Integer numberOfInspectedFishing,
+            Integer numberOfInspectedAlcoholicBeverages,
+            Integer numberOfInspectedNonAlcoholicBeverages,
+            Integer numberOfGrainsDiscarded,
+            Integer numberOfLegumesDiscarded,
+            Integer numberOfMeatDiscarded,
+            Integer numberOfFishingDiscarded,
+            Integer numberOfAlcoholicBeverageDiscarded,
+            Integer numberOfNonAlcoholicBeverageDiscarded,
+            Integer healthReportsAffectingPeopleInWorkplacesRespiratoryDiseases,
+            Integer healthReportsAffectingPeopleInWorkplacesToxicChemicals,
+            Integer healthReportsAffectingPeopleInWorkplacesBurns,
+            Integer healthReportsAffectingPeopleInWorkplacesHearingLoss,
+            Integer healthReportsAffectingPeopleInWorkplacesEyeProblems,
+            Integer healthReportsAffectingPeopleInWorkplacesOtherEffects,
+            Double amountOfSolidWasteGeneratedAnnuallyTons,
+            Double amountOfSolidWasteDisposedAtADesignatedSiteAnnuallyTons,
+            Integer numberOfWasteCollectionEquipmentVehicles,
+            Integer numberOfWasteCollectionEquipmentTractors,
+            Integer numberOfWasteCollectionEquipmentCarts,
+            Integer numberOfWasteCollectionEquipmentWheelbarrows,
+            Integer numberOfWasteCollectionEquipmentOthers,
+            Integer numberOfAreasSprayedWithPesticidesPonds,
+            Integer numberOfAreasSprayedWithPesticidesCans,
+            Integer numberOfAreasSprayedWithPesticidesDrums,
+            Integer numberOfAreasSprayedWithPesticidesBarrels,
+            Integer numberOfAreasSprayedWithPesticidesCoconutShells,
+            Integer numberOfTimesSprayingWasDonePonds,
+            Integer numberOfTimesSprayingWasDoneCans,
+            Integer numberOfTimesSprayingWasDoneDrums,
+            Integer numberOfTimesSprayingWasDoneBarrels,
+            Integer numberOfTimesSprayingWasDoneCoconutShells,
+            String typesOfPesticidesUsedPonds,
+            String typesOfPesticidesUsedCans,
+            String typesOfPesticidesUsedDrums,
+            String typesOfPesticidesUsedBarrels,
+            String typesOfPesticidesUsedCoconutShells,
+            Double amountOfPesticideUsedPonds,
+            Double amountOfPesticideUsedCans,
+            Double amountOfPesticideUsedDrums,
+            Double amountOfPesticideUsedBarrels,
+            Double amountOfPesticideUsedCoconutShells,
+            long lastInteractedWith
+    ) {
+        String sql = "INSERT INTO ec_hps_annual_census_register ("
+                + "id, base_entity_id, year, select_age_group, number_of_male_by_age_group_under1, number_of_female_by_age_group_under1, "
+                + "number_of_male_by_age_group_1_4, number_of_female_by_age_group_1_4, number_of_male_by_age_group_5_14, number_of_female_by_age_group_5_14, "
+                + "number_of_male_by_age_group_15_49, number_of_female_by_age_group_15_49, number_of_male_by_age_group_50_59, number_of_female_by_age_group_50_59, "
+                + "number_of_male_by_age_group_60_plus, number_of_female_by_age_group_60_plus, number_of_house_hold_with_road_access, "
+                + "number_of_house_holds_with_at_least_one_landline_or_mobile_phone, number_of_house_hold_with_basic_nutrition_source_vegetable, "
+                + "number_of_house_hold_with_basic_nutrition_source_fruit_trees, number_of_house_hold_with_basic_nutrition_source_domestic_animal, "
+                + "select_centers_category, number_of_pre_schools_government, number_of_primary_schools_government, number_of_secondary_schools_government, "
+                + "number_of_universities_government, number_of_special_needs_schools_government, number_of_dispensary_government, number_of_health_centers_government, "
+                + "number_of_hospital_government, number_of_special_clinics_government, number_of_laboratory_government, number_of_pharmacy_government, "
+                + "number_of_addo_government, number_of_maternity_home_government, number_of_orphan_care_centers_government, "
+                + "number_of_centers_for_children_with_disabilities_government, number_of_cbecdc_rehabilitation_centre_government, "
+                + "number_of_day_care_centers_government, number_of_elderly_care_centers_government, number_of_pre_schools_faith_based_organisation, "
+                + "number_of_primary_schools_faith_based_organisation, number_of_secondary_schools_faith_based_organisation, "
+                + "number_of_universities_faith_based_organisation, number_of_special_needs_schools_faith_based_organisation, "
+                + "number_of_dispensary_faith_based_organisation, number_of_health_centers_faith_based_organisation, number_of_hospital_faith_based_organisation, "
+                + "number_of_special_clinics_faith_based_organisation, number_of_laboratory_faith_based_organisation, number_of_pharmacy_faith_based_organisation, "
+                + "number_of_addo_faith_based_organisation, number_of_maternity_home_faith_based_organisation, number_of_orphan_care_centers_faith_based_organisation, "
+                + "number_of_centers_for_children_with_disabilities_faith_based_organisation, number_of_cbecdc_rehabilitation_centre_faith_based_organisation, "
+                + "number_of_day_care_centers_faith_based_organisation, number_of_elderly_care_centers_faith_based_organisation, "
+                + "number_of_pre_schools_public, number_of_primary_schools_public, number_of_secondary_schools_public, number_of_universities_public, "
+                + "number_of_special_needs_schools_public, number_of_dispensary_public, number_of_health_centers_public, number_of_hospital_public, "
+                + "number_of_special_clinics_public, number_of_laboratory_public, number_of_pharmacy_public, number_of_addo_public, number_of_maternity_home_public, "
+                + "number_of_orphan_care_centers_public, number_of_centers_for_children_with_disabilities_public, number_of_cbecdc_rehabilitation_centre_public, "
+                + "number_of_day_care_centers_public, number_of_elderly_care_centers_public, number_of_pre_schools_private, number_of_primary_schools_private, "
+                + "number_of_secondary_schools_private, number_of_universities_private, number_of_special_needs_schools_private, number_of_dispensary_private, "
+                + "number_of_health_centers_private, number_of_hospital_private, number_of_special_clinics_private, number_of_laboratory_private, "
+                + "number_of_pharmacy_private, number_of_addo_private, number_of_maternity_home_private, number_of_orphan_care_centers_private, "
+                + "number_of_centers_for_children_with_disabilities_private, number_of_cbecdc_rehabilitation_centre_private, number_of_day_care_centers_private, "
+                + "number_of_elderly_care_centers_private, number_of_food_shop_visited, number_of_restaurants_visited, number_of_butcheries_visited, "
+                + "number_of_bar_and_clubs_visited, number_of_guest_house_visited, number_of_loca_food_vendors_visited, number_of_markets_visited, "
+                + "number_of_public_toilets_visited, number_of_bus_stations_visited, number_of_primary_schools_visited, number_of_secondary_schools_visited, "
+                + "number_of_hospital_visited, number_of_health_centers_visited, number_of_dispensaries_visited, number_of_offices_visited, "
+                + "number_of_universities_college_visited, number_of_food_shop_that_met_the_standards, number_of_restaurants_that_met_the_standards, "
+                + "number_of_butcheries_that_met_the_standards, number_of_bar_and_clubs_that_met_the_standards, number_of_guest_house_that_met_the_standards, "
+                + "number_of_loca_food_vendors_that_met_the_standards, number_of_markets_that_met_the_standards, number_of_public_toilets_that_met_the_standards, "
+                + "number_of_bus_stations_that_met_the_standards, number_of_primary_schools_that_met_the_standards, number_of_secondary_schools_that_met_the_standards, "
+                + "number_of_hospital_that_met_the_standards, number_of_health_centers_that_met_the_standards, number_of_dispensaries_that_met_the_standards, "
+                + "number_of_offices_that_met_the_standards, number_of_universities_college_that_met_the_standards, number_of_inspected_agriculture_areas, "
+                + "number_of_inspected_livestock_keeping_areas, number_of_inspected_fishing_areas, number_of_inspected_industries_areas, "
+                + "number_of_inspected_offices_areas, number_of_inspected_transportation_areas, number_of_other_inspected_areas, "
+                + "number_of_agriculture_areas_inspected_with_risk_indicators, number_of_livestock_keeping_areas_inspected_with_risk_indicators, "
+                + "number_of_fishing_areas_inspected_with_risk_indicators, number_of_industries_areas_inspected_with_risk_indicators, "
+                + "number_of_offices_areas_inspected_with_risk_indicators, number_of_transportation_areas_inspected_with_risk_indicators, "
+                + "number_of_other_areas_inspected_with_risk_indicators, number_of_inspected_grains, number_of_inspected_legumes, "
+                + "number_of_inspected_meat, number_of_inspected_fishing, number_of_inspected_alcoholic_beverages, "
+                + "number_of_inspected_non_alcoholic_beverages, number_of_grains_discarded, number_of_legumes_discarded, number_of_meat_discarded, "
+                + "number_of_fishing_discarded, number_of_alcoholic_beverage_discarded, number_of_non_alcoholic_beverage_discarded, "
+                + "health_reports_affecting_people_in_workplaces_respiratory_diseases, health_reports_affecting_people_in_workplaces_toxic_chemicals, "
+                + "health_reports_affecting_people_in_workplaces_burns, health_reports_affecting_people_in_workplaces_hearing_loss, "
+                + "health_reports_affecting_people_in_workplaces_eye_problems, health_reports_affecting_people_in_workplaces_other_effects, "
+                + "amount_of_solid_waste_generated_annually_tons, amount_of_solid_waste_disposed_at_a_designated_site_annually_tons, "
+                + "number_of_waste_collection_equipment_vehicles, number_of_waste_collection_equipment_tractors, "
+                + "number_of_waste_collection_equipment_carts, number_of_waste_collection_equipment_wheelbarrows, "
+                + "number_of_waste_collection_equipment_others, number_of_areas_sprayed_with_pesticides_ponds, "
+                + "number_of_areas_sprayed_with_pesticides_cans, number_of_areas_sprayed_with_pesticides_drums, "
+                + "number_of_areas_sprayed_with_pesticides_barrels, number_of_areas_sprayed_with_pesticides_coconut_shells, "
+                + "number_of_times_spraying_was_done_ponds, number_of_times_spraying_was_done_cans, number_of_times_spraying_was_done_drums, "
+                + "number_of_times_spraying_was_done_barrels, number_of_times_spraying_was_done_coconut_shells, "
+                + "types_of_pesticides_used_ponds, types_of_pesticides_used_cans, types_of_pesticides_used_drums, "
+                + "types_of_pesticides_used_barrels, types_of_pesticides_used_coconut_shells, amount_of_pesticide_used_ponds, "
+                + "amount_of_pesticide_used_cans, amount_of_pesticide_used_drums, amount_of_pesticide_used_barrels, "
+                + "amount_of_pesticide_used_coconut_shells, last_interacted_with) VALUES ("
+                + "'" + baseEntityId + "', "
+                + "'" + baseEntityId + "', "
+                + "'" + year + "', "
+                + "'" + selectAgeGroup + "', "
+                + "'" + numberOfMaleByAgeGroupUnder1 + "', "
+                + "'" + numberOfFemaleByAgeGroupUnder1 + "', "
+                + "'" + numberOfMaleByAgeGroup1_4 + "', "
+                + "'" + numberOfFemaleByAgeGroup1_4 + "', "
+                + "'" + numberOfMaleByAgeGroup5_14 + "', "
+                + "'" + numberOfFemaleByAgeGroup5_14 + "', "
+                + "'" + numberOfMaleByAgeGroup15_49 + "', "
+                + "'" + numberOfFemaleByAgeGroup15_49 + "', "
+                + "'" + numberOfMaleByAgeGroup50_59 + "', "
+                + "'" + numberOfFemaleByAgeGroup50_59 + "', "
+                + "'" + numberOfMaleByAgeGroup60Plus + "', "
+                + "'" + numberOfFemaleByAgeGroup60Plus + "', "
+                + "'" + numberOfHouseHoldWithRoadAccess + "', "
+                + "'" + numberOfHouseHoldsWithAtLeastOneLandlineOrMobilePhone + "', "
+                + "'" + numberOfHouseHoldWithBasicNutritionSourceVegetable + "', "
+                + "'" + numberOfHouseHoldWithBasicNutritionSourceFruitTrees + "', "
+                + "'" + numberOfHouseHoldWithBasicNutritionSourceDomesticAnimal + "', "
+                + "'" + selectCentersCategory + "', "
+                + "'" + numberOfPreSchoolsGovernment + "', "
+                + "'" + numberOfPrimarySchoolsGovernment + "', "
+                + "'" + numberOfSecondarySchoolsGovernment + "', "
+                + "'" + numberOfUniversitiesGovernment + "', "
+                + "'" + numberOfSpecialNeedsSchoolsGovernment + "', "
+                + "'" + numberOfDispensaryGovernment + "', "
+                + "'" + numberOfHealthCentersGovernment + "', "
+                + "'" + numberOfHospitalGovernment + "', "
+                + "'" + numberOfSpecialClinicsGovernment + "', "
+                + "'" + numberOfLaboratoryGovernment + "', "
+                + "'" + numberOfPharmacyGovernment + "', "
+                + "'" + numberOfADDOGovernment + "', "
+                + "'" + numberOfMaternityHomeGovernment + "', "
+                + "'" + numberOfOrphanCareCentersGovernment + "', "
+                + "'" + numberOfCentersForChildrenWithDisabilitiesGovernment + "', "
+                + "'" + numberOfCbecdcRehabilitationCentreGovernment + "', "
+                + "'" + numberOfDayCareCentersGovernment + "', "
+                + "'" + numberOfElderlyCareCentersGovernment + "', "
+                + "'" + numberOfPreSchoolsFaithBasedOrganisation + "', "
+                + "'" + numberOfPrimarySchoolsFaithBasedOrganisation + "', "
+                + "'" + numberOfSecondarySchoolsFaithBasedOrganisation + "', "
+                + "'" + numberOfUniversitiesFaithBasedOrganisation + "', "
+                + "'" + numberOfSpecialNeedsSchoolsFaithBasedOrganisation + "', "
+                + "'" + numberOfDispensaryFaithBasedOrganisation + "', "
+                + "'" + numberOfHealthCentersFaithBasedOrganisation + "', "
+                + "'" + numberOfHospitalFaithBasedOrganisation + "', "
+                + "'" + numberOfSpecialClinicsFaithBasedOrganisation + "', "
+                + "'" + numberOfLaboratoryFaithBasedOrganisation + "', "
+                + "'" + numberOfPharmacyFaithBasedOrganisation + "', "
+                + "'" + numberOfADDOFaithBasedOrganisation + "', "
+                + "'" + numberOfMaternityHomeFaithBasedOrganisation + "', "
+                + "'" + numberOfOrphanCareCentersFaithBasedOrganisation + "', "
+                + "'" + numberOfCentersForChildrenWithDisabilitiesFaithBasedOrganisation + "', "
+                + "'" + numberOfCbecdcRehabilitationCentreFaithBasedOrganisation + "', "
+                + "'" + numberOfDayCareCentersFaithBasedOrganisation + "', "
+                + "'" + numberOfElderlyCareCentersFaithBasedOrganisation + "', "
+                + "'" + numberOfPreSchoolsPublic + "', "
+                + "'" + numberOfPrimarySchoolsPublic + "', "
+                + "'" + numberOfSecondarySchoolsPublic + "', "
+                + "'" + numberOfUniversitiesPublic + "', "
+                + "'" + numberOfSpecialNeedsSchoolsPublic + "', "
+                + "'" + numberOfDispensaryPublic + "', "
+                + "'" + numberOfHealthCentersPublic + "', "
+                + "'" + numberOfHospitalPublic + "', "
+                + "'" + numberOfSpecialClinicsPublic + "', "
+                + "'" + numberOfLaboratoryPublic + "', "
+                + "'" + numberOfPharmacyPublic + "', "
+                + "'" + numberOfADDOPublic + "', "
+                + "'" + numberOfMaternityHomePublic + "', "
+                + "'" + numberOfOrphanCareCentersPublic + "', "
+                + "'" + numberOfCentersForChildrenWithDisabilitiesPublic + "', "
+                + "'" + numberOfCbecdcRehabilitationCentrePublic + "', "
+                + "'" + numberOfDayCareCentersPublic + "', "
+                + "'" + numberOfElderlyCareCentersPublic + "', "
+                + "'" + numberOfPreSchoolsPrivate + "', "
+                + "'" + numberOfPrimarySchoolsPrivate + "', "
+                + "'" + numberOfSecondarySchoolsPrivate + "', "
+                + "'" + numberOfUniversitiesPrivate + "', "
+                + "'" + numberOfSpecialNeedsSchoolsPrivate + "', "
+                + "'" + numberOfDispensaryPrivate + "', "
+                + "'" + numberOfHealthCentersPrivate + "', "
+                + "'" + numberOfHospitalPrivate + "', "
+                + "'" + numberOfSpecialClinicsPrivate + "', "
+                + "'" + numberOfLaboratoryPrivate + "', "
+                + "'" + numberOfPharmacyPrivate + "', "
+                + "'" + numberOfADDOPrivate + "', "
+                + "'" + numberOfMaternityHomePrivate + "', "
+                + "'" + numberOfOrphanCareCentersPrivate + "', "
+                + "'" + numberOfCentersForChildrenWithDisabilitiesPrivate + "', "
+                + "'" + numberOfCbecdcRehabilitationCentrePrivate + "', "
+                + "'" + numberOfDayCareCentersPrivate + "', "
+                + "'" + numberOfElderlyCareCentersPrivate + "', "
+                + "'" + numberOfFoodShopVisited + "', "
+                + "'" + numberOfRestaurantsVisited + "', "
+                + "'" + numberOfButcheriesVisited + "', "
+                + "'" + numberOfBarAndClubsVisited + "', "
+                + "'" + numberOfGuestHouseVisited + "', "
+                + "'" + numberOfLocaFoodVendorsVisited + "', "
+                + "'" + numberOfMarketsVisited + "', "
+                + "'" + numberOfPublicToiletsVisited + "', "
+                + "'" + numberOfBusStationsVisited + "', "
+                + "'" + numberOfPrimarySchoolsVisited + "', "
+                + "'" + numberOfSecondarySchoolsVisited + "', "
+                + "'" + numberOfHospitalVisited + "', "
+                + "'" + numberOfHealthCentersVisited + "', "
+                + "'" + numberOfDispensariesVisited + "', "
+                + "'" + numberOfOfficesVisited + "', "
+                + "'" + numberOfUniversitiesCollegeVisited + "', "
+                + "'" + numberOfFoodShopThatMetTheStandards + "', "
+                + "'" + numberOfRestaurantsThatMetTheStandards + "', "
+                + "'" + numberOfButcheriesThatMetTheStandards + "', "
+                + "'" + numberOfBarAndClubsThatMetTheStandards + "', "
+                + "'" + numberOfGuestHouseThatMetTheStandards + "', "
+                + "'" + numberOfLocaFoodVendorsThatMetTheStandards + "', "
+                + "'" + numberOfMarketsThatMetTheStandards + "', "
+                + "'" + numberOfPublicToiletsThatMetTheStandards + "', "
+                + "'" + numberOfBusStationsThatMetTheStandards + "', "
+                + "'" + numberOfPrimarySchoolsThatMetTheStandards + "', "
+                + "'" + numberOfSecondarySchoolsThatMetTheStandards + "', "
+                + "'" + numberOfHospitalThatMetTheStandards + "', "
+                + "'" + numberOfHealthCentersThatMetTheStandards + "', "
+                + "'" + numberOfDispensariesThatMetTheStandards + "', "
+                + "'" + numberOfOfficesThatMetTheStandards + "', "
+                + "'" + numberOfUniversitiesCollegeThatMetTheStandards + "', "
+                + "'" + numberOfInspectedAgricultureAreas + "', "
+                + "'" + numberOfInspectedLivestockKeepingAreas + "', "
+                + "'" + numberOfInspectedFishingAreas + "', "
+                + "'" + numberOfInspectedIndustriesAreas + "', "
+                + "'" + numberOfInspectedOfficesAreas + "', "
+                + "'" + numberOfInspectedTransportationAreas + "', "
+                + "'" + numberOfOtherInspectedAreas + "', "
+                + "'" + numberOfAgricultureAreasInspectedWithRiskIndicators + "', "
+                + "'" + numberOfLivestockKeepingAreasInspectedWithRiskIndicators + "', "
+                + "'" + numberOfFishingAreasInspectedWithRiskIndicators + "', "
+                + "'" + numberOfIndustriesAreasInspectedWithRiskIndicators + "', "
+                + "'" + numberOfOfficesAreasInspectedWithRiskIndicators + "', "
+                + "'" + numberOfTransportationAreasInspectedWithRiskIndicators + "', "
+                + "'" + numberOfOtherAreasInspectedWithRiskIndicators + "', "
+                + "'" + numberOfInspectedGrains + "', "
+                + "'" + numberOfInspectedLegumes + "', "
+                + "'" + numberOfInspectedMeat + "', "
+                + "'" + numberOfInspectedFishing + "', "
+                + "'" + numberOfInspectedAlcoholicBeverages + "', "
+                + "'" + numberOfInspectedNonAlcoholicBeverages + "', "
+                + "'" + numberOfGrainsDiscarded + "', "
+                + "'" + numberOfLegumesDiscarded + "', "
+                + "'" + numberOfMeatDiscarded + "', "
+                + "'" + numberOfFishingDiscarded + "', "
+                + "'" + numberOfAlcoholicBeverageDiscarded + "', "
+                + "'" + numberOfNonAlcoholicBeverageDiscarded + "', "
+                + "'" + healthReportsAffectingPeopleInWorkplacesRespiratoryDiseases + "', "
+                + "'" + healthReportsAffectingPeopleInWorkplacesToxicChemicals + "', "
+                + "'" + healthReportsAffectingPeopleInWorkplacesBurns + "', "
+                + "'" + healthReportsAffectingPeopleInWorkplacesHearingLoss + "', "
+                + "'" + healthReportsAffectingPeopleInWorkplacesEyeProblems + "', "
+                + "'" + healthReportsAffectingPeopleInWorkplacesOtherEffects + "', "
+                + "'" + amountOfSolidWasteGeneratedAnnuallyTons + "', "
+                + "'" + amountOfSolidWasteDisposedAtADesignatedSiteAnnuallyTons + "', "
+                + "'" + numberOfWasteCollectionEquipmentVehicles + "', "
+                + "'" + numberOfWasteCollectionEquipmentTractors + "', "
+                + "'" + numberOfWasteCollectionEquipmentCarts + "', "
+                + "'" + numberOfWasteCollectionEquipmentWheelbarrows + "', "
+                + "'" + numberOfWasteCollectionEquipmentOthers + "', "
+                + "'" + numberOfAreasSprayedWithPesticidesPonds + "', "
+                + "'" + numberOfAreasSprayedWithPesticidesCans + "', "
+                + "'" + numberOfAreasSprayedWithPesticidesDrums + "', "
+                + "'" + numberOfAreasSprayedWithPesticidesBarrels + "', "
+                + "'" + numberOfAreasSprayedWithPesticidesCoconutShells + "', "
+                + "'" + numberOfTimesSprayingWasDonePonds + "', "
+                + "'" + numberOfTimesSprayingWasDoneCans + "', "
+                + "'" + numberOfTimesSprayingWasDoneDrums + "', "
+                + "'" + numberOfTimesSprayingWasDoneBarrels + "', "
+                + "'" + numberOfTimesSprayingWasDoneCoconutShells + "', "
+                + "'" + typesOfPesticidesUsedPonds + "', "
+                + "'" + typesOfPesticidesUsedCans + "', "
+                + "'" + typesOfPesticidesUsedDrums + "', "
+                + "'" + typesOfPesticidesUsedBarrels + "', "
+                + "'" + typesOfPesticidesUsedCoconutShells + "', "
+                + "'" + amountOfPesticideUsedPonds + "', "
+                + "'" + amountOfPesticideUsedCans + "', "
+                + "'" + amountOfPesticideUsedDrums + "', "
+                + "'" + amountOfPesticideUsedBarrels + "', "
+                + "'" + amountOfPesticideUsedCoconutShells + "', "
+                + lastInteractedWith
+                + ") ON CONFLICT (id) DO UPDATE SET "
+                + "select_age_group = '" + selectAgeGroup + "', "
+                + "number_of_male_by_age_group_under1 = '" + numberOfMaleByAgeGroupUnder1 + "', "
+                + "number_of_female_by_age_group_under1 = '" + numberOfFemaleByAgeGroupUnder1 + "', "
+                + "number_of_male_by_age_group_1_4 = '" + numberOfMaleByAgeGroup1_4 + "', "
+                + "number_of_female_by_age_group_1_4 = '" + numberOfFemaleByAgeGroup1_4 + "', "
+                + "number_of_male_by_age_group_5_14 = '" + numberOfMaleByAgeGroup5_14 + "', "
+                + "number_of_female_by_age_group_5_14 = '" + numberOfFemaleByAgeGroup5_14 + "', "
+                + "number_of_male_by_age_group_15_49 = '" + numberOfMaleByAgeGroup15_49 + "', "
+                + "number_of_female_by_age_group_15_49 = '" + numberOfFemaleByAgeGroup15_49 + "', "
+                + "number_of_male_by_age_group_50_59 = '" + numberOfMaleByAgeGroup50_59 + "', "
+                + "number_of_female_by_age_group_50_59 = '" + numberOfFemaleByAgeGroup50_59 + "', "
+                + "number_of_male_by_age_group_60_plus = '" + numberOfMaleByAgeGroup60Plus + "', "
+                + "number_of_female_by_age_group_60_plus = '" + numberOfFemaleByAgeGroup60Plus + "', "
+                + "number_of_house_hold_with_road_access = '" + numberOfHouseHoldWithRoadAccess + "', "
+                + "number_of_house_holds_with_at_least_one_landline_or_mobile_phone = '" + numberOfHouseHoldsWithAtLeastOneLandlineOrMobilePhone + "', "
+                + "number_of_house_hold_with_basic_nutrition_source_vegetable = '" + numberOfHouseHoldWithBasicNutritionSourceVegetable + "', "
+                + "number_of_house_hold_with_basic_nutrition_source_fruit_trees = '" + numberOfHouseHoldWithBasicNutritionSourceFruitTrees + "', "
+                + "number_of_house_hold_with_basic_nutrition_source_domestic_animal = '" + numberOfHouseHoldWithBasicNutritionSourceDomesticAnimal + "', "
+                + "select_centers_category = '" + selectCentersCategory + "', "
+                + "number_of_pre_schools_government = '" + numberOfPreSchoolsGovernment + "', "
+                + "number_of_primary_schools_government = '" + numberOfPrimarySchoolsGovernment + "', "
+                + "number_of_secondary_schools_government = '" + numberOfSecondarySchoolsGovernment + "', "
+                + "number_of_universities_government = '" + numberOfUniversitiesGovernment + "', "
+                + "number_of_special_needs_schools_government = '" + numberOfSpecialNeedsSchoolsGovernment + "', "
+                + "number_of_dispensary_government = '" + numberOfDispensaryGovernment + "', "
+                + "number_of_health_centers_government = '" + numberOfHealthCentersGovernment + "', "
+                + "number_of_hospital_government = '" + numberOfHospitalGovernment + "', "
+                + "number_of_special_clinics_government = '" + numberOfSpecialClinicsGovernment + "', "
+                + "number_of_laboratory_government = '" + numberOfLaboratoryGovernment + "', "
+                + "number_of_pharmacy_government = '" + numberOfPharmacyGovernment + "', "
+                + "number_of_addo_government = '" + numberOfADDOGovernment + "', "
+                + "number_of_maternity_home_government = '" + numberOfMaternityHomeGovernment + "', "
+                + "number_of_orphan_care_centers_government = '" + numberOfOrphanCareCentersGovernment + "', "
+                + "number_of_centers_for_children_with_disabilities_government = '" + numberOfCentersForChildrenWithDisabilitiesGovernment + "', "
+                + "number_of_cbecdc_rehabilitation_centre_government = '" + numberOfCbecdcRehabilitationCentreGovernment + "', "
+                + "number_of_day_care_centers_government = '" + numberOfDayCareCentersGovernment + "', "
+                + "number_of_elderly_care_centers_government = '" + numberOfElderlyCareCentersGovernment + "', "
+                + "number_of_pre_schools_faith_based_organisation = '" + numberOfPreSchoolsFaithBasedOrganisation + "', "
+                + "number_of_primary_schools_faith_based_organisation = '" + numberOfPrimarySchoolsFaithBasedOrganisation + "', "
+                + "number_of_secondary_schools_faith_based_organisation = '" + numberOfSecondarySchoolsFaithBasedOrganisation + "', "
+                + "number_of_universities_faith_based_organisation = '" + numberOfUniversitiesFaithBasedOrganisation + "', "
+                + "number_of_special_needs_schools_faith_based_organisation = '" + numberOfSpecialNeedsSchoolsFaithBasedOrganisation + "', "
+                + "number_of_dispensary_faith_based_organisation = '" + numberOfDispensaryFaithBasedOrganisation + "', "
+                + "number_of_health_centers_faith_based_organisation = '" + numberOfHealthCentersFaithBasedOrganisation + "', "
+                + "number_of_hospital_faith_based_organisation = '" + numberOfHospitalFaithBasedOrganisation + "', "
+                + "number_of_special_clinics_faith_based_organisation = '" + numberOfSpecialClinicsFaithBasedOrganisation + "', "
+                + "number_of_laboratory_faith_based_organisation = '" + numberOfLaboratoryFaithBasedOrganisation + "', "
+                + "number_of_pharmacy_faith_based_organisation = '" + numberOfPharmacyFaithBasedOrganisation + "', "
+                + "number_of_addo_faith_based_organisation = '" + numberOfADDOFaithBasedOrganisation + "', "
+                + "number_of_maternity_home_faith_based_organisation = '" + numberOfMaternityHomeFaithBasedOrganisation + "', "
+                + "number_of_orphan_care_centers_faith_based_organisation = '" + numberOfOrphanCareCentersFaithBasedOrganisation + "', "
+                + "number_of_centers_for_children_with_disabilities_faith_based_organisation = '" + numberOfCentersForChildrenWithDisabilitiesFaithBasedOrganisation + "', "
+                + "number_of_cbecdc_rehabilitation_centre_faith_based_organisation = '" + numberOfCbecdcRehabilitationCentreFaithBasedOrganisation + "', "
+                + "number_of_day_care_centers_faith_based_organisation = '" + numberOfDayCareCentersFaithBasedOrganisation + "', "
+                + "number_of_elderly_care_centers_faith_based_organisation = '" + numberOfElderlyCareCentersFaithBasedOrganisation + "', "
+                + "number_of_pre_schools_public = '" + numberOfPreSchoolsPublic + "', "
+                + "number_of_primary_schools_public = '" + numberOfPrimarySchoolsPublic + "', "
+                + "number_of_secondary_schools_public = '" + numberOfSecondarySchoolsPublic + "', "
+                + "number_of_universities_public = '" + numberOfUniversitiesPublic + "', "
+                + "number_of_special_needs_schools_public = '" + numberOfSpecialNeedsSchoolsPublic + "', "
+                + "number_of_dispensary_public = '" + numberOfDispensaryPublic + "', "
+                + "number_of_health_centers_public = '" + numberOfHealthCentersPublic + "', "
+                + "number_of_hospital_public = '" + numberOfHospitalPublic + "', "
+                + "number_of_special_clinics_public = '" + numberOfSpecialClinicsPublic + "', "
+                + "number_of_laboratory_public = '" + numberOfLaboratoryPublic + "', "
+                + "number_of_pharmacy_public = '" + numberOfPharmacyPublic + "', "
+                + "number_of_addo_public = '" + numberOfADDOPublic + "', "
+                + "number_of_maternity_home_public = '" + numberOfMaternityHomePublic + "', "
+                + "number_of_orphan_care_centers_public = '" + numberOfOrphanCareCentersPublic + "', "
+                + "number_of_centers_for_children_with_disabilities_public = '" + numberOfCentersForChildrenWithDisabilitiesPublic + "', "
+                + "number_of_cbecdc_rehabilitation_centre_public = '" + numberOfCbecdcRehabilitationCentrePublic + "', "
+                + "number_of_day_care_centers_public = '" + numberOfDayCareCentersPublic + "', "
+                + "number_of_elderly_care_centers_public = '" + numberOfElderlyCareCentersPublic + "', "
+                + "number_of_pre_schools_private = '" + numberOfPreSchoolsPrivate + "', "
+                + "number_of_primary_schools_private = '" + numberOfPrimarySchoolsPrivate + "', "
+                + "number_of_secondary_schools_private = '" + numberOfSecondarySchoolsPrivate + "', "
+                + "number_of_universities_private = '" + numberOfUniversitiesPrivate + "', "
+                + "number_of_special_needs_schools_private = '" + numberOfSpecialNeedsSchoolsPrivate + "', "
+                + "number_of_dispensary_private = '" + numberOfDispensaryPrivate + "', "
+                + "number_of_health_centers_private = '" + numberOfHealthCentersPrivate + "', "
+                + "number_of_hospital_private = '" + numberOfHospitalPrivate + "', "
+                + "number_of_special_clinics_private = '" + numberOfSpecialClinicsPrivate + "', "
+                + "number_of_laboratory_private = '" + numberOfLaboratoryPrivate + "', "
+                + "number_of_pharmacy_private = '" + numberOfPharmacyPrivate + "', "
+                + "number_of_addo_private = '" + numberOfADDOPrivate + "', "
+                + "number_of_maternity_home_private = '" + numberOfMaternityHomePrivate + "', "
+                + "number_of_orphan_care_centers_private = '" + numberOfOrphanCareCentersPrivate + "', "
+                + "number_of_centers_for_children_with_disabilities_private = '" + numberOfCentersForChildrenWithDisabilitiesPrivate + "', "
+                + "number_of_cbecdc_rehabilitation_centre_private = '" + numberOfCbecdcRehabilitationCentrePrivate + "', "
+                + "number_of_day_care_centers_private = '" + numberOfDayCareCentersPrivate + "', "
+                + "number_of_elderly_care_centers_private = '" + numberOfElderlyCareCentersPrivate + "', "
+                + "number_of_food_shop_visited = '" + numberOfFoodShopVisited + "', "
+                + "number_of_restaurants_visited = '" + numberOfRestaurantsVisited + "', "
+                + "number_of_butcheries_visited = '" + numberOfButcheriesVisited + "', "
+                + "number_of_bar_and_clubs_visited = '" + numberOfBarAndClubsVisited + "', "
+                + "number_of_guest_house_visited = '" + numberOfGuestHouseVisited + "', "
+                + "number_of_loca_food_vendors_visited = '" + numberOfLocaFoodVendorsVisited + "', "
+                + "number_of_markets_visited = '" + numberOfMarketsVisited + "', "
+                + "number_of_public_toilets_visited = '" + numberOfPublicToiletsVisited + "', "
+                + "number_of_bus_stations_visited = '" + numberOfBusStationsVisited + "', "
+                + "number_of_primary_schools_visited = '" + numberOfPrimarySchoolsVisited + "', "
+                + "number_of_secondary_schools_visited = '" + numberOfSecondarySchoolsVisited + "', "
+                + "number_of_hospital_visited = '" + numberOfHospitalVisited + "', "
+                + "number_of_health_centers_visited = '" + numberOfHealthCentersVisited + "', "
+                + "number_of_dispensaries_visited = '" + numberOfDispensariesVisited + "', "
+                + "number_of_offices_visited = '" + numberOfOfficesVisited + "', "
+                + "number_of_universities_college_visited = '" + numberOfUniversitiesCollegeVisited + "', "
+                + "number_of_food_shop_that_met_the_standards = '" + numberOfFoodShopThatMetTheStandards + "', "
+                + "number_of_restaurants_that_met_the_standards = '" + numberOfRestaurantsThatMetTheStandards + "', "
+                + "number_of_butcheries_that_met_the_standards = '" + numberOfButcheriesThatMetTheStandards + "', "
+                + "number_of_bar_and_clubs_that_met_the_standards = '" + numberOfBarAndClubsThatMetTheStandards + "', "
+                + "number_of_guest_house_that_met_the_standards = '" + numberOfGuestHouseThatMetTheStandards + "', "
+                + "number_of_loca_food_vendors_that_met_the_standards = '" + numberOfLocaFoodVendorsThatMetTheStandards + "', "
+                + "number_of_markets_that_met_the_standards = '" + numberOfMarketsThatMetTheStandards + "', "
+                + "number_of_public_toilets_that_met_the_standards = '" + numberOfPublicToiletsThatMetTheStandards + "', "
+                + "number_of_bus_stations_that_met_the_standards = '" + numberOfBusStationsThatMetTheStandards + "', "
+                + "number_of_primary_schools_that_met_the_standards = '" + numberOfPrimarySchoolsThatMetTheStandards + "', "
+                + "number_of_secondary_schools_that_met_the_standards = '" + numberOfSecondarySchoolsThatMetTheStandards + "', "
+                + "number_of_hospital_that_met_the_standards = '" + numberOfHospitalThatMetTheStandards + "', "
+                + "number_of_health_centers_that_met_the_standards = '" + numberOfHealthCentersThatMetTheStandards + "', "
+                + "number_of_dispensaries_that_met_the_standards = '" + numberOfDispensariesThatMetTheStandards + "', "
+                + "number_of_offices_that_met_the_standards = '" + numberOfOfficesThatMetTheStandards + "', "
+                + "number_of_universities_college_that_met_the_standards = '" + numberOfUniversitiesCollegeThatMetTheStandards + "', "
+                + "number_of_inspected_agriculture_areas = '" + numberOfInspectedAgricultureAreas + "', "
+                + "number_of_inspected_livestock_keeping_areas = '" + numberOfInspectedLivestockKeepingAreas + "', "
+                + "number_of_inspected_fishing_areas = '" + numberOfInspectedFishingAreas + "', "
+                + "number_of_inspected_industries_areas = '" + numberOfInspectedIndustriesAreas + "', "
+                + "number_of_inspected_offices_areas = '" + numberOfInspectedOfficesAreas + "', "
+                + "number_of_inspected_transportation_areas = '" + numberOfInspectedTransportationAreas + "', "
+                + "number_of_other_inspected_areas = '" + numberOfOtherInspectedAreas + "', "
+                + "number_of_agriculture_areas_inspected_with_risk_indicators = '" + numberOfAgricultureAreasInspectedWithRiskIndicators + "', "
+                + "number_of_livestock_keeping_areas_inspected_with_risk_indicators = '" + numberOfLivestockKeepingAreasInspectedWithRiskIndicators + "', "
+                + "number_of_fishing_areas_inspected_with_risk_indicators = '" + numberOfFishingAreasInspectedWithRiskIndicators + "', "
+                + "number_of_industries_areas_inspected_with_risk_indicators = '" + numberOfIndustriesAreasInspectedWithRiskIndicators + "', "
+                + "number_of_offices_areas_inspected_with_risk_indicators = '" + numberOfOfficesAreasInspectedWithRiskIndicators + "', "
+                + "number_of_transportation_areas_inspected_with_risk_indicators = '" + numberOfTransportationAreasInspectedWithRiskIndicators + "', "
+                + "number_of_other_areas_inspected_with_risk_indicators = '" + numberOfOtherAreasInspectedWithRiskIndicators + "', "
+                + "number_of_inspected_grains = '" + numberOfInspectedGrains + "', "
+                + "number_of_inspected_legumes = '" + numberOfInspectedLegumes + "', "
+                + "number_of_inspected_meat = '" + numberOfInspectedMeat + "', "
+                + "number_of_inspected_fishing = '" + numberOfInspectedFishing + "', "
+                + "number_of_inspected_alcoholic_beverages = '" + numberOfInspectedAlcoholicBeverages + "', "
+                + "number_of_inspected_non_alcoholic_beverages = '" + numberOfInspectedNonAlcoholicBeverages + "', "
+                + "number_of_grains_discarded = '" + numberOfGrainsDiscarded + "', "
+                + "number_of_legumes_discarded = '" + numberOfLegumesDiscarded + "', "
+                + "number_of_meat_discarded = '" + numberOfMeatDiscarded + "', "
+                + "number_of_fishing_discarded = '" + numberOfFishingDiscarded + "', "
+                + "number_of_alcoholic_beverage_discarded = '" + numberOfAlcoholicBeverageDiscarded + "', "
+                + "number_of_non_alcoholic_beverage_discarded = '" + numberOfNonAlcoholicBeverageDiscarded + "', "
+                + "health_reports_affecting_people_in_workplaces_respiratory_diseases = '" + healthReportsAffectingPeopleInWorkplacesRespiratoryDiseases + "', "
+                + "health_reports_affecting_people_in_workplaces_toxic_chemicals = '" + healthReportsAffectingPeopleInWorkplacesToxicChemicals + "', "
+                + "health_reports_affecting_people_in_workplaces_burns = '" + healthReportsAffectingPeopleInWorkplacesBurns + "', "
+                + "health_reports_affecting_people_in_workplaces_hearing_loss = '" + healthReportsAffectingPeopleInWorkplacesHearingLoss + "', "
+                + "health_reports_affecting_people_in_workplaces_eye_problems = '" + healthReportsAffectingPeopleInWorkplacesEyeProblems + "', "
+                + "health_reports_affecting_people_in_workplaces_other_effects = '" + healthReportsAffectingPeopleInWorkplacesOtherEffects + "', "
+                + "amount_of_solid_waste_generated_annually_tons = '" + amountOfSolidWasteGeneratedAnnuallyTons + "', "
+                + "amount_of_solid_waste_disposed_at_a_designated_site_annually_tons = '" + amountOfSolidWasteDisposedAtADesignatedSiteAnnuallyTons + "', "
+                + "number_of_waste_collection_equipment_vehicles = '" + numberOfWasteCollectionEquipmentVehicles + "', "
+                + "number_of_waste_collection_equipment_tractors = '" + numberOfWasteCollectionEquipmentTractors + "', "
+                + "number_of_waste_collection_equipment_carts = '" + numberOfWasteCollectionEquipmentCarts + "', "
+                + "number_of_waste_collection_equipment_wheelbarrows = '" + numberOfWasteCollectionEquipmentWheelbarrows + "', "
+                + "number_of_waste_collection_equipment_others = '" + numberOfWasteCollectionEquipmentOthers + "', "
+                + "number_of_areas_sprayed_with_pesticides_ponds = '" + numberOfAreasSprayedWithPesticidesPonds + "', "
+                + "number_of_areas_sprayed_with_pesticides_cans = '" + numberOfAreasSprayedWithPesticidesCans + "', "
+                + "number_of_areas_sprayed_with_pesticides_drums = '" + numberOfAreasSprayedWithPesticidesDrums + "', "
+                + "number_of_areas_sprayed_with_pesticides_barrels = '" + numberOfAreasSprayedWithPesticidesBarrels + "', "
+                + "number_of_areas_sprayed_with_pesticides_coconut_shells = '" + numberOfAreasSprayedWithPesticidesCoconutShells + "', "
+                + "number_of_times_spraying_was_done_ponds = '" + numberOfTimesSprayingWasDonePonds + "', "
+                + "number_of_times_spraying_was_done_cans = '" + numberOfTimesSprayingWasDoneCans + "', "
+                + "number_of_times_spraying_was_done_drums = '" + numberOfTimesSprayingWasDoneDrums + "', "
+                + "number_of_times_spraying_was_done_barrels = '" + numberOfTimesSprayingWasDoneBarrels + "', "
+                + "number_of_times_spraying_was_done_coconut_shells = '" + numberOfTimesSprayingWasDoneCoconutShells + "', "
+                + "types_of_pesticides_used_ponds = '" + typesOfPesticidesUsedPonds + "', "
+                + "types_of_pesticides_used_cans = '" + typesOfPesticidesUsedCans + "', "
+                + "types_of_pesticides_used_drums = '" + typesOfPesticidesUsedDrums + "', "
+                + "types_of_pesticides_used_barrels = '" + typesOfPesticidesUsedBarrels + "', "
+                + "types_of_pesticides_used_coconut_shells = '" + typesOfPesticidesUsedCoconutShells + "', "
+                + "amount_of_pesticide_used_ponds = '" + amountOfPesticideUsedPonds + "', "
+                + "amount_of_pesticide_used_cans = '" + amountOfPesticideUsedCans + "', "
+                + "amount_of_pesticide_used_drums = '" + amountOfPesticideUsedDrums + "', "
+                + "amount_of_pesticide_used_barrels = '" + amountOfPesticideUsedBarrels + "', "
+                + "amount_of_pesticide_used_coconut_shells = '" + amountOfPesticideUsedCoconutShells + "', "
+                + "last_interacted_with = " + lastInteractedWith;
+        updateDB(sql);
+    }
+
+    public static List<HpsAnnualCensusRegisterModel> getHpsAnnualCensusRegisters() {
+        String sql = "SELECT * FROM " + Constants.TABLES.HPS_ANNUAL_CENSUS_REGISTER;
+
+        @SuppressLint("Range")
+        DataMap<HpsAnnualCensusRegisterModel> dataMap = cursor -> {
+            HpsAnnualCensusRegisterModel model = new HpsAnnualCensusRegisterModel();
+            model.setBaseEntityId(cursor.getString(cursor.getColumnIndex("base_entity_id")));
+            model.setYear(cursor.getString(cursor.getColumnIndex("year")));
+            model.setSelectAgeGroup(cursor.getString(cursor.getColumnIndex("select_age_group")));
+            model.setNumberOfMaleByAgeGroupUnder1(cursor.getInt(cursor.getColumnIndex("number_of_male_by_age_group_under1")));
+            model.setNumberOfFemaleByAgeGroupUnder1(cursor.getInt(cursor.getColumnIndex("number_of_female_by_age_group_under1")));
+            model.setNumberOfMaleByAgeGroup1_4(cursor.getInt(cursor.getColumnIndex("number_of_male_by_age_group_1_4")));
+            model.setNumberOfFemaleByAgeGroup1_4(cursor.getInt(cursor.getColumnIndex("number_of_female_by_age_group_1_4")));
+            model.setNumberOfMaleByAgeGroup5_14(cursor.getInt(cursor.getColumnIndex("number_of_male_by_age_group_5_14")));
+            model.setNumberOfFemaleByAgeGroup5_14(cursor.getInt(cursor.getColumnIndex("number_of_female_by_age_group_5_14")));
+            model.setNumberOfMaleByAgeGroup15_49(cursor.getInt(cursor.getColumnIndex("number_of_male_by_age_group_15_49")));
+            model.setNumberOfFemaleByAgeGroup15_49(cursor.getInt(cursor.getColumnIndex("number_of_female_by_age_group_15_49")));
+            model.setNumberOfMaleByAgeGroup50_59(cursor.getInt(cursor.getColumnIndex("number_of_male_by_age_group_50_59")));
+            model.setNumberOfFemaleByAgeGroup50_59(cursor.getInt(cursor.getColumnIndex("number_of_female_by_age_group_50_59")));
+            model.setNumberOfMaleByAgeGroup60Plus(cursor.getInt(cursor.getColumnIndex("number_of_male_by_age_group_60_plus")));
+            model.setNumberOfFemaleByAgeGroup60Plus(cursor.getInt(cursor.getColumnIndex("number_of_female_by_age_group_60_plus")));
+            model.setNumberOfHouseHoldWithRoadAccess(cursor.getInt(cursor.getColumnIndex("number_of_house_hold_with_road_access")));
+            model.setNumberOfHouseHoldsWithAtLeastOneLandlineOrMobilePhone(
+                    cursor.getInt(cursor.getColumnIndex("number_of_house_holds_with_at_least_one_landline_or_mobile_phone"))
+            );
+            model.setNumberOfHouseHoldWithBasicNutritionSourceVegetable(
+                    cursor.getInt(cursor.getColumnIndex("number_of_house_hold_with_basic_nutrition_source_vegetable"))
+            );
+            model.setNumberOfHouseHoldWithBasicNutritionSourceFruitTrees(
+                    cursor.getInt(cursor.getColumnIndex("number_of_house_hold_with_basic_nutrition_source_fruit_trees"))
+            );
+            model.setNumberOfHouseHoldWithBasicNutritionSourceDomesticAnimal(
+                    cursor.getInt(cursor.getColumnIndex("number_of_house_hold_with_basic_nutrition_source_domestic_animal"))
+            );
+            model.setSelectCentersCategory(cursor.getString(cursor.getColumnIndex("select_centers_category")));
+            model.setNumberOfPreSchoolsGovernment(cursor.getInt(cursor.getColumnIndex("number_of_pre_schools_government")));
+            model.setNumberOfPrimarySchoolsGovernment(cursor.getInt(cursor.getColumnIndex("number_of_primary_schools_government")));
+            model.setNumberOfSecondarySchoolsGovernment(cursor.getInt(cursor.getColumnIndex("number_of_secondary_schools_government")));
+            model.setNumberOfUniversitiesGovernment(cursor.getInt(cursor.getColumnIndex("number_of_universities_government")));
+            model.setNumberOfSpecialNeedsSchoolsGovernment(cursor.getInt(cursor.getColumnIndex("number_of_special_needs_schools_government")));
+            model.setNumberOfDispensaryGovernment(cursor.getInt(cursor.getColumnIndex("number_of_dispensary_government")));
+            model.setNumberOfHealthCentersGovernment(cursor.getInt(cursor.getColumnIndex("number_of_health_centers_government")));
+            model.setNumberOfHospitalGovernment(cursor.getInt(cursor.getColumnIndex("number_of_hospital_government")));
+            model.setNumberOfSpecialClinicsGovernment(cursor.getInt(cursor.getColumnIndex("number_of_special_clinics_government")));
+            model.setNumberOfLaboratoryGovernment(cursor.getInt(cursor.getColumnIndex("number_of_laboratory_government")));
+            model.setNumberOfPharmacyGovernment(cursor.getInt(cursor.getColumnIndex("number_of_pharmacy_government")));
+            model.setNumberOfADDOGovernment(cursor.getInt(cursor.getColumnIndex("number_of_addo_government")));
+            model.setNumberOfMaternityHomeGovernment(cursor.getInt(cursor.getColumnIndex("number_of_maternity_home_government")));
+            model.setNumberOfOrphanCareCentersGovernment(cursor.getInt(cursor.getColumnIndex("number_of_orphan_care_centers_government")));
+            model.setNumberOfCentersForChildrenWithDisabilitiesGovernment(
+                    cursor.getInt(cursor.getColumnIndex("number_of_centers_for_children_with_disabilities_government"))
+            );
+            model.setNumberOfCbecdcRehabilitationCentreGovernment(
+                    cursor.getInt(cursor.getColumnIndex("number_of_cbecdc_rehabilitation_centre_government"))
+            );
+            model.setNumberOfDayCareCentersGovernment(cursor.getInt(cursor.getColumnIndex("number_of_day_care_centers_government")));
+            model.setNumberOfElderlyCareCentersGovernment(cursor.getInt(cursor.getColumnIndex("number_of_elderly_care_centers_government")));
+            model.setNumberOfPreSchoolsFaithBasedOrganisation(
+                    cursor.getInt(cursor.getColumnIndex("number_of_pre_schools_faith_based_organisation"))
+            );
+            model.setNumberOfPrimarySchoolsFaithBasedOrganisation(
+                    cursor.getInt(cursor.getColumnIndex("number_of_primary_schools_faith_based_organisation"))
+            );
+            model.setNumberOfSecondarySchoolsFaithBasedOrganisation(
+                    cursor.getInt(cursor.getColumnIndex("number_of_secondary_schools_faith_based_organisation"))
+            );
+            model.setNumberOfUniversitiesFaithBasedOrganisation(
+                    cursor.getInt(cursor.getColumnIndex("number_of_universities_faith_based_organisation"))
+            );
+            model.setNumberOfSpecialNeedsSchoolsFaithBasedOrganisation(
+                    cursor.getInt(cursor.getColumnIndex("number_of_special_needs_schools_faith_based_organisation"))
+            );
+            model.setNumberOfDispensaryFaithBasedOrganisation(
+                    cursor.getInt(cursor.getColumnIndex("number_of_dispensary_faith_based_organisation"))
+            );
+            model.setNumberOfHealthCentersFaithBasedOrganisation(
+                    cursor.getInt(cursor.getColumnIndex("number_of_health_centers_faith_based_organisation"))
+            );
+            model.setNumberOfHospitalFaithBasedOrganisation(
+                    cursor.getInt(cursor.getColumnIndex("number_of_hospital_faith_based_organisation"))
+            );
+            model.setNumberOfSpecialClinicsFaithBasedOrganisation(
+                    cursor.getInt(cursor.getColumnIndex("number_of_special_clinics_faith_based_organisation"))
+            );
+            model.setNumberOfLaboratoryFaithBasedOrganisation(
+                    cursor.getInt(cursor.getColumnIndex("number_of_laboratory_faith_based_organisation"))
+            );
+            model.setNumberOfPharmacyFaithBasedOrganisation(
+                    cursor.getInt(cursor.getColumnIndex("number_of_pharmacy_faith_based_organisation"))
+            );
+            model.setNumberOfADDOFaithBasedOrganisation(
+                    cursor.getInt(cursor.getColumnIndex("number_of_addo_faith_based_organisation"))
+            );
+            model.setNumberOfMaternityHomeFaithBasedOrganisation(
+                    cursor.getInt(cursor.getColumnIndex("number_of_maternity_home_faith_based_organisation"))
+            );
+            model.setNumberOfOrphanCareCentersFaithBasedOrganisation(
+                    cursor.getInt(cursor.getColumnIndex("number_of_orphan_care_centers_faith_based_organisation"))
+            );
+            model.setNumberOfCentersForChildrenWithDisabilitiesFaithBasedOrganisation(
+                    cursor.getInt(cursor.getColumnIndex("number_of_centers_for_children_with_disabilities_faith_based_organisation"))
+            );
+            model.setNumberOfCbecdcRehabilitationCentreFaithBasedOrganisation(
+                    cursor.getInt(cursor.getColumnIndex("number_of_cbecdc_rehabilitation_centre_faith_based_organisation"))
+            );
+            model.setNumberOfDayCareCentersFaithBasedOrganisation(
+                    cursor.getInt(cursor.getColumnIndex("number_of_day_care_centers_faith_based_organisation"))
+            );
+            model.setNumberOfElderlyCareCentersFaithBasedOrganisation(
+                    cursor.getInt(cursor.getColumnIndex("number_of_elderly_care_centers_faith_based_organisation"))
+            );
+            model.setNumberOfPreSchoolsPublic(cursor.getInt(cursor.getColumnIndex("number_of_pre_schools_public")));
+            model.setNumberOfPrimarySchoolsPublic(cursor.getInt(cursor.getColumnIndex("number_of_primary_schools_public")));
+            model.setNumberOfSecondarySchoolsPublic(cursor.getInt(cursor.getColumnIndex("number_of_secondary_schools_public")));
+            model.setNumberOfUniversitiesPublic(cursor.getInt(cursor.getColumnIndex("number_of_universities_public")));
+            model.setNumberOfSpecialNeedsSchoolsPublic(cursor.getInt(cursor.getColumnIndex("number_of_special_needs_schools_public")));
+            model.setNumberOfDispensaryPublic(cursor.getInt(cursor.getColumnIndex("number_of_dispensary_public")));
+            model.setNumberOfHealthCentersPublic(cursor.getInt(cursor.getColumnIndex("number_of_health_centers_public")));
+            model.setNumberOfHospitalPublic(cursor.getInt(cursor.getColumnIndex("number_of_hospital_public")));
+            model.setNumberOfSpecialClinicsPublic(cursor.getInt(cursor.getColumnIndex("number_of_special_clinics_public")));
+            model.setNumberOfLaboratoryPublic(cursor.getInt(cursor.getColumnIndex("number_of_laboratory_public")));
+            model.setNumberOfPharmacyPublic(cursor.getInt(cursor.getColumnIndex("number_of_pharmacy_public")));
+            model.setNumberOfADDOPublic(cursor.getInt(cursor.getColumnIndex("number_of_addo_public")));
+            model.setNumberOfMaternityHomePublic(cursor.getInt(cursor.getColumnIndex("number_of_maternity_home_public")));
+            model.setNumberOfOrphanCareCentersPublic(cursor.getInt(cursor.getColumnIndex("number_of_orphan_care_centers_public")));
+            model.setNumberOfCentersForChildrenWithDisabilitiesPublic(
+                    cursor.getInt(cursor.getColumnIndex("number_of_centers_for_children_with_disabilities_public"))
+            );
+            model.setNumberOfCbecdcRehabilitationCentrePublic(
+                    cursor.getInt(cursor.getColumnIndex("number_of_cbecdc_rehabilitation_centre_public"))
+            );
+            model.setNumberOfDayCareCentersPublic(cursor.getInt(cursor.getColumnIndex("number_of_day_care_centers_public")));
+            model.setNumberOfElderlyCareCentersPublic(cursor.getInt(cursor.getColumnIndex("number_of_elderly_care_centers_public")));
+            model.setNumberOfPreSchoolsPrivate(cursor.getInt(cursor.getColumnIndex("number_of_pre_schools_private")));
+            model.setNumberOfPrimarySchoolsPrivate(cursor.getInt(cursor.getColumnIndex("number_of_primary_schools_private")));
+            model.setNumberOfSecondarySchoolsPrivate(cursor.getInt(cursor.getColumnIndex("number_of_secondary_schools_private")));
+            model.setNumberOfUniversitiesPrivate(cursor.getInt(cursor.getColumnIndex("number_of_universities_private")));
+            model.setNumberOfSpecialNeedsSchoolsPrivate(cursor.getInt(cursor.getColumnIndex("number_of_special_needs_schools_private")));
+            model.setNumberOfDispensaryPrivate(cursor.getInt(cursor.getColumnIndex("number_of_dispensary_private")));
+            model.setNumberOfHealthCentersPrivate(cursor.getInt(cursor.getColumnIndex("number_of_health_centers_private")));
+            model.setNumberOfHospitalPrivate(cursor.getInt(cursor.getColumnIndex("number_of_hospital_private")));
+            model.setNumberOfSpecialClinicsPrivate(cursor.getInt(cursor.getColumnIndex("number_of_special_clinics_private")));
+            model.setNumberOfLaboratoryPrivate(cursor.getInt(cursor.getColumnIndex("number_of_laboratory_private")));
+            model.setNumberOfPharmacyPrivate(cursor.getInt(cursor.getColumnIndex("number_of_pharmacy_private")));
+            model.setNumberOfADDOPrivate(cursor.getInt(cursor.getColumnIndex("number_of_addo_private")));
+            model.setNumberOfMaternityHomePrivate(cursor.getInt(cursor.getColumnIndex("number_of_maternity_home_private")));
+            model.setNumberOfOrphanCareCentersPrivate(cursor.getInt(cursor.getColumnIndex("number_of_orphan_care_centers_private")));
+            model.setNumberOfCentersForChildrenWithDisabilitiesPrivate(
+                    cursor.getInt(cursor.getColumnIndex("number_of_centers_for_children_with_disabilities_private"))
+            );
+            model.setNumberOfCbecdcRehabilitationCentrePrivate(
+                    cursor.getInt(cursor.getColumnIndex("number_of_cbecdc_rehabilitation_centre_private"))
+            );
+            model.setNumberOfDayCareCentersPrivate(cursor.getInt(cursor.getColumnIndex("number_of_day_care_centers_private")));
+            model.setNumberOfElderlyCareCentersPrivate(cursor.getInt(cursor.getColumnIndex("number_of_elderly_care_centers_private")));
+            model.setNumberOfFoodShopVisited(cursor.getInt(cursor.getColumnIndex("number_of_food_shop_visited")));
+            model.setNumberOfRestaurantsVisited(cursor.getInt(cursor.getColumnIndex("number_of_restaurants_visited")));
+            model.setNumberOfButcheriesVisited(cursor.getInt(cursor.getColumnIndex("number_of_butcheries_visited")));
+            model.setNumberOfBarAndClubsVisited(cursor.getInt(cursor.getColumnIndex("number_of_bar_and_clubs_visited")));
+            model.setNumberOfGuestHouseVisited(cursor.getInt(cursor.getColumnIndex("number_of_guest_house_visited")));
+            model.setNumberOfLocaFoodVendorsVisited(cursor.getInt(cursor.getColumnIndex("number_of_loca_food_vendors_visited")));
+            model.setNumberOfMarketsVisited(cursor.getInt(cursor.getColumnIndex("number_of_markets_visited")));
+            model.setNumberOfPublicToiletsVisited(cursor.getInt(cursor.getColumnIndex("number_of_public_toilets_visited")));
+            model.setNumberOfBusStationsVisited(cursor.getInt(cursor.getColumnIndex("number_of_bus_stations_visited")));
+            model.setNumberOfPrimarySchoolsVisited(cursor.getInt(cursor.getColumnIndex("number_of_primary_schools_visited")));
+            model.setNumberOfSecondarySchoolsVisited(cursor.getInt(cursor.getColumnIndex("number_of_secondary_schools_visited")));
+            model.setNumberOfHospitalVisited(cursor.getInt(cursor.getColumnIndex("number_of_hospital_visited")));
+            model.setNumberOfHealthCentersVisited(cursor.getInt(cursor.getColumnIndex("number_of_health_centers_visited")));
+            model.setNumberOfDispensariesVisited(cursor.getInt(cursor.getColumnIndex("number_of_dispensaries_visited")));
+            model.setNumberOfOfficesVisited(cursor.getInt(cursor.getColumnIndex("number_of_offices_visited")));
+            model.setNumberOfUniversitiesCollegeVisited(cursor.getInt(cursor.getColumnIndex("number_of_universities_college_visited")));
+            model.setNumberOfFoodShopThatMetTheStandards(cursor.getInt(cursor.getColumnIndex("number_of_food_shop_that_met_the_standards")));
+            model.setNumberOfRestaurantsThatMetTheStandards(cursor.getInt(cursor.getColumnIndex("number_of_restaurants_that_met_the_standards")));
+            model.setNumberOfButcheriesThatMetTheStandards(cursor.getInt(cursor.getColumnIndex("number_of_butcheries_that_met_the_standards")));
+            model.setNumberOfBarAndClubsThatMetTheStandards(cursor.getInt(cursor.getColumnIndex("number_of_bar_and_clubs_that_met_the_standards")));
+            model.setNumberOfGuestHouseThatMetTheStandards(cursor.getInt(cursor.getColumnIndex("number_of_guest_house_that_met_the_standards")));
+            model.setNumberOfLocaFoodVendorsThatMetTheStandards(cursor.getInt(cursor.getColumnIndex("number_of_loca_food_vendors_that_met_the_standards")));
+            model.setNumberOfMarketsThatMetTheStandards(cursor.getInt(cursor.getColumnIndex("number_of_markets_that_met_the_standards")));
+            model.setNumberOfPublicToiletsThatMetTheStandards(cursor.getInt(cursor.getColumnIndex("number_of_public_toilets_that_met_the_standards")));
+            model.setNumberOfBusStationsThatMetTheStandards(cursor.getInt(cursor.getColumnIndex("number_of_bus_stations_that_met_the_standards")));
+            model.setNumberOfPrimarySchoolsThatMetTheStandards(cursor.getInt(cursor.getColumnIndex("number_of_primary_schools_that_met_the_standards")));
+            model.setNumberOfSecondarySchoolsThatMetTheStandards(cursor.getInt(cursor.getColumnIndex("number_of_secondary_schools_that_met_the_standards")));
+            model.setNumberOfHospitalThatMetTheStandards(cursor.getInt(cursor.getColumnIndex("number_of_hospital_that_met_the_standards")));
+            model.setNumberOfHealthCentersThatMetTheStandards(cursor.getInt(cursor.getColumnIndex("number_of_health_centers_that_met_the_standards")));
+            model.setNumberOfDispensariesThatMetTheStandards(cursor.getInt(cursor.getColumnIndex("number_of_dispensaries_that_met_the_standards")));
+            model.setNumberOfOfficesThatMetTheStandards(cursor.getInt(cursor.getColumnIndex("number_of_offices_that_met_the_standards")));
+            model.setNumberOfUniversitiesCollegeThatMetTheStandards(
+                    cursor.getInt(cursor.getColumnIndex("number_of_universities_college_that_met_the_standards"))
+            );
+            model.setNumberOfInspectedAgricultureAreas(cursor.getInt(cursor.getColumnIndex("number_of_inspected_agriculture_areas")));
+            model.setNumberOfInspectedLivestockKeepingAreas(cursor.getInt(cursor.getColumnIndex("number_of_inspected_livestock_keeping_areas")));
+            model.setNumberOfInspectedFishingAreas(cursor.getInt(cursor.getColumnIndex("number_of_inspected_fishing_areas")));
+            model.setNumberOfInspectedIndustriesAreas(cursor.getInt(cursor.getColumnIndex("number_of_inspected_industries_areas")));
+            model.setNumberOfInspectedOfficesAreas(cursor.getInt(cursor.getColumnIndex("number_of_inspected_offices_areas")));
+            model.setNumberOfInspectedTransportationAreas(cursor.getInt(cursor.getColumnIndex("number_of_inspected_transportation_areas")));
+            model.setNumberOfOtherInspectedAreas(cursor.getInt(cursor.getColumnIndex("number_of_other_inspected_areas")));
+            model.setNumberOfAgricultureAreasInspectedWithRiskIndicators(
+                    cursor.getInt(cursor.getColumnIndex("number_of_agriculture_areas_inspected_with_risk_indicators"))
+            );
+            model.setNumberOfLivestockKeepingAreasInspectedWithRiskIndicators(
+                    cursor.getInt(cursor.getColumnIndex("number_of_livestock_keeping_areas_inspected_with_risk_indicators"))
+            );
+            model.setNumberOfFishingAreasInspectedWithRiskIndicators(
+                    cursor.getInt(cursor.getColumnIndex("number_of_fishing_areas_inspected_with_risk_indicators"))
+            );
+            model.setNumberOfIndustriesAreasInspectedWithRiskIndicators(
+                    cursor.getInt(cursor.getColumnIndex("number_of_industries_areas_inspected_with_risk_indicators"))
+            );
+            model.setNumberOfOfficesAreasInspectedWithRiskIndicators(
+                    cursor.getInt(cursor.getColumnIndex("number_of_offices_areas_inspected_with_risk_indicators"))
+            );
+            model.setNumberOfTransportationAreasInspectedWithRiskIndicators(
+                    cursor.getInt(cursor.getColumnIndex("number_of_transportation_areas_inspected_with_risk_indicators"))
+            );
+            model.setNumberOfOtherAreasInspectedWithRiskIndicators(
+                    cursor.getInt(cursor.getColumnIndex("number_of_other_areas_inspected_with_risk_indicators"))
+            );
+            model.setNumberOfInspectedGrains(cursor.getInt(cursor.getColumnIndex("number_of_inspected_grains")));
+            model.setNumberOfInspectedLegumes(cursor.getInt(cursor.getColumnIndex("number_of_inspected_legumes")));
+            model.setNumberOfInspectedMeat(cursor.getInt(cursor.getColumnIndex("number_of_inspected_meat")));
+            model.setNumberOfInspectedFishing(cursor.getInt(cursor.getColumnIndex("number_of_inspected_fishing")));
+            model.setNumberOfInspectedAlcoholicBeverages(
+                    cursor.getInt(cursor.getColumnIndex("number_of_inspected_alcoholic_beverages"))
+            );
+            model.setNumberOfInspectedNonAlcoholicBeverages(
+                    cursor.getInt(cursor.getColumnIndex("number_of_inspected_non_alcoholic_beverages"))
+            );
+            model.setNumberOfGrainsDiscarded(cursor.getInt(cursor.getColumnIndex("number_of_grains_discarded")));
+            model.setNumberOfLegumesDiscarded(cursor.getInt(cursor.getColumnIndex("number_of_legumes_discarded")));
+            model.setNumberOfMeatDiscarded(cursor.getInt(cursor.getColumnIndex("number_of_meat_discarded")));
+            model.setNumberOfFishingDiscarded(cursor.getInt(cursor.getColumnIndex("number_of_fishing_discarded")));
+            model.setNumberOfAlcoholicBeverageDiscarded(
+                    cursor.getInt(cursor.getColumnIndex("number_of_alcoholic_beverage_discarded"))
+            );
+            model.setNumberOfNonAlcoholicBeverageDiscarded(
+                    cursor.getInt(cursor.getColumnIndex("number_of_non_alcoholic_beverage_discarded"))
+            );
+            model.setHealthReportsAffectingPeopleInWorkplacesRespiratoryDiseases(
+                    cursor.getInt(cursor.getColumnIndex("health_reports_affecting_people_in_workplaces_respiratory_diseases"))
+            );
+            model.setHealthReportsAffectingPeopleInWorkplacesToxicChemicals(
+                    cursor.getInt(cursor.getColumnIndex("health_reports_affecting_people_in_workplaces_toxic_chemicals"))
+            );
+            model.setHealthReportsAffectingPeopleInWorkplacesBurns(
+                    cursor.getInt(cursor.getColumnIndex("health_reports_affecting_people_in_workplaces_burns"))
+            );
+            model.setHealthReportsAffectingPeopleInWorkplacesHearingLoss(
+                    cursor.getInt(cursor.getColumnIndex("health_reports_affecting_people_in_workplaces_hearing_loss"))
+            );
+            model.setHealthReportsAffectingPeopleInWorkplacesEyeProblems(
+                    cursor.getInt(cursor.getColumnIndex("health_reports_affecting_people_in_workplaces_eye_problems"))
+            );
+            model.setHealthReportsAffectingPeopleInWorkplacesOtherEffects(
+                    cursor.getInt(cursor.getColumnIndex("health_reports_affecting_people_in_workplaces_other_effects"))
+            );
+            model.setAmountOfSolidWasteGeneratedAnnuallyTons(
+                    cursor.getDouble(cursor.getColumnIndex("amount_of_solid_waste_generated_annually_tons"))
+            );
+            model.setAmountOfSolidWasteDisposedAtADesignatedSiteAnnuallyTons(
+                    cursor.getDouble(cursor.getColumnIndex("amount_of_solid_waste_disposed_at_a_designated_site_annually_tons"))
+            );
+            model.setNumberOfWasteCollectionEquipmentVehicles(
+                    cursor.getInt(cursor.getColumnIndex("number_of_waste_collection_equipment_vehicles"))
+            );
+            model.setNumberOfWasteCollectionEquipmentTractors(
+                    cursor.getInt(cursor.getColumnIndex("number_of_waste_collection_equipment_tractors"))
+            );
+            model.setNumberOfWasteCollectionEquipmentCarts(
+                    cursor.getInt(cursor.getColumnIndex("number_of_waste_collection_equipment_carts"))
+            );
+            model.setNumberOfWasteCollectionEquipmentWheelbarrows(
+                    cursor.getInt(cursor.getColumnIndex("number_of_waste_collection_equipment_wheelbarrows"))
+            );
+            model.setNumberOfWasteCollectionEquipmentOthers(
+                    cursor.getInt(cursor.getColumnIndex("number_of_waste_collection_equipment_others"))
+            );
+            model.setNumberOfAreasSprayedWithPesticidesPonds(
+                    cursor.getInt(cursor.getColumnIndex("number_of_areas_sprayed_with_pesticides_ponds"))
+            );
+            model.setNumberOfAreasSprayedWithPesticidesCans(
+                    cursor.getInt(cursor.getColumnIndex("number_of_areas_sprayed_with_pesticides_cans"))
+            );
+            model.setNumberOfAreasSprayedWithPesticidesDrums(
+                    cursor.getInt(cursor.getColumnIndex("number_of_areas_sprayed_with_pesticides_drums"))
+            );
+            model.setNumberOfAreasSprayedWithPesticidesBarrels(
+                    cursor.getInt(cursor.getColumnIndex("number_of_areas_sprayed_with_pesticides_barrels"))
+            );
+            model.setNumberOfAreasSprayedWithPesticidesCoconutShells(
+                    cursor.getInt(cursor.getColumnIndex("number_of_areas_sprayed_with_pesticides_coconut_shells"))
+            );
+            model.setNumberOfTimesSprayingWasDonePonds(
+                    cursor.getInt(cursor.getColumnIndex("number_of_times_spraying_was_done_ponds"))
+            );
+            model.setNumberOfTimesSprayingWasDoneCans(
+                    cursor.getInt(cursor.getColumnIndex("number_of_times_spraying_was_done_cans"))
+            );
+            model.setNumberOfTimesSprayingWasDoneDrums(
+                    cursor.getInt(cursor.getColumnIndex("number_of_times_spraying_was_done_drums"))
+            );
+            model.setNumberOfTimesSprayingWasDoneBarrels(
+                    cursor.getInt(cursor.getColumnIndex("number_of_times_spraying_was_done_barrels"))
+            );
+            model.setNumberOfTimesSprayingWasDoneCoconutShells(
+                    cursor.getInt(cursor.getColumnIndex("number_of_times_spraying_was_done_coconut_shells"))
+            );
+            model.setTypesOfPesticidesUsedPonds(cursor.getString(cursor.getColumnIndex("types_of_pesticides_used_ponds")));
+            model.setTypesOfPesticidesUsedCans(cursor.getString(cursor.getColumnIndex("types_of_pesticides_used_cans")));
+            model.setTypesOfPesticidesUsedDrums(cursor.getString(cursor.getColumnIndex("types_of_pesticides_used_drums")));
+            model.setTypesOfPesticidesUsedBarrels(cursor.getString(cursor.getColumnIndex("types_of_pesticides_used_barrels")));
+            model.setTypesOfPesticidesUsedCoconutShells(
+                    cursor.getString(cursor.getColumnIndex("types_of_pesticides_used_coconut_shells"))
+            );
+            model.setAmountOfPesticideUsedPonds(
+                    cursor.getDouble(cursor.getColumnIndex("amount_of_pesticide_used_ponds"))
+            );
+            model.setAmountOfPesticideUsedCans(
+                    cursor.getDouble(cursor.getColumnIndex("amount_of_pesticide_used_cans"))
+            );
+            model.setAmountOfPesticideUsedDrums(
+                    cursor.getDouble(cursor.getColumnIndex("amount_of_pesticide_used_drums"))
+            );
+            model.setAmountOfPesticideUsedBarrels(
+                    cursor.getDouble(cursor.getColumnIndex("amount_of_pesticide_used_barrels"))
+            );
+            model.setAmountOfPesticideUsedCoconutShells(
+                    cursor.getDouble(cursor.getColumnIndex("amount_of_pesticide_used_coconut_shells"))
+            );
+            return model;
+        };
+
+        List<HpsAnnualCensusRegisterModel> res = readData(sql, dataMap);
+        if (res == null || res.isEmpty()) return null;
+        return res;
     }
 
 
