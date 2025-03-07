@@ -1,12 +1,20 @@
 package org.smartregister.chw.hps.actionhelper;
 
+import static com.vijay.jsonwizard.constants.JsonFormConstants.EDITABLE;
+import static com.vijay.jsonwizard.constants.JsonFormConstants.FIELDS;
+import static com.vijay.jsonwizard.constants.JsonFormConstants.READ_ONLY;
+import static org.smartregister.client.utils.constants.JsonFormConstants.STEP1;
+import static org.smartregister.client.utils.constants.JsonFormConstants.VALUE;
+
 import android.content.Context;
 
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.Period;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.smartregister.chw.hps.dao.HpsDao;
 import org.smartregister.chw.hps.domain.MemberObject;
 import org.smartregister.chw.hps.domain.VisitDetail;
 import org.smartregister.chw.hps.model.BaseHpsVisitAction;
@@ -57,6 +65,18 @@ public class HpsClientCriteriaActionHelper implements BaseHpsVisitAction.HpsVisi
     public String getPreProcessed() {
         try {
             JSONObject jsonObject = new JSONObject(jsonPayload);
+
+            //Handle Visit Type
+            String visitTypeValue = HpsDao.individualClientHasAnyVisit(memberObject.getBaseEntityId()) ? "return_visit" : "new_visit";
+            //Client has a visit, set visit type
+            JSONArray fieldsArray = jsonObject.getJSONObject(STEP1).getJSONArray(FIELDS);
+            JSONObject visitType = JsonFormUtils.getFieldJSONObject(fieldsArray,"visit_type");
+            visitType.put(VALUE,visitTypeValue);
+            visitType.put(READ_ONLY,true);
+            visitType.put(EDITABLE, false);
+            jsonPayload = jsonObject.toString();
+
+
             JSONObject global = jsonObject.getJSONObject("global");
 
             global.put("sex", memberObject.getGender());
