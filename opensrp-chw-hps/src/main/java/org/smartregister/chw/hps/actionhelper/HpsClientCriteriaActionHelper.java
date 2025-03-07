@@ -67,22 +67,14 @@ public class HpsClientCriteriaActionHelper implements BaseHpsVisitAction.HpsVisi
             JSONObject jsonObject = new JSONObject(jsonPayload);
 
             //Handle Visit Type
-            if (HpsDao.hasAnyVisit(memberObject.getBaseEntityId())){
-                //Client has a visit, set visit type
-                JSONArray fieldsArray = jsonObject.getJSONObject(STEP1).getJSONArray(FIELDS);
-                JSONObject visitType = JsonFormUtils.getFieldJSONObject(fieldsArray,"visit_type");
-                visitType.put(VALUE,"return_visit");
-                visitType.put(READ_ONLY,true);
-                visitType.put(EDITABLE, false);
-                jsonPayload = jsonObject.toString();
-            } else {
-                JSONArray fieldsArray = jsonObject.getJSONObject(STEP1).getJSONArray(FIELDS);
-                JSONObject visitType = JsonFormUtils.getFieldJSONObject(fieldsArray,"visit_type");
-                visitType.put(VALUE,"new_visit");
-                visitType.put(READ_ONLY,true);
-                visitType.put(EDITABLE, false);
-                jsonPayload = jsonObject.toString();
-            }
+            String visitTypeValue = HpsDao.individualClientHasAnyVisit(memberObject.getBaseEntityId()) ? "return_visit" : "new_visit";
+            //Client has a visit, set visit type
+            JSONArray fieldsArray = jsonObject.getJSONObject(STEP1).getJSONArray(FIELDS);
+            JSONObject visitType = JsonFormUtils.getFieldJSONObject(fieldsArray,"visit_type");
+            visitType.put(VALUE,visitTypeValue);
+            visitType.put(READ_ONLY,true);
+            visitType.put(EDITABLE, false);
+            jsonPayload = jsonObject.toString();
 
 
             JSONObject global = jsonObject.getJSONObject("global");
