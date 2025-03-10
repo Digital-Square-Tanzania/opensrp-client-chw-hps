@@ -1356,9 +1356,17 @@ public class HpsDao extends AbstractDao {
         return res;
     }
 
-    public static boolean hasAnyVisit(String baseEntityID){
-        String sql = "SELECT COUNT (*) FROM ec_hps_client_services cs " +
+    public static boolean individualClientHasAnyVisit(String baseEntityID){
+        String sql = "SELECT COUNT (*) AS count FROM "+ Constants.TABLES.HPS_CLIENT_SERVICES+ "cs " +
                      "WHERE cs.entity_id = '" + baseEntityID + "' ";
+        DataMap<Integer> countMap = cursor -> getCursorIntValue(cursor,"count");
+        List<Integer> countResults = readData(sql,countMap);
+        return !countResults.isEmpty() && countResults.get(0) > 0;
+    }
+
+    public static boolean houseHoldClientHasAnyVisit(String baseEntityID){
+        String sql = "SELECT COUNT (*) AS count FROM "+ Constants.TABLES.HPS_HOUSEHOLD_SERVICES+ " hs " +
+                "WHERE hs.entity_id = '" + baseEntityID + "' ";
         DataMap<Integer> countMap = cursor -> getCursorIntValue(cursor,"count");
         List<Integer> countResults = readData(sql,countMap);
         return !countResults.isEmpty() && countResults.get(0) > 0;
