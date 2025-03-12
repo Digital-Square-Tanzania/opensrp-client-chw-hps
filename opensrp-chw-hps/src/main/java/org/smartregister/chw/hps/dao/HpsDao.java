@@ -1357,7 +1357,7 @@ public class HpsDao extends AbstractDao {
     }
 
     public static boolean individualClientHasAnyVisit(String baseEntityID){
-        String sql = "SELECT COUNT (*) AS count FROM "+ Constants.TABLES.HPS_CLIENT_SERVICES+ "cs " +
+        String sql = "SELECT COUNT (*) AS count FROM "+ Constants.TABLES.HPS_CLIENT_SERVICES+ " cs " +
                      "WHERE cs.entity_id = '" + baseEntityID + "' ";
         DataMap<Integer> countMap = cursor -> getCursorIntValue(cursor,"count");
         List<Integer> countResults = readData(sql,countMap);
