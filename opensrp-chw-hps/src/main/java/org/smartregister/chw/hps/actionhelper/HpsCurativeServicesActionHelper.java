@@ -1,8 +1,16 @@
 package org.smartregister.chw.hps.actionhelper;
 
+import static com.vijay.jsonwizard.constants.JsonFormConstants.FIELDS;
+import static com.vijay.jsonwizard.constants.JsonFormConstants.KEY;
+import static org.smartregister.AllConstants.OPTIONS;
+import static org.smartregister.client.utils.constants.JsonFormConstants.STEP1;
+
 import android.content.Context;
 
 import org.apache.commons.lang3.StringUtils;
+import org.joda.time.DateTime;
+import org.joda.time.Period;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.chw.hps.domain.MemberObject;
@@ -41,6 +49,37 @@ public class HpsCurativeServicesActionHelper implements BaseHpsVisitAction.HpsVi
     public String getPreProcessed() {
         try {
             JSONObject jsonObject = new JSONObject(jsonPayload);
+            JSONArray fieldsArray = jsonObject.getJSONObject(STEP1).getJSONArray(FIELDS);
+
+            // Check age for client to have MUAC option
+            int age = new Period(new DateTime(memberObject.getAge()),
+                    new DateTime()).getYears();
+            //Get key field and options
+            JSONObject testConducted = JsonFormUtils.getFieldJSONObject(fieldsArray, "diseases_test_conducted");
+            JSONArray testConductedOptions = testConducted.getJSONArray(OPTIONS);
+
+            if (age >= 5) {
+                for (int i = 0; i < testConductedOptions.length(); i++) {
+                    JSONObject option = testConductedOptions.getJSONObject(i);
+                    if (option.getString(KEY).equals("arm_circumference")) {
+                        testConductedOptions.remove(i);
+                    }
+                }
+            }
+
+            // Check age for client to have RUTF option
+            JSONObject treatmentProvided = JsonFormUtils.getFieldJSONObject(fieldsArray, "treatment_provided");
+            JSONArray treatmentProvidedOptions = treatmentProvided.getJSONArray(OPTIONS);
+
+            if (age >= 5) {
+                for (int i = 0; i < treatmentProvidedOptions.length(); i++) {
+                    JSONObject option = treatmentProvidedOptions.getJSONObject(i);
+                    if (option.getString(KEY).equals("food_supplements")) {
+                        treatmentProvidedOptions.remove(i);
+                    }
+                }
+            }
+
             return jsonObject.toString();
         } catch (JSONException e) {
             Timber.e(e);
