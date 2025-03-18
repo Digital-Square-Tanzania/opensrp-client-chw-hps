@@ -72,7 +72,7 @@
     <string name="hps_curative_services">Huduma za Tiba</string>
     <string name="hps_referral_services">Huduma za Rufaa</string>
     <string name="no_phone_number">Hakuna nambari ya simu</string>
-    <string name="return_to_hps_clients">Rudi kwenye wateja wote wa tohara</string>
+    <string name="return_to_hps_clients">Rudi kwenye wateja wa huduma za afya ngazi ya jamii</string>
     <string name="number_not_filled">Nambari ya simu ya mteja, haijajazwa</string>
     <string name="hps_visit">Tembeleo la kutoa elimu ya Afya kwa Umma</string>
     <string name="household_service">Kaya</string>
