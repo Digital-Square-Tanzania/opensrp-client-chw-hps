@@ -582,6 +582,11 @@ public class HpsDao extends AbstractDao {
             String amountOfPesticideUsedDrums,
             String amountOfPesticideUsedBarrels,
             String amountOfPesticideUsedCoconutShells,
+            String numberOfHouseHolds,
+            String numberOfMaleCapableOfEngagingInEconomicActivities,
+            String numberOfFemaleCapableOfEngagingInEconomicActivities,
+            String numberOfMaleEngagedInEconomicActivities,
+            String numberOfFemaleEngagedInEconomicActivities,
             long lastInteractedWith
     ) {
         String sql = "INSERT INTO ec_hps_annual_census_register ("
@@ -646,7 +651,8 @@ public class HpsDao extends AbstractDao {
                 + "types_of_pesticides_used_ponds, types_of_pesticides_used_cans, types_of_pesticides_used_drums, "
                 + "types_of_pesticides_used_barrels, types_of_pesticides_used_coconut_shells, amount_of_pesticide_used_ponds, "
                 + "amount_of_pesticide_used_cans, amount_of_pesticide_used_drums, amount_of_pesticide_used_barrels, "
-                + "amount_of_pesticide_used_coconut_shells, last_interacted_with) VALUES ("
+                + "amount_of_pesticide_used_coconut_shells, "
+                +"number_of_house_hold, number_of_male_capable_of_engaging_in_economic_activities, number_of_female_capable_of_engaging_in_economic_activities, number_of_male_engaged_in_economic_activities, number_of_female_engaged_in_economic_activities, last_interacted_with) VALUES ("
                 + "'" + baseEntityId + "', "
                 + "'" + baseEntityId + "', "
                 + "'" + year + "', "
@@ -832,6 +838,11 @@ public class HpsDao extends AbstractDao {
                 + "'" + amountOfPesticideUsedDrums + "', "
                 + "'" + amountOfPesticideUsedBarrels + "', "
                 + "'" + amountOfPesticideUsedCoconutShells + "', "
+                + "'" + numberOfHouseHolds + "', "
+                + "'" + numberOfMaleCapableOfEngagingInEconomicActivities + "', "
+                + "'" + numberOfFemaleCapableOfEngagingInEconomicActivities + "', "
+                + "'" + numberOfMaleEngagedInEconomicActivities + "', "
+                + "'" + numberOfFemaleEngagedInEconomicActivities + "', "
                 + lastInteractedWith
                 + ") ON CONFLICT (id) DO UPDATE SET "
                 + "select_age_group = '" + selectAgeGroup + "', "
@@ -1016,6 +1027,12 @@ public class HpsDao extends AbstractDao {
                 + "amount_of_pesticide_used_drums = '" + amountOfPesticideUsedDrums + "', "
                 + "amount_of_pesticide_used_barrels = '" + amountOfPesticideUsedBarrels + "', "
                 + "amount_of_pesticide_used_coconut_shells = '" + amountOfPesticideUsedCoconutShells + "', "
+                + "number_of_house_hold = '" + numberOfHouseHolds + "', "
+                + "number_of_male_capable_of_engaging_in_economic_activities = '" + numberOfMaleCapableOfEngagingInEconomicActivities + "', "
+                + "number_of_female_capable_of_engaging_in_economic_activities = '" + numberOfFemaleCapableOfEngagingInEconomicActivities + "', "
+                + "number_of_male_engaged_in_economic_activities = '" + numberOfMaleEngagedInEconomicActivities + "', "
+                + "number_of_female_engaged_in_economic_activities = '" + numberOfFemaleEngagedInEconomicActivities + "', "
+
                 + "last_interacted_with = " + lastInteractedWith;
         updateDB(sql);
     }
