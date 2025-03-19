@@ -1,11 +1,7 @@
 package org.smartregister.chw.hps.util;
 
 import static org.smartregister.chw.hps.util.Constants.ENCOUNTER_TYPE;
-import static org.smartregister.chw.hps.util.Constants.STEP_ONE;
-import static org.smartregister.chw.hps.util.Constants.STEP_TWO;
 import static org.smartregister.chw.hps.util.Constants.HPS_VISIT_GROUP;
-
-import android.util.Log;
 
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 
@@ -43,7 +39,7 @@ public class HpsJsonFormUtils extends org.smartregister.util.JsonFormUtils {
         return registrationFormParams;
     }
 
-   public static JSONArray hpsFormFields(JSONObject jsonForm) {
+    public static JSONArray hpsFormFields(JSONObject jsonForm) {
         try {
             JSONArray mergedFields = new JSONArray();
             // Retrieve the count of steps from the jsonForm
@@ -157,7 +153,7 @@ public class HpsJsonFormUtils extends org.smartregister.util.JsonFormUtils {
             Triple<Boolean, JSONObject, JSONArray> registrationFormParams = validateParameters(map.getValue());
 
             if (!registrationFormParams.getLeft()) {
-                 continue;
+                continue;
             }
 
             if (jsonForm == null) {
@@ -222,6 +218,8 @@ public class HpsJsonFormUtils extends org.smartregister.util.JsonFormUtils {
                     if (detailList != null) {
                         if (jo.getString(JsonFormConstants.TYPE).equalsIgnoreCase(JsonFormConstants.CHECK_BOX)) {
                             jo.put(JsonFormConstants.VALUE, getValue(jo, detailList));
+                        }else if( jo.getString(JsonFormConstants.TYPE).equalsIgnoreCase(JsonFormConstants.MULTI_SELECT_LIST)){
+                            jo.put(JsonFormConstants.VALUE, getValue(jo, detailList).toString());
                         } else {
                             String value = getValue(detailList.get(0));
                             if (key.contains("date")) {
@@ -271,6 +269,34 @@ public class HpsJsonFormUtils extends org.smartregister.util.JsonFormUtils {
                     if (nid != null) {
                         values.put(nid.name);
                         options.getJSONObject(nid.position).put(JsonFormConstants.VALUE, true);
+                    }
+                }
+            }
+        } else if (jo.getString(JsonFormConstants.TYPE).equalsIgnoreCase(JsonFormConstants.MULTI_SELECT_LIST)) {
+            JSONArray options = jo.getJSONArray(JsonFormConstants.OPTIONS_FIELD_NAME);
+            HashMap<String, JSONObject> valueMap = new HashMap<>();
+
+            int x = options.length() - 1;
+            while (x >= 0) {
+                JSONObject object = options.getJSONObject(x);
+                valueMap.put(object.getString(JsonFormConstants.KEY), object);
+                x--;
+            }
+
+            for (VisitDetail d : visitDetails) {
+                String val = d.getDetails();
+                List<String> checkedList = new ArrayList<>(Arrays.asList(val.split(", ")));
+                if (checkedList.size() > 1) {
+                    for (String item : checkedList) {
+                        JSONObject option = valueMap.get(item);
+                        if (option != null) {
+                            values.put(option);
+                        }
+                    }
+                } else {
+                    JSONObject option = valueMap.get(val);
+                    if (option != null) {
+                        values.put(option);
                     }
                 }
             }
@@ -331,6 +357,13 @@ public class HpsJsonFormUtils extends org.smartregister.util.JsonFormUtils {
         return "";
     }
 
+    public static String cleanString(String dirtyString) {
+        if (StringUtils.isBlank(dirtyString))
+            return "";
+
+        return dirtyString.substring(1, dirtyString.length() - 1);
+    }
+
     private static class NameID {
         private String name;
         private int position;
@@ -339,13 +372,6 @@ public class HpsJsonFormUtils extends org.smartregister.util.JsonFormUtils {
             this.name = name;
             this.position = position;
         }
-    }
-
-    public static String cleanString(String dirtyString) {
-        if (StringUtils.isBlank(dirtyString))
-            return "";
-
-        return dirtyString.substring(1, dirtyString.length() - 1);
     }
 
 }

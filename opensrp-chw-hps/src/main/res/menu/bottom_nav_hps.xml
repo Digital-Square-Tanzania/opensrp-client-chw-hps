@@ -22,7 +22,7 @@
     <item
         android:id="@+id/action_death_register"
         android:enabled="true"
-        android:icon="@mipmap/ic_jobaids"
+        android:icon="@drawable/tombstone_death"
         android:title="@string/death_register"
         app:showAsAction="ifRoom" />
     <item
