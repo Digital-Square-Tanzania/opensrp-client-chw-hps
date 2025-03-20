@@ -67,7 +67,7 @@ public class HpsCurativeServicesActionHelper implements BaseHpsVisitAction.HpsVi
                 }
             }
 
-            // Check age for client to have RUTF option
+            // Check age for treatment provided has RUTF option
             JSONObject treatmentProvided = JsonFormUtils.getFieldJSONObject(fieldsArray, "treatment_provided");
             JSONArray treatmentProvidedOptions = treatmentProvided.getJSONArray(OPTIONS);
 
@@ -76,6 +76,32 @@ public class HpsCurativeServicesActionHelper implements BaseHpsVisitAction.HpsVi
                     JSONObject option = treatmentProvidedOptions.getJSONObject(i);
                     if (option.getString(KEY).equals("food_supplements")) {
                         treatmentProvidedOptions.remove(i);
+                    }
+                }
+            }
+
+            //Check age for treatment provided has oral rehydration solutions
+             JSONObject oralRehydration = JsonFormUtils.getFieldJSONObject(fieldsArray,"treatment_provided");
+             JSONArray  oralRehydrationOptions = oralRehydration.getJSONArray(OPTIONS);
+
+             if (age >= 5){
+                 for (int i = 0; i < oralRehydrationOptions.length(); i++) {
+                     JSONObject option = oralRehydrationOptions.getJSONObject(i);
+                     if (option.getString(KEY).equals("oral_rehydration_solutions")) {
+                         oralRehydrationOptions.remove(i);
+                     }
+                 }
+             }
+
+            //Check age for treatment provided has amoxicillin DT
+            JSONObject amoxicillinDT = JsonFormUtils.getFieldJSONObject(fieldsArray,"treatment_provided");
+            JSONArray amoxicillinDTOptions = amoxicillinDT.getJSONArray(OPTIONS);
+
+            if (age >= 5){
+                for (int i = 0; i < amoxicillinDTOptions.length(); i++) {
+                    JSONObject option = amoxicillinDTOptions.getJSONObject(i);
+                    if (option.getString(KEY).equals("amoxicillin_dt")) {
+                        amoxicillinDTOptions.remove(i);
                     }
                 }
             }
