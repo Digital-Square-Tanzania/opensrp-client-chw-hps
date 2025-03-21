@@ -10,12 +10,12 @@
     <string name="job_aids">Vitendea kazi</string>
     <string name="saving_dialog_title">Kuhifadhi</string>
     <string name="hps_followup_visit">Tembeleo la ufuatiliaji</string>
-    <string name="record_hps">Utoaji wa Huduma Ya HPS</string>
+    <string name="record_hps">Utoaji wa Huduma za Afya Ngazi ya Jamii</string>
 
 
     <string name="optional">Sio lazima</string>
     <string name="error_unable_save_visit">Imeshindwa kuitunza hii visit</string>
-    <string name="return_to_previous_page">Rudi kwenye wateja wote wa hps</string>
+    <string name="return_to_previous_page">Rudi kwenye wateja wote wa huduma za afya ngazi ya jamii</string>
     <string name="last_visit_40_days_ago">Tembeleo la mwisho %1$s uliyopita</string>
     <string name="hps_view_visit_history">Angalia historia ya huduma</string>
     <string name="call_no_number_provided">(Hakuna namba iliyotolewa)</string>
@@ -29,9 +29,9 @@
     <string name="vaccine_service_upcoming"><![CDATA[%1$s <font color=#7f7f7f>inakaribia (%2$s)</font></b>]]></string>
     <string name="vaccine_service_overdue"><![CDATA[%1$s <font color=#f04646>muda umepita (%2$s)</font></b>]]></string>
     <string name="vaccine_service_due"><![CDATA[%1$s <font color=#000000>imefika (%2$s)</font></b>]]></string>
-    <string name="call_hps_client">Mteja wa Hps</string>
+    <string name="call_hps_client">Mteja wa huduma za afya ngazi ya jamii</string>
     <string name="head_of_family">Mkuu wa kaya</string>
-    <string name="hps_client">Mteja wa hps</string>
+    <string name="hps_client">Mteja wa huduma za afya ngazi ya jamii</string>
     <string name="copy_to_clipboard">Nakili namba ya simu</string>
     <string name="copied_phone_number">Namba ya simu imenakiliwa</string>
     <string name="call">Piga simu</string>
@@ -45,8 +45,8 @@
     <string name="call_anc_client">Mjamzito</string>
     <string name="call_pnc_client">Mama aliyejifungua</string>
     <string name="call_head_of_family">Piga simu kwa mkuu wa kaya</string>
-    <string name="view_hps_test_result">Angalia majibu ya kipimo cha hps</string>
-    <string name="hps_positive">Hps chanya</string>
+    <string name="view_hps_test_result">Angalia majibu ya kipimo cha huduma za afya ngazi ya jamii</string>
+    <string name="hps_positive">Huduma za Afya Ngazi ya Jamii chanya</string>
     <string name="anc_string">Wajawazito</string>
     <string name="pnc_string">Baada ya kujifungua</string>
     <string name="visit_done">Tembeleo limekamilika</string>
@@ -60,11 +60,11 @@
     <string name="continue_visit">Endelea</string>
     <string name="edit_visit">Hariri</string>
     <string name="hps_visit_in_progress">Hudhurio linaendelea</string>
-    <string name="hps_service_visit_in_progress">Huduma ya tohara inaendelea</string>
-    <string name="hps_procedure_visit_in_progress">Huduma ya upasuaji wa tohara inaendelea</string>
-    <string name="hps_visit_conducted">Hudhurio la tohara limefanyika</string>
+    <string name="hps_service_visit_in_progress">Huduma za afya ngazi ya jamii zinaendelea</string>
+    <string name="hps_procedure_visit_in_progress">Huduma ya upasuaji wa huduma za afya ngazi ya jamii inaendelea</string>
+    <string name="hps_visit_conducted">Hudhurio la huduma za afya ngazi ya jamii limefanyika</string>
 
-    <string name="hps_profile">Profile la tohara</string>
+    <string name="hps_profile">Wasifu wa Huduma za Afya Ngazi ya Jamii</string>
 
     <string name="client_criteria">Kigezo cha Mteja</string>
     <string name="hps_education_on_behavioural_change">Elimu iliyotolewa</string>
@@ -72,19 +72,19 @@
     <string name="hps_curative_services">Huduma za Tiba</string>
     <string name="hps_referral_services">Huduma za Rufaa</string>
     <string name="no_phone_number">Hakuna nambari ya simu</string>
-    <string name="return_to_hps_clients">Rudi kwenye wateja wa huduma za afya ngazi ya jamii</string>
+    <string name="return_to_hps_clients">Rudi kwenye wateja wote wa huduma za afya ngazi ya jamii</string>
     <string name="number_not_filled">Nambari ya simu ya mteja, haijajazwa</string>
     <string name="hps_visit">Tembeleo la kutoa elimu ya Afya kwa Umma</string>
     <string name="household_service">Kaya</string>
     <string name="hps_edit_home_visit">Hariri</string>
-    <string name="hps_client_register">Wateja wa HPS</string>
-    <string name="hps_household_register">Kaya za HPS</string>
-    <string name="hps_mobilization_sessions_title">Mazoezi ya uhamasishaji wa HPS</string>
+    <string name="hps_client_register">Wateja wa Huduma za Afya Ngazi ya Jamii</string>
+    <string name="hps_household_register">Kaya za Huduma za Afya Ngazi ya Jamii</string>
+    <string name="hps_mobilization_sessions_title">Mazoezi ya uhamasishaji ya huduma za afya ngazi ya jamii</string>
     <string name="hps_death_register_title">Rejesta ya Vifo</string>
     <string name="death_register">Rejesta ya Vifo</string>
     <string name="hps_mobilization_sessions">Mazoezi ya uhamasishaji</string>
     <string name="hps_mobilization_sessions_menu">Uhamasishaji</string>
-    <string name="hps_mobilization_session_details">Taarifa za zoezi la uhamasishaji wa HPS</string>
+    <string name="hps_mobilization_session_details">Taarifa za zoezi la uhamasishaji wa huduma za afya ngazi ya jamii</string>
     <string name="hps_death_registration_details">Taarifa za usajili wa Kifo</string>
     <string name="hps_back_to_all_mobilization_sessions">Rudi  kwenye rejesta ya vifo</string>
     <string name="record_hps_household_services">Rekodi tembeleo la kutoa huduma za ngazi ya kaya</string>
