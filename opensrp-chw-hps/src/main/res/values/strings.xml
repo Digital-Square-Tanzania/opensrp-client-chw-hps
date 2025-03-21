@@ -99,6 +99,7 @@
     <string name="hps_death_register_name_of_the_client"><![CDATA[<b>Name of the Client:</b> %s]]></string>
     <string name="hps_death_register_cause_of_death"><![CDATA[<b>Cause of Death:</b> %s]]></string>
     <string name="hps_session_date"><![CDATA[<b>Date:</b> %s]]></string>
+    <string name="refer">Refer the client to health facility</string>
 
 
 </resources>
