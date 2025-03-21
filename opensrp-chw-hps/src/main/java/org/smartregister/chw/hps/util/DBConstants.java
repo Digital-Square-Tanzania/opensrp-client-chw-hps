@@ -437,5 +437,10 @@ public class DBConstants {
         public static final String AMOUNT_OF_PESTICIDE_USED_DRUMS = "amount_of_pesticide_used_drums";
         public static final String AMOUNT_OF_PESTICIDE_USED_BARRELS = "amount_of_pesticide_used_barrels";
         public static final String AMOUNT_OF_PESTICIDE_USED_COCONUT_SHELLS = "amount_of_pesticide_used_coconut_shells";
+        public static final String NUMBER_OF_HOUSE_HOLD = "number_of_house_hold";
+        public static final String NUMBER_OF_MALE_CAPABLE_OF_ENGAGING_IN_ECONOMIC_ACTIVITIES = "number_of_male_capable_of_engaging_in_economic_activities";
+        public static final String NUMBER_OF_FEMALE_CAPABLE_OF_ENGAGING_IN_ECONOMIC_ACTIVITIES = "number_of_female_capable_of_engaging_in_economic_activities";
+        public static final String NUMBER_OF_MALE_ENGAGED_IN_ECONOMIC_ACTIVITIES = "number_of_male_engaged_in_economic_activities";
+        public static final String NUMBER_OF_FEMALE_ENGAGED_IN_ECONOMIC_ACTIVITIES = "number_of_female_engaged_in_economic_activities";
     }
 }
