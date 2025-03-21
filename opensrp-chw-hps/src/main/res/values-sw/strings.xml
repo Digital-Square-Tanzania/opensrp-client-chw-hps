@@ -60,11 +60,11 @@
     <string name="continue_visit">Endelea</string>
     <string name="edit_visit">Hariri</string>
     <string name="hps_visit_in_progress">Hudhurio linaendelea</string>
-    <string name="hps_service_visit_in_progress">Huduma ya tohara inaendelea</string>
-    <string name="hps_procedure_visit_in_progress">Huduma ya upasuaji wa tohara inaendelea</string>
-    <string name="hps_visit_conducted">Hudhurio la tohara limefanyika</string>
+    <string name="hps_service_visit_in_progress">Huduma ya hps inaendelea</string>
+    <string name="hps_procedure_visit_in_progress">Huduma ya upasuaji wa hps inaendelea</string>
+    <string name="hps_visit_conducted">Hudhurio la hps limefanyika</string>
 
-    <string name="hps_profile">Profile la tohara</string>
+    <string name="hps_profile">Profile la hps</string>
 
     <string name="client_criteria">Kigezo cha Mteja</string>
     <string name="hps_education_on_behavioural_change">Elimu ya Mabadiliko ya Tabia</string>
@@ -72,7 +72,7 @@
     <string name="hps_curative_services">Huduma za Tiba</string>
     <string name="hps_referral_services">Huduma za Rufaa</string>
     <string name="no_phone_number">Hakuna nambari ya simu</string>
-    <string name="return_to_hps_clients">Rudi kwenye wateja wote wa tohara</string>
+    <string name="return_to_hps_clients">Rudi kwenye wateja wote wa hps</string>
     <string name="number_not_filled">Nambari ya simu ya mteja, haijajazwa</string>
     <string name="hps_visit">Tembeleo la kutoa elimu ya Afya kwa Umma</string>
     <string name="household_service">Kaya</string>
