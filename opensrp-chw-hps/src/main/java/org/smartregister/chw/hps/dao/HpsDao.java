@@ -99,6 +99,19 @@ public class HpsDao extends AbstractDao {
         return res.get(0) > 0;
     }
 
+    public static boolean isHouseholdRegisteredForHps(String baseEntityID) {
+        String sql = "SELECT count(p.base_entity_id) count FROM "+Constants.TABLES.HPS_HOUSEHOLD_REGISTER+" p " +
+                "WHERE p.base_entity_id = '" + baseEntityID + "' AND p.is_closed = 0 ";
+
+        DataMap<Integer> dataMap = cursor -> getCursorIntValue(cursor, "count");
+
+        List<Integer> res = readData(sql, dataMap);
+        if (res == null || res.size() != 1)
+            return false;
+
+        return res.get(0) > 0;
+    }
+
     public static Integer getHpsFamilyMembersCount(String familyBaseEntityId) {
         String sql = "SELECT count(emc.base_entity_id) count FROM ec_hps_client_register emc " +
                 "INNER Join ec_family_member fm on fm.base_entity_id = emc.base_entity_id " +
