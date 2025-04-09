@@ -51,6 +51,10 @@ public class HpsCurativeServicesActionHelper implements BaseHpsVisitAction.HpsVi
             JSONObject jsonObject = new JSONObject(jsonPayload);
             JSONArray fieldsArray = jsonObject.getJSONObject(STEP1).getJSONArray(FIELDS);
 
+            JSONObject global = jsonObject.getJSONObject("global");
+
+            global.put("gender", memberObject.getGender());
+
             // Check age for client to have MUAC option
             int age = new Period(new DateTime(memberObject.getAge()),
                     new DateTime()).getYears();

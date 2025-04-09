@@ -43,6 +43,9 @@ public class HpsReferralServicesActionHelper implements BaseHpsVisitAction.HpsVi
     public String getPreProcessed() {
         try {
             JSONObject jsonObject = new JSONObject(jsonPayload);
+            JSONObject global = jsonObject.getJSONObject("global");
+
+            global.put("gender", memberObject.getGender());
             return jsonObject.toString();
         } catch (JSONException e) {
             Timber.e(e);
