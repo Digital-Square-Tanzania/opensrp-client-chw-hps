@@ -100,7 +100,7 @@ public class HpsDao extends AbstractDao {
     }
 
     public static boolean isHouseholdRegisteredForHps(String baseEntityID) {
-        String sql = "SELECT count(p.base_entity_id) count FROM "+Constants.TABLES.HPS_HOUSEHOLD_REGISTER+" p " +
+        String sql = "SELECT count(p.base_entity_id) count FROM " + Constants.TABLES.HPS_HOUSEHOLD_REGISTER + " p " +
                 "WHERE p.base_entity_id = '" + baseEntityID + "' AND p.is_closed = 0 ";
 
         DataMap<Integer> dataMap = cursor -> getCursorIntValue(cursor, "count");
@@ -193,7 +193,7 @@ public class HpsDao extends AbstractDao {
                 "mr.* " +
                 "from ec_family_member m " +
                 "inner join ec_family f on m.relational_id = f.base_entity_id " +
-                "inner join "+Constants.TABLES.HPS_HOUSEHOLD_REGISTER+" mr on mr.base_entity_id = m.base_entity_id " +
+                "inner join " + Constants.TABLES.HPS_HOUSEHOLD_REGISTER + " mr on mr.base_entity_id = m.base_entity_id " +
                 "left join ec_family_member fh on fh.base_entity_id = f.family_head " +
                 "left join ec_family_member pcg on pcg.base_entity_id = f.primary_caregiver " +
                 "where mr.is_closed = 0 AND m.base_entity_id ='" + baseEntityID + "' ";
@@ -378,7 +378,6 @@ public class HpsDao extends AbstractDao {
 
         updateDB(sql);
     }
-
 
 
     public static void saveHpsDeathRegister(String baseEntityId,
@@ -600,6 +599,30 @@ public class HpsDao extends AbstractDao {
             String numberOfFemaleCapableOfEngagingInEconomicActivities,
             String numberOfMaleEngagedInEconomicActivities,
             String numberOfFemaleEngagedInEconomicActivities,
+            String numberOfHouseholdsMostCommonlyUseTapAsSourcesOfWater,
+            String numberOfHouseholdsMostCommonlyUseRiverAsSourcesOfWater,
+            String numberOfHouseholdsMostCommonlyUseShallowWellAsSourcesOfWater,
+            String numberOfHouseholdsMostCommonlyUseWaterPondAsSourcesOfWater,
+            String numberOfHouseholdsMostCommonlyUseSmallDamAsSourcesOfWater,
+            String numberOfHouseholdsMostCommonlyUseLakeAsSourcesOfWater,
+            String numberOfHouseholdsMostCommonlyUseSpringAsSourcesOfWater,
+            String numberOfHouseholdsUsingElectricityAsSourceOfEnergyForLighting,
+            String numberOfHouseholdsUsingSolarAsSourceOfEnergyForLighting,
+            String numberOfHouseholdsUsingKerosineAsSourceOfEnergyForLighting,
+            String numberOfHouseholdsUsingKoroboiAsSourceOfEnergyForLighting,
+            String numberOfHouseholdsUsingOtherSourceOfEnergyForLighting,
+            String numberOfHouseholdsUsingElectricityAsSourceOfCookingEnergy,
+            String numberOfHouseholdsUsingSolarAsSourceOfCookingEnergy,
+            String numberOfHouseholdsUsingKerosineAsSourceOfCookingEnergy,
+            String numberOfHouseholdsUsingGasAsSourceOfCookingEnergy,
+            String numberOfHouseholdsUsingCharcoalAsSourceOfCookingEnergy,
+            String numberOfHouseholdsUsingFirewoodAsSourceOfCookingEnergy,
+            String numberOfHealthCommitteeMembersForEffectiveCommitteeMeetings,
+            String numberOfCommitteeMembersAttendedFisrtQuarter,
+            String numberOfRegisteredAlternativeMedicineServiceProviders,
+            String numberOfRegisteredTraditionalMedicineServiceProviders,
+            String numberOfUnregisteredAlternativeMedicineServiceProviders,
+            String numberOfUnregisteredTraditionalMedicineServiceProviders,
             long lastInteractedWith
     ) {
         String sql = "INSERT INTO ec_hps_annual_census_register ("
@@ -665,7 +688,8 @@ public class HpsDao extends AbstractDao {
                 + "types_of_pesticides_used_barrels, types_of_pesticides_used_coconut_shells, amount_of_pesticide_used_ponds, "
                 + "amount_of_pesticide_used_cans, amount_of_pesticide_used_drums, amount_of_pesticide_used_barrels, "
                 + "amount_of_pesticide_used_coconut_shells, "
-                +"number_of_house_hold, number_of_male_capable_of_engaging_in_economic_activities, number_of_female_capable_of_engaging_in_economic_activities, number_of_male_engaged_in_economic_activities, number_of_female_engaged_in_economic_activities, last_interacted_with) VALUES ("
+                + "number_of_house_hold, number_of_male_capable_of_engaging_in_economic_activities, number_of_female_capable_of_engaging_in_economic_activities, number_of_male_engaged_in_economic_activities, number_of_female_engaged_in_economic_activities, " +
+                " number_of_households_most_commonly_use_tap_as_sources_of_water,number_of_households_most_commonly_use_river_as_sources_of_water,number_of_households_most_commonly_use_shallow_well_as_sources_of_water,number_of_households_most_commonly_use_water_pond_as_sources_of_water,number_of_households_most_commonly_use_small_dam_as_sources_of_water,number_of_households_most_commonly_use_lake_as_sources_of_water,number_of_households_most_commonly_use_spring_as_sources_of_water,number_of_households_using_electricity_as_source_of_energy_for_lighting,number_of_households_using_solar_as_source_of_energy_for_lighting,number_of_households_using_kerosine_as_source_of_energy_for_lighting,number_of_households_using_koroboi_as_source_of_energy_for_lighting,number_of_households_using_other_source_of_energy_for_lighting,number_of_households_using_electricity_as_source_of_cooking_energy,number_of_households_using_solar_as_source_of_cooking_energy,number_of_households_using_kerosine_as_source_of_cooking_energy,number_of_households_using_gas_as_source_of_cooking_energy,number_of_households_using_charcoal_as_source_of_cooking_energy,number_of_households_using_firewood_as_source_of_cooking_energy,number_of_male_capable_of_engaging_in_economic_activities,number_of_male_engaged_in_economic_activities,number_of_female_capable_of_engaging_in_economic_activities,number_of_female_engaged_in_economic_activities,number_of_health_committee_members_for_effective_committee_meetings,number_of_committee_members_attended_fisrt_quarter,number_of_registered_alternative_medicine_service_providers,number_of_registered_traditional_medicine_service_providers,number_of_unregistered_alternative_medicine_service_providers,number_of_unregistered_traditional_medicine_service_providers, last_interacted_with) VALUES ("
                 + "'" + baseEntityId + "', "
                 + "'" + baseEntityId + "', "
                 + "'" + year + "', "
@@ -856,6 +880,30 @@ public class HpsDao extends AbstractDao {
                 + "'" + numberOfFemaleCapableOfEngagingInEconomicActivities + "', "
                 + "'" + numberOfMaleEngagedInEconomicActivities + "', "
                 + "'" + numberOfFemaleEngagedInEconomicActivities + "', "
+                + "'" + numberOfHouseholdsMostCommonlyUseTapAsSourcesOfWater + "', "
+                + "'" + numberOfHouseholdsMostCommonlyUseRiverAsSourcesOfWater + "', "
+                + "'" + numberOfHouseholdsMostCommonlyUseShallowWellAsSourcesOfWater + "', "
+                + "'" + numberOfHouseholdsMostCommonlyUseWaterPondAsSourcesOfWater + "', "
+                + "'" + numberOfHouseholdsMostCommonlyUseSmallDamAsSourcesOfWater + "', "
+                + "'" + numberOfHouseholdsMostCommonlyUseLakeAsSourcesOfWater + "', "
+                + "'" + numberOfHouseholdsMostCommonlyUseSpringAsSourcesOfWater + "', "
+                + "'" + numberOfHouseholdsUsingElectricityAsSourceOfEnergyForLighting + "', "
+                + "'" + numberOfHouseholdsUsingSolarAsSourceOfEnergyForLighting + "', "
+                + "'" + numberOfHouseholdsUsingKerosineAsSourceOfEnergyForLighting + "', "
+                + "'" + numberOfHouseholdsUsingKoroboiAsSourceOfEnergyForLighting + "', "
+                + "'" + numberOfHouseholdsUsingOtherSourceOfEnergyForLighting + "', "
+                + "'" + numberOfHouseholdsUsingElectricityAsSourceOfCookingEnergy + "', "
+                + "'" + numberOfHouseholdsUsingSolarAsSourceOfCookingEnergy + "', "
+                + "'" + numberOfHouseholdsUsingKerosineAsSourceOfCookingEnergy + "', "
+                + "'" + numberOfHouseholdsUsingGasAsSourceOfCookingEnergy + "', "
+                + "'" + numberOfHouseholdsUsingCharcoalAsSourceOfCookingEnergy + "', "
+                + "'" + numberOfHouseholdsUsingFirewoodAsSourceOfCookingEnergy + "', "
+                + "'" + numberOfHealthCommitteeMembersForEffectiveCommitteeMeetings + "', "
+                + "'" + numberOfCommitteeMembersAttendedFisrtQuarter + "', "
+                + "'" + numberOfRegisteredAlternativeMedicineServiceProviders + "', "
+                + "'" + numberOfRegisteredTraditionalMedicineServiceProviders + "', "
+                + "'" + numberOfUnregisteredAlternativeMedicineServiceProviders + "', "
+                + "'" + numberOfUnregisteredTraditionalMedicineServiceProviders + "', "
                 + lastInteractedWith
                 + ") ON CONFLICT (id) DO UPDATE SET "
                 + "select_age_group = '" + selectAgeGroup + "', "
@@ -1046,6 +1094,30 @@ public class HpsDao extends AbstractDao {
                 + "number_of_male_engaged_in_economic_activities = '" + numberOfMaleEngagedInEconomicActivities + "', "
                 + "number_of_female_engaged_in_economic_activities = '" + numberOfFemaleEngagedInEconomicActivities + "', "
 
+                + "number_of_households_most_commonly_use_tap_as_sources_of_water = '" + numberOfHouseholdsMostCommonlyUseTapAsSourcesOfWater + "', "
+                + "number_of_households_most_commonly_use_river_as_sources_of_water = '" + numberOfHouseholdsMostCommonlyUseRiverAsSourcesOfWater + "', "
+                + "number_of_households_most_commonly_use_shallow_well_as_sources_of_water = '" + numberOfHouseholdsMostCommonlyUseShallowWellAsSourcesOfWater + "', "
+                + "number_of_households_most_commonly_use_water_pond_as_sources_of_water = '" + numberOfHouseholdsMostCommonlyUseWaterPondAsSourcesOfWater + "', "
+                + "number_of_households_most_commonly_use_small_dam_as_sources_of_water = '" + numberOfHouseholdsMostCommonlyUseSmallDamAsSourcesOfWater + "', "
+                + "number_of_households_most_commonly_use_lake_as_sources_of_water = '" + numberOfHouseholdsMostCommonlyUseLakeAsSourcesOfWater + "', "
+                + "number_of_households_most_commonly_use_spring_as_sources_of_water = '" + numberOfHouseholdsMostCommonlyUseSpringAsSourcesOfWater + "', "
+                + "number_of_households_using_electricity_as_source_of_energy_for_lighting = '" + numberOfHouseholdsUsingElectricityAsSourceOfEnergyForLighting + "', "
+                + "number_of_households_using_solar_as_source_of_energy_for_lighting = '" + numberOfHouseholdsUsingSolarAsSourceOfEnergyForLighting + "', "
+                + "number_of_households_using_kerosine_as_source_of_energy_for_lighting = '" + numberOfHouseholdsUsingKerosineAsSourceOfEnergyForLighting + "', "
+                + "number_of_households_using_koroboi_as_source_of_energy_for_lighting = '" + numberOfHouseholdsUsingKoroboiAsSourceOfEnergyForLighting + "', "
+                + "number_of_households_using_other_source_of_energy_for_lighting = '" + numberOfHouseholdsUsingOtherSourceOfEnergyForLighting + "', "
+                + "number_of_households_using_electricity_as_source_of_cooking_energy = '" + numberOfHouseholdsUsingElectricityAsSourceOfCookingEnergy + "', "
+                + "number_of_households_using_solar_as_source_of_cooking_energy = '" + numberOfHouseholdsUsingSolarAsSourceOfCookingEnergy + "', "
+                + "number_of_households_using_kerosine_as_source_of_cooking_energy = '" + numberOfHouseholdsUsingKerosineAsSourceOfCookingEnergy + "', "
+                + "number_of_households_using_gas_as_source_of_cooking_energy = '" + numberOfHouseholdsUsingGasAsSourceOfCookingEnergy + "', "
+                + "number_of_households_using_charcoal_as_source_of_cooking_energy = '" + numberOfHouseholdsUsingCharcoalAsSourceOfCookingEnergy + "', "
+                + "number_of_households_using_firewood_as_source_of_cooking_energy = '" + numberOfHouseholdsUsingFirewoodAsSourceOfCookingEnergy + "', "
+                + "number_of_health_committee_members_for_effective_committee_meetings = '" + numberOfHealthCommitteeMembersForEffectiveCommitteeMeetings + "', "
+                + "number_of_committee_members_attended_fisrt_quarter = '" + numberOfCommitteeMembersAttendedFisrtQuarter + "', "
+                + "number_of_registered_alternative_medicine_service_providers = '" + numberOfRegisteredAlternativeMedicineServiceProviders + "', "
+                + "number_of_registered_traditional_medicine_service_providers = '" + numberOfRegisteredTraditionalMedicineServiceProviders + "', "
+                + "number_of_unregistered_alternative_medicine_service_providers = '" + numberOfUnregisteredAlternativeMedicineServiceProviders + "', "
+                + "number_of_unregistered_traditional_medicine_service_providers = '" + numberOfUnregisteredTraditionalMedicineServiceProviders + "', "
                 + "last_interacted_with = " + lastInteractedWith;
         updateDB(sql);
     }
@@ -1386,19 +1458,19 @@ public class HpsDao extends AbstractDao {
         return res;
     }
 
-    public static boolean individualClientHasAnyVisit(String baseEntityID){
-        String sql = "SELECT COUNT (*) AS count FROM "+ Constants.TABLES.HPS_CLIENT_SERVICES+ " cs " +
-                     "WHERE cs.entity_id = '" + baseEntityID + "' ";
-        DataMap<Integer> countMap = cursor -> getCursorIntValue(cursor,"count");
-        List<Integer> countResults = readData(sql,countMap);
+    public static boolean individualClientHasAnyVisit(String baseEntityID) {
+        String sql = "SELECT COUNT (*) AS count FROM " + Constants.TABLES.HPS_CLIENT_SERVICES + " cs " +
+                "WHERE cs.entity_id = '" + baseEntityID + "' ";
+        DataMap<Integer> countMap = cursor -> getCursorIntValue(cursor, "count");
+        List<Integer> countResults = readData(sql, countMap);
         return !countResults.isEmpty() && countResults.get(0) > 0;
     }
 
-    public static boolean houseHoldClientHasAnyVisit(String baseEntityID){
-        String sql = "SELECT COUNT (*) AS count FROM "+ Constants.TABLES.HPS_HOUSEHOLD_SERVICES+ " hs " +
+    public static boolean houseHoldClientHasAnyVisit(String baseEntityID) {
+        String sql = "SELECT COUNT (*) AS count FROM " + Constants.TABLES.HPS_HOUSEHOLD_SERVICES + " hs " +
                 "WHERE hs.entity_id = '" + baseEntityID + "' ";
-        DataMap<Integer> countMap = cursor -> getCursorIntValue(cursor,"count");
-        List<Integer> countResults = readData(sql,countMap);
+        DataMap<Integer> countMap = cursor -> getCursorIntValue(cursor, "count");
+        List<Integer> countResults = readData(sql, countMap);
         return !countResults.isEmpty() && countResults.get(0) > 0;
     }
 
