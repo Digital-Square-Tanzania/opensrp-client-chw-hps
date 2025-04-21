@@ -442,5 +442,53 @@ public class DBConstants {
         public static final String NUMBER_OF_FEMALE_CAPABLE_OF_ENGAGING_IN_ECONOMIC_ACTIVITIES = "number_of_female_capable_of_engaging_in_economic_activities";
         public static final String NUMBER_OF_MALE_ENGAGED_IN_ECONOMIC_ACTIVITIES = "number_of_male_engaged_in_economic_activities";
         public static final String NUMBER_OF_FEMALE_ENGAGED_IN_ECONOMIC_ACTIVITIES = "number_of_female_engaged_in_economic_activities";
+
+        public static final String NUMBER_OF_HOUSEHOLDS_MOST_COMMONLY_USE_TAP_AS_SOURCES_OF_WATER = "number_of_households_most_commonly_use_tap_as_sources_of_water";
+
+        public static final String NUMBER_OF_HOUSEHOLDS_MOST_COMMONLY_USE_RIVER_AS_SOURCES_OF_WATER = "number_of_households_most_commonly_use_river_as_sources_of_water";
+
+        public static final String NUMBER_OF_HOUSEHOLDS_MOST_COMMONLY_USE_SHALLOW_WELL_AS_SOURCES_OF_WATER = "number_of_households_most_commonly_use_shallow_well_as_sources_of_water";
+
+        public static final String NUMBER_OF_HOUSEHOLDS_MOST_COMMONLY_USE_WATER_POND_AS_SOURCES_OF_WATER = "number_of_households_most_commonly_use_water_pond_as_sources_of_water";
+
+        public static final String NUMBER_OF_HOUSEHOLDS_MOST_COMMONLY_USE_SMALL_DAM_AS_SOURCES_OF_WATER = "number_of_households_most_commonly_use_small_dam_as_sources_of_water";
+
+        public static final String NUMBER_OF_HOUSEHOLDS_MOST_COMMONLY_USE_LAKE_AS_SOURCES_OF_WATER = "number_of_households_most_commonly_use_lake_as_sources_of_water";
+
+        public static final String NUMBER_OF_HOUSEHOLDS_MOST_COMMONLY_USE_SPRING_AS_SOURCES_OF_WATER = "number_of_households_most_commonly_use_spring_as_sources_of_water";
+
+        public static final String NUMBER_OF_HOUSEHOLDS_USING_ELECTRICITY_AS_SOURCE_OF_ENERGY_FOR_LIGHTING = "number_of_households_using_electricity_as_source_of_energy_for_lighting";
+
+        public static final String NUMBER_OF_HOUSEHOLDS_USING_SOLAR_AS_SOURCE_OF_ENERGY_FOR_LIGHTING = "number_of_households_using_solar_as_source_of_energy_for_lighting";
+
+        public static final String NUMBER_OF_HOUSEHOLDS_USING_KEROSINE_AS_SOURCE_OF_ENERGY_FOR_LIGHTING = "number_of_households_using_kerosine_as_source_of_energy_for_lighting";
+
+        public static final String NUMBER_OF_HOUSEHOLDS_USING_KOROBOI_AS_SOURCE_OF_ENERGY_FOR_LIGHTING = "number_of_households_using_koroboi_as_source_of_energy_for_lighting";
+
+        public static final String NUMBER_OF_HOUSEHOLDS_USING_OTHER_SOURCE_OF_ENERGY_FOR_LIGHTING = "number_of_households_using_other_source_of_energy_for_lighting";
+
+        public static final String NUMBER_OF_HOUSEHOLDS_USING_ELECTRICITY_AS_SOURCE_OF_COOKING_ENERGY = "number_of_households_using_electricity_as_source_of_cooking_energy";
+
+        public static final String NUMBER_OF_HOUSEHOLDS_USING_SOLAR_AS_SOURCE_OF_COOKING_ENERGY = "number_of_households_using_solar_as_source_of_cooking_energy";
+
+        public static final String NUMBER_OF_HOUSEHOLDS_USING_KEROSINE_AS_SOURCE_OF_COOKING_ENERGY = "number_of_households_using_kerosine_as_source_of_cooking_energy";
+
+        public static final String NUMBER_OF_HOUSEHOLDS_USING_GAS_AS_SOURCE_OF_COOKING_ENERGY = "number_of_households_using_gas_as_source_of_cooking_energy";
+
+        public static final String NUMBER_OF_HOUSEHOLDS_USING_CHARCOAL_AS_SOURCE_OF_COOKING_ENERGY = "number_of_households_using_charcoal_as_source_of_cooking_energy";
+
+        public static final String NUMBER_OF_HOUSEHOLDS_USING_FIREWOOD_AS_SOURCE_OF_COOKING_ENERGY = "number_of_households_using_firewood_as_source_of_cooking_energy";
+
+        public static final String NUMBER_OF_HEALTH_COMMITTEE_MEMBERS_FOR_EFFECTIVE_COMMITTEE_MEETINGS = "number_of_health_committee_members_for_effective_committee_meetings";
+
+        public static final String NUMBER_OF_COMMITTEE_MEMBERS_ATTENDED_FISRT_QUARTER = "number_of_committee_members_attended_fisrt_quarter";
+
+        public static final String NUMBER_OF_REGISTERED_ALTERNATIVE_MEDICINE_SERVICE_PROVIDERS = "number_of_registered_alternative_medicine_service_providers";
+
+        public static final String NUMBER_OF_REGISTERED_TRADITIONAL_MEDICINE_SERVICE_PROVIDERS = "number_of_registered_traditional_medicine_service_providers";
+
+        public static final String NUMBER_OF_UNREGISTERED_ALTERNATIVE_MEDICINE_SERVICE_PROVIDERS = "number_of_unregistered_alternative_medicine_service_providers";
+
+        public static final String NUMBER_OF_UNREGISTERED_TRADITIONAL_MEDICINE_SERVICE_PROVIDERS = "number_of_unregistered_traditional_medicine_service_providers";
     }
 }
