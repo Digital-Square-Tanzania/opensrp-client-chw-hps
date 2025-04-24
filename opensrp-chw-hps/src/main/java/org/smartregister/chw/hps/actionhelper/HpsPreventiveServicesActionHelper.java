@@ -27,7 +27,7 @@ public class HpsPreventiveServicesActionHelper implements BaseHpsVisitAction.Hps
 
     protected String jsonPayload;
 
-    protected String ecMaterialsDistributed;
+    protected String preventiveServicesProvided;
 
     protected String baseEntityId;
 
@@ -61,7 +61,7 @@ public class HpsPreventiveServicesActionHelper implements BaseHpsVisitAction.Hps
     public void onPayloadReceived(String jsonPayload) {
         try {
             JSONObject jsonObject = new JSONObject(jsonPayload);
-            ecMaterialsDistributed = JsonFormUtils.getValue(jsonObject, "provide_iec_materials");
+            preventiveServicesProvided = JsonFormUtils.getValue(jsonObject, "preventive_services_provided");
         } catch (JSONException e) {
             Timber.e(e);
         }
@@ -111,7 +111,7 @@ public class HpsPreventiveServicesActionHelper implements BaseHpsVisitAction.Hps
     @Override
     public BaseHpsVisitAction.Status evaluateStatusOnPayload() {
 
-        if (StringUtils.isNotBlank(ecMaterialsDistributed)) {
+        if (StringUtils.isNotBlank(preventiveServicesProvided)) {
             return BaseHpsVisitAction.Status.COMPLETED;
         }
         return BaseHpsVisitAction.Status.PENDING;
