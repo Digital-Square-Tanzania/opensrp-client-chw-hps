@@ -15,10 +15,10 @@ import java.util.Map;
 
 import timber.log.Timber;
 
-public class HpsEducationOnBehaviouralChangeActionHelper implements BaseHpsVisitAction.HpsVisitActionHelper {
+public class HpsRemarksActionHelper implements BaseHpsVisitAction.HpsVisitActionHelper {
     protected String jsonPayload;
 
-    protected String healthEducationProvided;
+    protected String remarks;
 
     protected String baseEntityId;
 
@@ -27,7 +27,7 @@ public class HpsEducationOnBehaviouralChangeActionHelper implements BaseHpsVisit
     protected MemberObject memberObject;
 
 
-    public HpsEducationOnBehaviouralChangeActionHelper(Context context, MemberObject memberObject) {
+    public HpsRemarksActionHelper(Context context, MemberObject memberObject) {
         this.context = context;
         this.memberObject = memberObject;
     }
@@ -53,7 +53,7 @@ public class HpsEducationOnBehaviouralChangeActionHelper implements BaseHpsVisit
     public void onPayloadReceived(String jsonPayload) {
         try {
             JSONObject jsonObject = new JSONObject(jsonPayload);
-            healthEducationProvided = JsonFormUtils.getValue(jsonObject, "provision_of_preventive_services");
+            remarks = JsonFormUtils.getValue(jsonObject, "hps_remarks");
         } catch (JSONException e) {
             Timber.e(e);
         }
@@ -83,7 +83,7 @@ public class HpsEducationOnBehaviouralChangeActionHelper implements BaseHpsVisit
     public BaseHpsVisitAction.Status evaluateStatusOnPayload() {
 
 
-        if (StringUtils.isNotBlank(healthEducationProvided)) {
+        if (StringUtils.isNotBlank(remarks)) {
             return BaseHpsVisitAction.Status.COMPLETED;
         }
         return BaseHpsVisitAction.Status.PENDING;
