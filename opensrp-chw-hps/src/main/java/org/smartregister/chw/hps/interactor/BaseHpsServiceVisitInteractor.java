@@ -2,6 +2,7 @@ package org.smartregister.chw.hps.interactor;
 
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -15,6 +16,7 @@ import org.smartregister.chw.hps.actionhelper.HpsPreventiveServicesActionHelper;
 import org.smartregister.chw.hps.actionhelper.HpsReferralServicesActionHelper;
 import org.smartregister.chw.hps.actionhelper.HpsRemarksActionHelper;
 import org.smartregister.chw.hps.contract.BaseHpsVisitContract;
+import org.smartregister.chw.hps.domain.MemberObject;
 import org.smartregister.chw.hps.domain.VisitDetail;
 import org.smartregister.chw.hps.model.BaseHpsVisitAction;
 import org.smartregister.chw.hps.util.AppExecutors;
@@ -68,7 +70,6 @@ public class BaseHpsServiceVisitInteractor extends BaseHpsVisitInteractor {
                 evaluateOtherHpsServices(details);
                 evaluateCurativeServices(details);
                 evaluateReferralServices(details);
-                evaluateHpsRemarks(details);
             } catch (BaseHpsVisitAction.ValidationException e) {
                 Timber.e(e);
             }
@@ -80,7 +81,22 @@ public class BaseHpsServiceVisitInteractor extends BaseHpsVisitInteractor {
     }
 
     private void evaluateHpsClientCriteria(Map<String, List<VisitDetail>> details) throws BaseHpsVisitAction.ValidationException {
-        HpsClientCriteriaActionHelper actionHelper = new HpsClientCriteriaActionHelper(mContext, memberObject);
+        HpsClientCriteriaActionHelper actionHelper = new HpsClientCriteriaActionHelper(mContext, memberObject){
+
+            @Override
+            public BaseHpsVisitAction.Status evaluateStatusOnPayload() {
+                if (StringUtils.isNotBlank(clientCriteria)) {
+                    try {
+                        new AppExecutors().mainThread().execute(() -> callBack.preloadActions(actionList));
+                        evaluateHpsRemarks(details);
+                    } catch(Exception e){
+                        Timber.e(e.toString());
+                    }
+                    return BaseHpsVisitAction.Status.COMPLETED;
+                }
+                return BaseHpsVisitAction.Status.PENDING;
+            }
+        };
         BaseHpsVisitAction action = getBuilder(context.getString(R.string.client_criteria))
                 .withOptional(false)
                 .withDetails(details)
@@ -92,7 +108,21 @@ public class BaseHpsServiceVisitInteractor extends BaseHpsVisitInteractor {
 
     private void evaluateHpsEducationOnBehavioralChange(Map<String, List<VisitDetail>> details) throws BaseHpsVisitAction.ValidationException {
 
-        HpsEducationOnBehaviouralChangeActionHelper actionHelper = new HpsEducationOnBehaviouralChangeActionHelper(mContext, memberObject);
+        HpsEducationOnBehaviouralChangeActionHelper actionHelper = new HpsEducationOnBehaviouralChangeActionHelper(mContext, memberObject){
+            @Override
+            public BaseHpsVisitAction.Status evaluateStatusOnPayload() {
+                if (StringUtils.isNotBlank(healthEducationProvided)) {
+                    try {
+                        new AppExecutors().mainThread().execute(() -> callBack.preloadActions(actionList));
+                        evaluateHpsRemarks(details);
+                    } catch(Exception e){
+                        Timber.e(e.toString());
+                    }
+                    return BaseHpsVisitAction.Status.COMPLETED;
+                }
+                return BaseHpsVisitAction.Status.PENDING;
+            }
+        };
         BaseHpsVisitAction action = getBuilder(context.getString(R.string.hps_education_on_behavioural_change))
                 .withOptional(false)
                 .withDetails(details)
@@ -104,7 +134,21 @@ public class BaseHpsServiceVisitInteractor extends BaseHpsVisitInteractor {
 
     private void evaluateOtherHpsServices(Map<String, List<VisitDetail>> details) throws BaseHpsVisitAction.ValidationException {
 
-        HpsPreventiveServicesActionHelper actionHelper = new HpsPreventiveServicesActionHelper(mContext, memberObject);
+        HpsPreventiveServicesActionHelper actionHelper = new HpsPreventiveServicesActionHelper(mContext, memberObject){
+            @Override
+            public BaseHpsVisitAction.Status evaluateStatusOnPayload() {
+                if (StringUtils.isNotBlank(preventiveServicesProvided)) {
+                    try {
+                        new AppExecutors().mainThread().execute(() -> callBack.preloadActions(actionList));
+                        evaluateHpsRemarks(details);
+                    } catch(Exception e){
+                        Timber.e(e.toString());
+                    }
+                    return BaseHpsVisitAction.Status.COMPLETED;
+                }
+                return BaseHpsVisitAction.Status.PENDING;
+            }
+        };
         BaseHpsVisitAction action = getBuilder(context.getString(R.string.hps_preventive_services))
                 .withOptional(false)
                 .withDetails(details)
@@ -116,7 +160,21 @@ public class BaseHpsServiceVisitInteractor extends BaseHpsVisitInteractor {
 
     private void evaluateCurativeServices(Map<String, List<VisitDetail>> details) throws BaseHpsVisitAction.ValidationException {
 
-        HpsCurativeServicesActionHelper actionHelper = new HpsCurativeServicesActionHelper(mContext, memberObject);
+        HpsCurativeServicesActionHelper actionHelper = new HpsCurativeServicesActionHelper(mContext, memberObject){
+            @Override
+            public BaseHpsVisitAction.Status evaluateStatusOnPayload() {
+                if (StringUtils.isNotBlank(wereCurativeServicesProvided)) {
+                    try {
+                        new AppExecutors().mainThread().execute(() -> callBack.preloadActions(actionList));
+                        evaluateHpsRemarks(details);
+                    } catch(Exception e){
+                        Timber.e(e.toString());
+                    }
+                    return BaseHpsVisitAction.Status.COMPLETED;
+                }
+                return BaseHpsVisitAction.Status.PENDING;
+            }
+        };
         BaseHpsVisitAction action = getBuilder(context.getString(R.string.hps_curative_services))
                 .withOptional(false)
                 .withDetails(details)
@@ -128,7 +186,21 @@ public class BaseHpsServiceVisitInteractor extends BaseHpsVisitInteractor {
 
     private void evaluateReferralServices(Map<String, List<VisitDetail>> details) throws BaseHpsVisitAction.ValidationException {
 
-        HpsReferralServicesActionHelper actionHelper = new HpsReferralServicesActionHelper(mContext, memberObject);
+        HpsReferralServicesActionHelper actionHelper = new HpsReferralServicesActionHelper(mContext, memberObject){
+            @Override
+            public BaseHpsVisitAction.Status evaluateStatusOnPayload() {
+                if (StringUtils.isNotBlank(wereReferralServicesProvided)) {
+                    try {
+                        new AppExecutors().mainThread().execute(() -> callBack.preloadActions(actionList));
+                        evaluateHpsRemarks(details);
+                    } catch(Exception e){
+                        Timber.e(e.toString());
+                    }
+                    return BaseHpsVisitAction.Status.COMPLETED;
+                }
+                return BaseHpsVisitAction.Status.PENDING;
+            }
+        };
         BaseHpsVisitAction action = getBuilder(context.getString(R.string.hps_referral_services))
                 .withOptional(false)
                 .withDetails(details)
