@@ -158,7 +158,7 @@ public class BaseHpsServiceVisitInteractor extends BaseHpsVisitInteractor {
 
         HpsRemarksActionHelper actionHelper = new HpsRemarksActionHelper(mContext, memberObject);
         BaseHpsVisitAction action = getBuilder(context.getString(R.string.hps_remarks))
-                .withOptional(false)
+                .withOptional(true)
                 .withDetails(details)
                 .withHelper(actionHelper)
                 .withFormName(Constants.HPS_FOLLOWUP_FORMS.HPS_REMARKS)
