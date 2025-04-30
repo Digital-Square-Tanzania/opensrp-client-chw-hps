@@ -2,6 +2,7 @@ package org.smartregister.chw.hps.interactor;
 
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -13,7 +14,9 @@ import org.smartregister.chw.hps.actionhelper.HpsCurativeServicesActionHelper;
 import org.smartregister.chw.hps.actionhelper.HpsEducationOnBehaviouralChangeActionHelper;
 import org.smartregister.chw.hps.actionhelper.HpsPreventiveServicesActionHelper;
 import org.smartregister.chw.hps.actionhelper.HpsReferralServicesActionHelper;
+import org.smartregister.chw.hps.actionhelper.HpsRemarksActionHelper;
 import org.smartregister.chw.hps.contract.BaseHpsVisitContract;
+import org.smartregister.chw.hps.domain.MemberObject;
 import org.smartregister.chw.hps.domain.VisitDetail;
 import org.smartregister.chw.hps.model.BaseHpsVisitAction;
 import org.smartregister.chw.hps.util.AppExecutors;
@@ -78,7 +81,22 @@ public class BaseHpsServiceVisitInteractor extends BaseHpsVisitInteractor {
     }
 
     private void evaluateHpsClientCriteria(Map<String, List<VisitDetail>> details) throws BaseHpsVisitAction.ValidationException {
-        HpsClientCriteriaActionHelper actionHelper = new HpsClientCriteriaActionHelper(mContext, memberObject);
+        HpsClientCriteriaActionHelper actionHelper = new HpsClientCriteriaActionHelper(mContext, memberObject){
+
+            @Override
+            public BaseHpsVisitAction.Status evaluateStatusOnPayload() {
+                if (StringUtils.isNotBlank(clientCriteria)) {
+                    try {
+                        new AppExecutors().mainThread().execute(() -> callBack.preloadActions(actionList));
+                        evaluateHpsRemarks(details);
+                    } catch(Exception e){
+                        Timber.e(e.toString());
+                    }
+                    return BaseHpsVisitAction.Status.COMPLETED;
+                }
+                return BaseHpsVisitAction.Status.PENDING;
+            }
+        };
         BaseHpsVisitAction action = getBuilder(context.getString(R.string.client_criteria))
                 .withOptional(false)
                 .withDetails(details)
@@ -135,6 +153,19 @@ public class BaseHpsServiceVisitInteractor extends BaseHpsVisitInteractor {
                 .build();
         actionList.put(context.getString(R.string.hps_referral_services), action);
     }
+
+    private void evaluateHpsRemarks(Map<String, List<VisitDetail>> details) throws BaseHpsVisitAction.ValidationException {
+
+        HpsRemarksActionHelper actionHelper = new HpsRemarksActionHelper(mContext, memberObject);
+        BaseHpsVisitAction action = getBuilder(context.getString(R.string.hps_remarks))
+                .withOptional(true)
+                .withDetails(details)
+                .withHelper(actionHelper)
+                .withFormName(Constants.HPS_FOLLOWUP_FORMS.HPS_REMARKS)
+                .build();
+        actionList.put(context.getString(R.string.hps_remarks), action);
+    }
+
 
     @Override
     protected String getEncounterType() {
