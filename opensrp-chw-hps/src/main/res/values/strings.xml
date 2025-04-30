@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name" translatable="false">hps</string>
+    <string name="app_name" translatable="false">iCCHW</string>
     <string name="error_unable_to_start_form">An error occurred when starting the form</string>
     <string name="error_unable_to_save_form">An error occurred when saving the form</string>
-    <string name="hps">HPS</string>
+    <string name="hps">iCCHW</string>
     <string name="add_member">Add Member</string>
     <string name="sort">Sort</string>
     <string name="home">Home</string>
@@ -13,16 +13,16 @@
     <string name="job_aids">Job Aids</string>
     <string name="saving_dialog_title">Saving</string>
     <string name="interpunct" translatable="false">\u00b7</string>
-    <string name="record_hps">Provide HPS Services</string>
+    <string name="record_hps">Provide iCCHW Services</string>
     <string name="manual_process_visit">Process Visit</string>
     <string name="continue_visit">Continue</string>
     <string name="edit_visit">Edit</string>
     <string name="hps_visit_in_progress">Visit In Progress</string>
-    <string name="hps_service_visit_in_progress">Hps Service In Progress</string>
-    <string name="hps_procedure_visit_in_progress">Hps Procedure In Progress</string>
-    <string name="hps_visit_conducted">HPS Visit Conducted</string>
+    <string name="hps_service_visit_in_progress">iCCHW Service In Progress</string>
+    <string name="hps_procedure_visit_in_progress">iCCHW Procedure In Progress</string>
+    <string name="hps_visit_conducted">iCCHW Visit Conducted</string>
 
-    <string name="hps_profile">HPS Profile</string>
+    <string name="hps_profile">iCCHW Profile</string>
 
     <string name="client_criteria">Client Criteria</string>
     <string name="hps_followup_visit">Follow Up Visit</string>
@@ -34,7 +34,7 @@
 
     <string name="optional">Optional</string>
     <string name="error_unable_save_visit">Unable to save visit</string>
-    <string name="return_to_previous_page">Return all Hps Clients</string>
+    <string name="return_to_previous_page">Return all iCCHW Clients</string>
     <string name="last_visit_40_days_ago">Last visit %1$s ago</string>
     <string name="hps_view_visit_history">View visit history</string>
     <string name="call_no_number_provided">(no number provided)</string>
@@ -48,9 +48,9 @@
     <string name="vaccine_service_upcoming"><![CDATA[%1$s <font color=#7f7f7f>upcoming (%2$s)</font></b>]]></string>
     <string name="vaccine_service_overdue"><![CDATA[%1$s <font color=#f04646>overdue (%2$s)</font></b>]]></string>
     <string name="vaccine_service_due"><![CDATA[%1$s <font color=#000000>due (%2$s)</font></b>]]></string>
-    <string name="call_hps_client">Hps Client</string>
+    <string name="call_hps_client">iCCHW Client</string>
     <string name="head_of_family">Head of family</string>
-    <string name="hps_client">Hps Client</string>
+    <string name="hps_client">iCCHW Client</string>
     <string name="copy_to_clipboard">Copy to clipboard</string>
     <string name="copied_phone_number">PhoneNumber copied to clipboard</string>
     <string name="call">Call</string>
@@ -65,31 +65,31 @@
     <string name="call_anc_client">ANC Client</string>
     <string name="call_pnc_client">PNC Client</string>
     <string name="call_head_of_family">Call Head of Family</string>
-    <string name="view_hps_test_result">View hps test results</string>
-    <string name="hps_positive">Hps positive</string>
+    <string name="view_hps_test_result">View iCCHW test results</string>
+    <string name="hps_positive">iCCHW positive</string>
     <string name="anc_string">ANC</string>
     <string name="pnc_string">PNC</string>
     <string name="visit_done">Visit Done</string>
     <string name="edit">EDIT</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
-    <string name="return_to_hps_clients">Return to HPS Clients</string>
+    <string name="return_to_hps_clients">Return to iCCHW Clients</string>
     <string name="number_not_filled">client phone number, not filled</string>
-    <string name="hps_visit">HPS Visit</string>
-    <string name="hps_client_register">HPS Clients</string>
-    <string name="hps_household_register">HPS Households</string>
-    <string name="hps_mobilization_sessions_title">HPS Mobilization Sessions</string>
-    <string name="hps_death_register_title">HPS Death Register</string>
+    <string name="hps_visit">iCCHW Visit</string>
+    <string name="hps_client_register">iCCHW Clients</string>
+    <string name="hps_household_register">iCCHW Households</string>
+    <string name="hps_mobilization_sessions_title">iCCHW Mobilization Sessions</string>
+    <string name="hps_death_register_title">iCCHW Death Register</string>
     <string name="death_register">Death Register</string>
     <string name="hps_mobilization_sessions">Mobilization Sessions</string>
     <string name="hps_mobilization_sessions_menu">Mobilizations</string>
 
-    <string name="hps_mobilization_session_details">HPS Mobilization Session Details</string>
+    <string name="hps_mobilization_session_details">iCCHW Mobilization Session Details</string>
     <string name="hps_death_registration_details">Death Registration Details</string>
     <string name="hps_back_to_all_mobilization_sessions">Back to Death register</string>
-    <string name="record_hps_household_services">Provide HPS Household Services</string>
-    <string name="hps_annual_census_register_title">HPS Annual Census Register</string>
-    <string name="hps_annual_census_register_details">HPS Annual Census Details</string>
+    <string name="record_hps_household_services">Provide iCCHW Household Services</string>
+    <string name="hps_annual_census_register_title">iCCHW Annual Census Register</string>
+    <string name="hps_annual_census_register_details">iCCHW Annual Census Details</string>
     <string name="hps_back_to_all_annual_census_register">Back to annual census register</string>
     <string name="annual_census">Annual Census</string>
     <string name="hps_annual_census_menu">Census</string>
