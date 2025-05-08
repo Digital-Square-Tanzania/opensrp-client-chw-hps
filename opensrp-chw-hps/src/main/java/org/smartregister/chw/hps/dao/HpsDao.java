@@ -91,7 +91,7 @@ public class HpsDao extends AbstractDao {
 
     public static boolean isRegisteredForHps(String baseEntityID) {
         String sql = "SELECT count(p.base_entity_id) count FROM ec_hps_client_register p " +
-                "WHERE p.base_entity_id = '" + baseEntityID + "' AND p.is_closed = 0 ";
+                "WHERE p.base_entity_id = '" + baseEntityID + "' AND p.does_the_client_consent_to_be_enrolled_in_hps_services = 'yes' AND p.is_closed = 0 ";
 
         DataMap<Integer> dataMap = cursor -> getCursorIntValue(cursor, "count");
 
@@ -104,7 +104,7 @@ public class HpsDao extends AbstractDao {
 
     public static boolean isHouseholdRegisteredForHps(String baseEntityID) {
         String sql = "SELECT count(p.base_entity_id) count FROM " + Constants.TABLES.HPS_HOUSEHOLD_REGISTER + " p " +
-                "WHERE p.base_entity_id = '" + baseEntityID + "' AND p.is_closed = 0 ";
+                "WHERE p.base_entity_id = '" + baseEntityID + "' AND p.does_the_household_consent_to_be_enrolled_in_hps_services = 'yes' AND p.is_closed = 0 ";
 
         DataMap<Integer> dataMap = cursor -> getCursorIntValue(cursor, "count");
 
@@ -332,7 +332,7 @@ public class HpsDao extends AbstractDao {
 
 
     public static List<HpsDeathRegisterModel> getHpsDeathRegisterRecords() {
-        String sql = "SELECT * FROM " + Constants.TABLES.HPS_DEATH_REGISTER;
+        String sql = "SELECT * FROM " + Constants.TABLES.HPS_DEATH_REGISTER+" WHERE is_closed = 0 AND dod IS NOT NULL AND dob IS NOT NULL";
 
         @SuppressLint("Range")
         DataMap<HpsDeathRegisterModel> dataMap = cursor -> {

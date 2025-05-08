@@ -1,7 +1,7 @@
 <resources>
     <string name="error_unable_to_start_form">Hitilafu imetokea wakati wa kuanzisha fomu</string>
     <string name="error_unable_to_save_form">Hitilafu imetokea wakati wa kuhifadhi fomu</string>
-    <string name="hps">Elimu ya Afya kwa Umma</string>
+    <string name="hps">iCCHW</string>
     <string name="add_member">Sajili mwanafamilia</string>
     <string name="sort">Panga</string>
     <string name="home">Nyumbani</string>
@@ -71,6 +71,7 @@
     <string name="hps_preventive_services">Huduma Kinga</string>
     <string name="hps_curative_services">Huduma za Tiba</string>
     <string name="hps_referral_services">Huduma za Rufaa</string>
+    <string name="hps_remarks">Maoni</string>
     <string name="no_phone_number">Hakuna nambari ya simu</string>
     <string name="return_to_hps_clients">Rudi kwenye wateja wote wa huduma za afya ngazi ya jamii</string>
     <string name="number_not_filled">Nambari ya simu ya mteja, haijajazwa</string>
@@ -88,7 +89,7 @@
     <string name="hps_mobilization_session_details">Taarifa za zoezi la uhamasishaji wa huduma za afya ngazi ya jamii</string>
     <string name="hps_death_registration_details">Taarifa za usajili wa Kifo</string>
     <string name="hps_back_to_all_mobilization_sessions">Rudi  kwenye rejesta ya vifo</string>
-    <string name="record_hps_household_services">Rekodi tembeleo la kutoa huduma za ngazi ya kaya</string>
+    <string name="record_hps_household_services">Utoaji wa huduma za afya ngazi ya jamii kwa kaya</string>
 
     <string name="hps_annual_census_register_title">Sensa ya mwaka</string>
     <string name="hps_annual_census_register_details">Taarifa za sensa ya mwaka</string>

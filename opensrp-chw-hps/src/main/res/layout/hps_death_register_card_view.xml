@@ -68,7 +68,7 @@
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
                 android:textSize="16sp"
-                android:visibility="visible"
+                android:visibility="gone"
                 tools:text="@string/hps_death_register_cause_of_death" />
         </RelativeLayout>
 
