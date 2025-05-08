@@ -15,13 +15,12 @@ import org.smartregister.view.activity.BaseRegisterActivity;
 public class HpsBottomNavigationListener extends BottomNavigationListener {
     private Activity context;
 
+    BaseRegisterActivity baseRegisterActivity;
+
     public HpsBottomNavigationListener(Activity context) {
         super(context);
         this.context = context;
     }
-
-    BaseRegisterActivity baseRegisterActivity;
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         super.onNavigationItemSelected(item);

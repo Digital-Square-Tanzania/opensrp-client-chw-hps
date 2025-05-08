@@ -445,7 +445,6 @@ public class HpsDao extends AbstractDao {
                 "health_education_heard = '" + healthEducationHeard + "', " +
                 "last_interacted_with = " + lastInteractedWith;
 
-        Timber.d("Generated SQL Query: %s", sql);
         updateDB(sql);
     }
 
