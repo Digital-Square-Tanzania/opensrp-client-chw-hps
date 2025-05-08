@@ -3,6 +3,7 @@ package org.smartregister.chw.hps.dao;
 import android.annotation.SuppressLint;
 
 import org.smartregister.chw.hps.domain.HpsAnnualCensusRegisterModel;
+import org.smartregister.chw.hps.domain.HpsAdvertisementFeedbackModel;
 import org.smartregister.chw.hps.domain.HpsDeathRegisterModel;
 import org.smartregister.chw.hps.domain.HpsMobilizationSessionModel;
 import org.smartregister.chw.hps.domain.MemberObject;
@@ -12,6 +13,8 @@ import org.smartregister.dao.AbstractDao;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
+
+import timber.log.Timber;
 
 public class HpsDao extends AbstractDao {
     private static final SimpleDateFormat df = new SimpleDateFormat(
@@ -302,6 +305,31 @@ public class HpsDao extends AbstractDao {
         return res;
     }
 
+    public static List<HpsAdvertisementFeedbackModel> getHpsAdvertisementFeedback() {
+        String sql = "SELECT * FROM " + Constants.TABLES.HPS_ADVERTISEMENT_FEEDBACK;
+
+        @SuppressLint("Range")
+        DataMap<HpsAdvertisementFeedbackModel> dataMap = cursor -> {
+            HpsAdvertisementFeedbackModel model = new HpsAdvertisementFeedbackModel();
+            model.setDateOfAdvertisementFeedback(cursor.getString(cursor.getColumnIndex("date_of_advertisement_feedback")));
+            model.setAreaWhereAdvertisementFeedbackTookPlace(cursor.getString(cursor.getColumnIndex("area_where_advertisement_feedback_took_place")));
+            model.setNumberOfFemalesWhoAttended(cursor.getString(cursor.getColumnIndex("number_of_females_who_attended")));
+            model.setNumberOfMalesWhoAttended(cursor.getString(cursor.getColumnIndex("number_of_males_who_attended")));
+            model.setOwnsRadioStation(cursor.getString(cursor.getColumnIndex("owns_radio_station")));
+            model.setNumberOfRadioOwners(cursor.getString(cursor.getColumnIndex("number_of_radio_owners")));
+            model.setMobilePhoneRadioListeners(cursor.getString(cursor.getColumnIndex("mobile_phone_radio_listeners")));
+            model.setNumberOfWhoListensRadioViaPhone(cursor.getString(cursor.getColumnIndex("number_of_who_listens_radio_via_phone")));
+            model.setRadioChannelListened(cursor.getString(cursor.getColumnIndex("radio_channel_listened")));
+            model.setSelectedHealthEducationTopics(cursor.getString(cursor.getColumnIndex("selected_health_education_topics")));
+            model.setHealthEducationHeard(cursor.getString(cursor.getColumnIndex("health_education_heard")));
+            return model;
+        };
+
+        List<HpsAdvertisementFeedbackModel> res = readData(sql, dataMap);
+        if (res == null || res.isEmpty()) return null;
+        return res;
+    }
+
 
     public static List<HpsDeathRegisterModel> getHpsDeathRegisterRecords() {
         String sql = "SELECT * FROM " + Constants.TABLES.HPS_DEATH_REGISTER;
@@ -376,6 +404,48 @@ public class HpsDao extends AbstractDao {
                 "    number_of_other_iec_provided = '" + numberOfOtherIecProvided + "', " +
                 "    last_interacted_with = " + lastInteractedWith;
 
+        updateDB(sql);
+    }
+
+    public static void saveHpsAdvertisementFeedback(String baseEntityId,
+                                                    String dateOfAdvertisementFeedback,
+                                                    String areaWhereAdvertisementFeedbackTookPlace,
+                                                    String numberOfFemalesWhoAttended,
+                                                    String numberOfMalesWhoAttended,
+                                                    String ownsRadioStation,
+                                                    String numberOfRadioOwners,
+                                                    String mobilePhoneRadioListeners,
+                                                    String numberOfWhoListensRadioViaPhone,
+                                                    String radioChannelListened,
+                                                    String selectedHealthEducationTopics,
+                                                    String healthEducationHeard,
+                                                    long lastInteractedWith) {
+
+        String sql = "INSERT INTO ec_hps_advertisement_feedback " +
+                "(id, base_entity_id, date_of_advertisement_feedback, area_where_advertisement_feedback_took_place, " +
+                "number_of_females_who_attended, number_of_males_who_attended, owns_radio_station, number_of_radio_owners, " +
+                "mobile_phone_radio_listeners, number_of_who_listens_radio_via_phone, radio_channel_listened, " +
+                "selected_health_education_topics, health_education_heard, last_interacted_with) " +
+                "VALUES ('" + baseEntityId + "', '" + baseEntityId + "', '" + dateOfAdvertisementFeedback + "', '" +
+                areaWhereAdvertisementFeedbackTookPlace + "', '" + numberOfFemalesWhoAttended + "', '" +
+                numberOfMalesWhoAttended + "', '" + ownsRadioStation + "', '" + numberOfRadioOwners + "', '" +
+                mobilePhoneRadioListeners + "', '" + numberOfWhoListensRadioViaPhone + "', '" + radioChannelListened + "', '" +
+                selectedHealthEducationTopics + "', '" + healthEducationHeard + "', " + lastInteractedWith + ") " +
+                "ON CONFLICT (id) DO UPDATE " +
+                "SET date_of_advertisement_feedback = '" + dateOfAdvertisementFeedback + "', " +
+                "area_where_advertisement_feedback_took_place = '" + areaWhereAdvertisementFeedbackTookPlace + "', " +
+                "number_of_females_who_attended = '" + numberOfFemalesWhoAttended + "', " +
+                "number_of_males_who_attended = '" + numberOfMalesWhoAttended + "', " +
+                "owns_radio_station = '" + ownsRadioStation + "', " +
+                "number_of_radio_owners = '" + numberOfRadioOwners + "', " +
+                "mobile_phone_radio_listeners = '" + mobilePhoneRadioListeners + "', " +
+                "number_of_who_listens_radio_via_phone = '" + numberOfWhoListensRadioViaPhone + "', " +
+                "radio_channel_listened = '" + radioChannelListened + "', " +
+                "selected_health_education_topics = '" + selectedHealthEducationTopics + "', " +
+                "health_education_heard = '" + healthEducationHeard + "', " +
+                "last_interacted_with = " + lastInteractedWith;
+
+        Timber.d("Generated SQL Query: %s", sql);
         updateDB(sql);
     }
 
