@@ -108,7 +108,7 @@ public class HpsDeathRegisterModel {
                 age--;
             }
             return age;
-        } catch (ParseException e) {
+        } catch (Exception e) {
             // Handle exception if date format is invalid
             Timber.e(e);
             return -1;

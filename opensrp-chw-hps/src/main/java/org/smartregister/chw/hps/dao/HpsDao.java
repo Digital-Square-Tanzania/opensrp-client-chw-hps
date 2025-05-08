@@ -304,7 +304,7 @@ public class HpsDao extends AbstractDao {
 
 
     public static List<HpsDeathRegisterModel> getHpsDeathRegisterRecords() {
-        String sql = "SELECT * FROM " + Constants.TABLES.HPS_DEATH_REGISTER;
+        String sql = "SELECT * FROM " + Constants.TABLES.HPS_DEATH_REGISTER+" WHERE is_closed = 0 AND dod IS NOT NULL AND dob IS NOT NULL";
 
         @SuppressLint("Range")
         DataMap<HpsDeathRegisterModel> dataMap = cursor -> {
