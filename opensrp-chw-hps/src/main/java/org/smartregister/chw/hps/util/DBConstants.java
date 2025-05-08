@@ -55,11 +55,24 @@ public class DBConstants {
 
         public static final String CHILD = "ec_child";
 
+        public static final String DATE_OF_ADVERTISEMENT_FEEDBACK = "date_of_advertisement_feedback";
+        public static final String AREA_WHERE_ADVERTISEMENT_FEEDBACK_TOOK_PLACE = "area_where_advertisement_feedback_took_place";
+        public static final String OWNS_RADIO_STATION = "owns_radio_station";
+        public static final String NUMBER_OF_RADIO_OWNERS = "number_of_radio_owners";
+        public static final String MOBILE_PHONE_RADIO_LISTENERS = "mobile_phone_radio_listeners";
+        public static final String NUMBER_OF_WHO_LISTENS_RADIO_VIA_PHONE = "number_of_who_listens_radio_via_phone";
+        public static final String RADIO_CHANNEL_LISTENED = "radio_channel_listened";
+        public static final String LISTEN_ADVERTISEMENT_VIA_RADIO = "listen_advertisement_via_radio";
+        public static final String SELECTED_HEALTH_EDUCATION_TOPICS = "selected_health_education_topics";
+        public static final String HEALTH_EDUCATION_HEARD = "health_education_heard";
+
         public static final String DATE_OF_GATHERING = "date_of_gathering";
 
         public static final String METHOD_OF_EDUCATION_AND_AWARENESS_USED = "method_of_education_and_awareness_used";
 
         public static final String AREA_WHERE_MOBILIZATION_TAKES_PLACE = "area_where_mobilization_takes_place";
+
+        public static final String AREA_WHERE_BROADCAST_EVALUATION_TAKE_PLACE = "area_where_broadcast_evaluation_take_place";
 
         public static final String NUMBER_OF_FEMALES_WHO_ATTENDED = "number_of_females_who_attended";
 

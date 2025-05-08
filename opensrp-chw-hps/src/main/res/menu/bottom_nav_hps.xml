@@ -25,11 +25,17 @@
         android:icon="@drawable/tombstone_death"
         android:title="@string/death_register"
         app:showAsAction="ifRoom" />
+<!--    <item-->
+<!--        android:id="@+id/action_annual_census_register"-->
+<!--        android:enabled="true"-->
+<!--        android:icon="@mipmap/ic_jobaids"-->
+<!--        android:title="@string/hps_annual_census_menu"-->
+<!--        app:showAsAction="ifRoom" />-->
     <item
-        android:id="@+id/action_annual_census_register"
+        android:id="@+id/action_more_items"
         android:enabled="true"
         android:icon="@mipmap/ic_jobaids"
-        android:title="@string/hps_annual_census_menu"
+        android:title="@string/hps_more"
         app:showAsAction="ifRoom" />
 
 </menu>
