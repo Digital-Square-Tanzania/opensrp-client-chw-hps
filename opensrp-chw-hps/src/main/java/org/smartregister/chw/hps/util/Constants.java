@@ -25,7 +25,7 @@ public interface Constants {
         String HPS_MOBILIZATION = "HPS Mobilization";
         String HPS_DEATH_REGISTRATION = "HPS Death Registration";
         String HPS_ANNUAL_CENSUS = "HPS Annual Census";
-
+        String HPS_ADVERTISEMENT_FEEDBACK = "HPS Advertisement Feedback";
     }
 
     interface FORMS {
@@ -35,6 +35,7 @@ public interface Constants {
         String HPS_HOUSEHOLD_VISIT = "hps_household_services";
         String HPS_DEATH_REGISTRATION = "hps_death_registration";
         String HPS_MOBILIZATION = "hps_mobilization";
+        String HPS_ADVERTISEMENT_FEEDBACK = "hps_advertisement_feedback";
         String HPS_ANNUAL_CENSUS = "hps_annual_census";
     }
 
@@ -53,6 +54,7 @@ public interface Constants {
         String HPS_CLIENT_SERVICES = "ec_hps_client_services";
         String HPS_HOUSEHOLD_SERVICES = "ec_hps_household_services";
         String HPS_MOBILIZATION_SESSIONS = "ec_hps_mobilization";
+        String HPS_ADVERTISEMENT_FEEDBACK = "ec_hps_advertisement_feedback";
         String HPS_DEATH_REGISTER = "ec_hps_death_register";
         String HPS_ANNUAL_CENSUS_REGISTER = "ec_hps_annual_census_register";
     }

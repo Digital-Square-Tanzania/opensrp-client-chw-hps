@@ -85,6 +85,7 @@
     <string name="death_register">Rejesta ya Vifo</string>
     <string name="hps_mobilization_sessions">Mazoezi ya uhamasishaji</string>
     <string name="hps_mobilization_sessions_menu">Uhamasishaji</string>
+    <string name="hps_advertisement_feedback_menu">Mrejesho wa Matangazo</string>
     <string name="hps_mobilization_session_details">Taarifa za zoezi la uhamasishaji wa huduma za afya ngazi ya jamii</string>
     <string name="hps_death_registration_details">Taarifa za usajili wa Kifo</string>
     <string name="hps_back_to_all_mobilization_sessions">Rudi  kwenye rejesta ya vifo</string>
@@ -95,6 +96,7 @@
     <string name="hps_back_to_all_annual_census_register">Rudi kwenye orodha ya sensa za mwaka</string>
     <string name="annual_census">Sensa ya mwaka</string>
     <string name="hps_annual_census_menu">Sensa</string>
+    <string name="hps_more">Zaidi</string>
 
     <string name="hps_clients_reached"><![CDATA[<b>Idadi ya wateja waliofikiwa:</b> %s]]></string>
     <string name="hps_annual_census_year"><![CDATA[<b>Mwaka:</b> %s]]></string>
