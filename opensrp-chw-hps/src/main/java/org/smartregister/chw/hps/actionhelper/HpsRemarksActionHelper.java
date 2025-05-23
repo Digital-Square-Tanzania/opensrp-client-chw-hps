@@ -53,7 +53,7 @@ public class HpsRemarksActionHelper implements BaseHpsVisitAction.HpsVisitAction
     public void onPayloadReceived(String jsonPayload) {
         try {
             JSONObject jsonObject = new JSONObject(jsonPayload);
-            remarks = JsonFormUtils.getValue(jsonObject, "hps_remarks");
+            remarks = JsonFormUtils.getValue(jsonObject, "comments");
         } catch (JSONException e) {
             Timber.e(e);
         }
