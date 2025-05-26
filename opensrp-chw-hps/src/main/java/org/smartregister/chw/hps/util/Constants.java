@@ -46,6 +46,8 @@ public interface Constants {
         String HPS_CURATIVE_SERVICES = "hps_curative_services";
         String HPS_REFERRAL_SERVICES = "hps_referral_services";
         String HPS_REMARKS = "hps_remarks";
+        String HPS_DISEASE_SIGNS = "hps_disease_signs";
+
     }
 
     interface TABLES {
