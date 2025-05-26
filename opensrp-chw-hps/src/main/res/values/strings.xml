@@ -31,6 +31,7 @@
     <string name="hps_curative_services">Curative Services</string>
     <string name="hps_referral_services">Referral Services</string>
     <string name="hps_remarks">Remarks</string>
+    <string name="hps_disease_signs">Disease Signs and Symptoms</string>
 
     <string name="optional">Optional</string>
     <string name="error_unable_save_visit">Unable to save visit</string>
