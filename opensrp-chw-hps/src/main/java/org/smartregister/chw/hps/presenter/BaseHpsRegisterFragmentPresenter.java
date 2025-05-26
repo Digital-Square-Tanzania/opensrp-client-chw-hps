@@ -34,7 +34,7 @@ public class BaseHpsRegisterFragmentPresenter implements HpsRegisterFragmentCont
 
     @Override
     public String getMainCondition() {
-        return " "+getMainTable()+".is_closed = 0 AND does_the_client_consent_to_be_enrolled_in_hps_services = 'yes' ";
+        return " "+getMainTable()+".is_closed = 0 AND does_the_client_consent_to_be_enrolled_in_hps_services = 'yes' AND ec_family_member.dod IS NULL ";
     }
 
     @Override

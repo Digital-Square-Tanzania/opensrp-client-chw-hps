@@ -11,6 +11,7 @@ import org.smartregister.chw.hps.HpsLibrary;
 import org.smartregister.chw.hps.R;
 import org.smartregister.chw.hps.actionhelper.HpsClientCriteriaActionHelper;
 import org.smartregister.chw.hps.actionhelper.HpsCurativeServicesActionHelper;
+import org.smartregister.chw.hps.actionhelper.HpsDiseaseSignsActionHelper;
 import org.smartregister.chw.hps.actionhelper.HpsEducationOnBehaviouralChangeActionHelper;
 import org.smartregister.chw.hps.actionhelper.HpsPreventiveServicesActionHelper;
 import org.smartregister.chw.hps.actionhelper.HpsReferralServicesActionHelper;
@@ -68,6 +69,7 @@ public class BaseHpsServiceVisitInteractor extends BaseHpsVisitInteractor {
                 evaluateHpsClientCriteria(details);
                 evaluateHpsEducationOnBehavioralChange(details);
                 evaluateOtherHpsServices(details);
+                evaluateHpsDiseaseSigns(details);
                 evaluateCurativeServices(details);
                 evaluateReferralServices(details);
             } catch (BaseHpsVisitAction.ValidationException e) {
@@ -164,6 +166,18 @@ public class BaseHpsServiceVisitInteractor extends BaseHpsVisitInteractor {
                 .withFormName(Constants.HPS_FOLLOWUP_FORMS.HPS_REMARKS)
                 .build();
         actionList.put(context.getString(R.string.hps_remarks), action);
+    }
+
+    private void evaluateHpsDiseaseSigns(Map<String, List<VisitDetail>> details) throws BaseHpsVisitAction.ValidationException {
+
+        HpsDiseaseSignsActionHelper actionHelper = new HpsDiseaseSignsActionHelper(mContext, memberObject);
+        BaseHpsVisitAction action = getBuilder(context.getString(R.string.hps_disease_signs))
+                .withOptional(false)
+                .withDetails(details)
+                .withHelper(actionHelper)
+                .withFormName(Constants.HPS_FOLLOWUP_FORMS.HPS_DISEASE_SIGNS)
+                .build();
+        actionList.put(context.getString(R.string.hps_disease_signs), action);
     }
 
 

@@ -15,10 +15,10 @@ import java.util.Map;
 
 import timber.log.Timber;
 
-public class HpsRemarksActionHelper implements BaseHpsVisitAction.HpsVisitActionHelper {
+public class HpsDiseaseSignsActionHelper implements BaseHpsVisitAction.HpsVisitActionHelper {
     protected String jsonPayload;
 
-    protected String remarks;
+    protected String diseases_signs;
 
     protected String baseEntityId;
 
@@ -27,7 +27,7 @@ public class HpsRemarksActionHelper implements BaseHpsVisitAction.HpsVisitAction
     protected MemberObject memberObject;
 
 
-    public HpsRemarksActionHelper(Context context, MemberObject memberObject) {
+    public HpsDiseaseSignsActionHelper(Context context, MemberObject memberObject) {
         this.context = context;
         this.memberObject = memberObject;
     }
@@ -41,6 +41,9 @@ public class HpsRemarksActionHelper implements BaseHpsVisitAction.HpsVisitAction
     public String getPreProcessed() {
         try {
             JSONObject jsonObject = new JSONObject(jsonPayload);
+            JSONObject global = jsonObject.getJSONObject("global");
+
+            global.put("gender", memberObject.getGender());
             return jsonObject.toString();
         } catch (JSONException e) {
             Timber.e(e);
@@ -53,7 +56,7 @@ public class HpsRemarksActionHelper implements BaseHpsVisitAction.HpsVisitAction
     public void onPayloadReceived(String jsonPayload) {
         try {
             JSONObject jsonObject = new JSONObject(jsonPayload);
-            remarks = JsonFormUtils.getValue(jsonObject, "comments");
+            diseases_signs = JsonFormUtils.getValue(jsonObject, "has_diseases_signs_and_symptoms");
         } catch (JSONException e) {
             Timber.e(e);
         }
@@ -83,7 +86,7 @@ public class HpsRemarksActionHelper implements BaseHpsVisitAction.HpsVisitAction
     public BaseHpsVisitAction.Status evaluateStatusOnPayload() {
 
 
-        if (StringUtils.isNotBlank(remarks)) {
+        if (StringUtils.isNotBlank(diseases_signs)) {
             return BaseHpsVisitAction.Status.COMPLETED;
         }
         return BaseHpsVisitAction.Status.PENDING;

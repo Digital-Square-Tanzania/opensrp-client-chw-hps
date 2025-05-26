@@ -123,7 +123,38 @@ public class BaseHpsVisitActivity extends SecuredActivity implements BaseHpsVisi
 
     @Override
     public void initializeActions(LinkedHashMap<String, BaseHpsVisitAction> map) {
-        actionList.putAll(map);
+        //Clearing the action List before recreation
+          actionList.clear();
+
+        //Necessary evil to rearrange the actions according to a specific arrangement
+        if (map.containsKey(getString(R.string.client_criteria))){
+          BaseHpsVisitAction clientCriteriaAction = map.get(getString(R.string.client_criteria));
+          actionList.put(getString(R.string.client_criteria), clientCriteriaAction);
+        }
+        if (map.containsKey(getString(R.string.hps_education_on_behavioural_change))){
+            BaseHpsVisitAction educationOnBehaviouralChangeAction = map.get(getString(R.string.hps_education_on_behavioural_change));
+            actionList.put(getString(R.string.hps_education_on_behavioural_change), educationOnBehaviouralChangeAction);
+        }
+        if (map.containsKey(getString(R.string.hps_preventive_services))){
+            BaseHpsVisitAction preventiveServicesAction = map.get(getString(R.string.hps_preventive_services));
+            actionList.put(getString(R.string.hps_preventive_services), preventiveServicesAction);
+        }
+        if (map.containsKey(getString(R.string.hps_curative_services))){
+            BaseHpsVisitAction investigativeServicesAction = map.get(getString(R.string.hps_curative_services));
+            actionList.put(getString(R.string.hps_curative_services), investigativeServicesAction);
+        }
+        if (map.containsKey(getString(R.string.hps_referral_services))){
+            BaseHpsVisitAction referralServicesAction = map.get(getString(R.string.hps_referral_services));
+            actionList.put(getString(R.string.hps_referral_services), referralServicesAction);
+        }
+        if (map.containsKey(getString(R.string.hps_remarks))){
+            BaseHpsVisitAction remarksAction = map.get(getString(R.string.hps_remarks));
+            actionList.put(getString(R.string.hps_remarks), remarksAction);
+        }
+        //====================End of Necessary evil ====================================
+
+//        actionList.putAll(map);
+
         if (mAdapter != null) {
             mAdapter.notifyDataSetChanged();
         }
