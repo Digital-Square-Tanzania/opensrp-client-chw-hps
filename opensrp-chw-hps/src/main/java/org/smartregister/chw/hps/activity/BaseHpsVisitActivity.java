@@ -139,6 +139,10 @@ public class BaseHpsVisitActivity extends SecuredActivity implements BaseHpsVisi
             BaseHpsVisitAction preventiveServicesAction = map.get(getString(R.string.hps_preventive_services));
             actionList.put(getString(R.string.hps_preventive_services), preventiveServicesAction);
         }
+        if (map.containsKey(getString(R.string.hps_disease_signs))) {
+            BaseHpsVisitAction diseaseSigns = map.get(getString(R.string.hps_disease_signs));
+            actionList.put(getString(R.string.hps_disease_signs), diseaseSigns);
+        }
         if (map.containsKey(getString(R.string.hps_curative_services))){
             BaseHpsVisitAction investigativeServicesAction = map.get(getString(R.string.hps_curative_services));
             actionList.put(getString(R.string.hps_curative_services), investigativeServicesAction);
