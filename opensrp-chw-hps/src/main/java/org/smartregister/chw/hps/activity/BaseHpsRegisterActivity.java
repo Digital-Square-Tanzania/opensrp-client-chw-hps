@@ -161,16 +161,17 @@ public class BaseHpsRegisterActivity extends BaseRegisterActivity implements Hps
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 //        super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK && requestCode == Constants.REQUEST_CODE_GET_JSON) {
-
-            try {
-                String jsonString = data.getStringExtra(Constants.JSON_FORM_EXTRA.JSON);
-                JSONObject form = new JSONObject(jsonString);
-                JSONArray fieldsOne = HpsJsonFormUtils.fields(form, Constants.STEP_ONE);
-                updateFormField(fieldsOne, FAMILY_BASE_ENTITY_ID);
-                presenter().saveForm(form.toString());
-            } catch (JSONException e) {
-                Timber.e(e);
-                displayToast(getString(R.string.error_unable_to_save_form));
+            String jsonString = data.getStringExtra(Constants.JSON_FORM_EXTRA.JSON);
+            if (jsonString != null) {
+                try {
+                    JSONObject form = new JSONObject(jsonString);
+                    JSONArray fieldsOne = HpsJsonFormUtils.fields(form, Constants.STEP_ONE);
+                    updateFormField(fieldsOne, FAMILY_BASE_ENTITY_ID);
+                    presenter().saveForm(form.toString());
+                } catch (Exception e) {
+                    Timber.e(e);
+                    displayToast(getString(R.string.error_unable_to_save_form));
+                }
             }
             startClientProcessing();
         }
