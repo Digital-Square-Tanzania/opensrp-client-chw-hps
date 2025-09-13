@@ -19,8 +19,8 @@ import org.smartregister.chw.hps.model.BaseHpsVisitAction;
 import org.smartregister.chw.hps.repository.VisitRepository;
 import org.smartregister.chw.hps.util.AppExecutors;
 import org.smartregister.chw.hps.util.Constants;
-import org.smartregister.chw.hps.util.NCUtils;
 import org.smartregister.chw.hps.util.HpsJsonFormUtils;
+import org.smartregister.chw.hps.util.NCUtils;
 import org.smartregister.chw.hps.util.VisitUtils;
 import org.smartregister.clientandeventmodel.Event;
 import org.smartregister.clientandeventmodel.Obs;
@@ -60,13 +60,14 @@ public class BaseHpsVisitInteractor implements BaseHpsVisitContract.Interactor {
     public BaseHpsVisitInteractor() {
         this(new AppExecutors(), HpsLibrary.getInstance().getEcSyncHelper());
     }
+
     public BaseHpsVisitInteractor(String visitType) {
         this(new AppExecutors(), HpsLibrary.getInstance().getEcSyncHelper());
         this.visitType = visitType;
     }
 
     protected String getCurrentVisitType() {
-        if(StringUtils.isNotBlank(visitType)){
+        if (StringUtils.isNotBlank(visitType)) {
             return visitType;
         }
         return Constants.EVENT_TYPE.HPS_CLIENT_ENROLLMENT;
@@ -169,7 +170,7 @@ public class BaseHpsVisitInteractor implements BaseHpsVisitContract.Interactor {
     protected String submitVisit(final boolean editMode,
                                  final String memberID,
                                  final Map<String,
-                                 BaseHpsVisitAction> map,
+                                         BaseHpsVisitAction> map,
                                  String parentEventType) throws Exception {
         // create a map of the different types
 
@@ -263,12 +264,13 @@ public class BaseHpsVisitInteractor implements BaseHpsVisitContract.Interactor {
             baseEvent.setFormSubmissionId(HpsJsonFormUtils.generateRandomUUIDString());
             HpsJsonFormUtils.tagEvent(allSharedPreferences, baseEvent);
 
-            String visitID = (editMode) ?
+            Visit lastVisit = visitRepository().getLatestVisit(memberID, getEncounterType());
+            String visitID = (editMode && lastVisit != null) ?
                     visitRepository().getLatestVisit(memberID, getEncounterType()).getVisitId() :
                     HpsJsonFormUtils.generateRandomUUIDString();
 
             // reset database
-            if (editMode) {
+            if (editMode && lastVisit != null) {
                 deleteProcessedVisit(visitID, memberID);
                 deleteOldVisit(visitID);
             }
