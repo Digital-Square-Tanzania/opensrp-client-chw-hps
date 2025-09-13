@@ -74,7 +74,8 @@ public class BaseHpsVisitActivity extends SecuredActivity implements BaseHpsVisi
             isEditMode = getIntent().getBooleanExtra(Constants.ACTIVITY_PAYLOAD.EDIT_MODE, false);
             baseEntityID = getIntent().getStringExtra(Constants.ACTIVITY_PAYLOAD.BASE_ENTITY_ID);
             profileType = getIntent().getStringExtra(Constants.ACTIVITY_PAYLOAD.PROFILE_TYPE);
-            memberObject = getMemberObject(baseEntityID);
+            if (memberObject == null)
+                memberObject = getMemberObject(baseEntityID);
 
         }
 
@@ -124,18 +125,18 @@ public class BaseHpsVisitActivity extends SecuredActivity implements BaseHpsVisi
     @Override
     public void initializeActions(LinkedHashMap<String, BaseHpsVisitAction> map) {
         //Clearing the action List before recreation
-          actionList.clear();
+        actionList.clear();
 
         //Necessary evil to rearrange the actions according to a specific arrangement
-        if (map.containsKey(getString(R.string.client_criteria))){
-          BaseHpsVisitAction clientCriteriaAction = map.get(getString(R.string.client_criteria));
-          actionList.put(getString(R.string.client_criteria), clientCriteriaAction);
+        if (map.containsKey(getString(R.string.client_criteria))) {
+            BaseHpsVisitAction clientCriteriaAction = map.get(getString(R.string.client_criteria));
+            actionList.put(getString(R.string.client_criteria), clientCriteriaAction);
         }
-        if (map.containsKey(getString(R.string.hps_education_on_behavioural_change))){
+        if (map.containsKey(getString(R.string.hps_education_on_behavioural_change))) {
             BaseHpsVisitAction educationOnBehaviouralChangeAction = map.get(getString(R.string.hps_education_on_behavioural_change));
             actionList.put(getString(R.string.hps_education_on_behavioural_change), educationOnBehaviouralChangeAction);
         }
-        if (map.containsKey(getString(R.string.hps_preventive_services))){
+        if (map.containsKey(getString(R.string.hps_preventive_services))) {
             BaseHpsVisitAction preventiveServicesAction = map.get(getString(R.string.hps_preventive_services));
             actionList.put(getString(R.string.hps_preventive_services), preventiveServicesAction);
         }
@@ -143,15 +144,15 @@ public class BaseHpsVisitActivity extends SecuredActivity implements BaseHpsVisi
             BaseHpsVisitAction diseaseSigns = map.get(getString(R.string.hps_disease_signs));
             actionList.put(getString(R.string.hps_disease_signs), diseaseSigns);
         }
-        if (map.containsKey(getString(R.string.hps_curative_services))){
+        if (map.containsKey(getString(R.string.hps_curative_services))) {
             BaseHpsVisitAction investigativeServicesAction = map.get(getString(R.string.hps_curative_services));
             actionList.put(getString(R.string.hps_curative_services), investigativeServicesAction);
         }
-        if (map.containsKey(getString(R.string.hps_referral_services))){
+        if (map.containsKey(getString(R.string.hps_referral_services))) {
             BaseHpsVisitAction referralServicesAction = map.get(getString(R.string.hps_referral_services));
             actionList.put(getString(R.string.hps_referral_services), referralServicesAction);
         }
-        if (map.containsKey(getString(R.string.hps_remarks))){
+        if (map.containsKey(getString(R.string.hps_remarks))) {
             BaseHpsVisitAction remarksAction = map.get(getString(R.string.hps_remarks));
             actionList.put(getString(R.string.hps_remarks), remarksAction);
         }
