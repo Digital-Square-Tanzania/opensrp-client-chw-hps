@@ -32,7 +32,7 @@ import timber.log.Timber;
 public class BaseHpsServiceVisitInteractor extends BaseHpsVisitInteractor {
 
     private final HpsLibrary hpsLibrary;
-    private final LinkedHashMap<String, BaseHpsVisitAction> actionList;
+    protected final LinkedHashMap<String, BaseHpsVisitAction> actionList;
     protected BaseHpsVisitContract.InteractorCallBack callBack;
     protected AppExecutors appExecutors;
     String visitType;
