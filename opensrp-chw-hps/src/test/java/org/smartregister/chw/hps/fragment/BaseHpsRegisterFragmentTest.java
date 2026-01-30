@@ -28,7 +28,8 @@ public class BaseHpsRegisterFragmentTest {
         Whitebox.invokeMethod(baseTestRegisterFragment, "openProfile", client);
         PowerMockito.mockStatic(BaseHpsProfileActivity.class);
         BaseHpsProfileActivity.startProfileActivity(null, null);
-        PowerMockito.verifyStatic(times(1));
+        PowerMockito.verifyStatic(BaseHpsProfileActivity.class, times(1));
+        BaseHpsProfileActivity.startProfileActivity(null, null);
 
     }
 }
