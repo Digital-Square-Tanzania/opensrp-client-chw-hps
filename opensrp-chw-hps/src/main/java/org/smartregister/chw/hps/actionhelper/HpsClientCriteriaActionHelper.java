@@ -81,9 +81,7 @@ public class HpsClientCriteriaActionHelper implements BaseHpsVisitAction.HpsVisi
 
             global.put("sex", memberObject.getGender());
 
-            int age = new Period(new DateTime(memberObject.getAge()),
-                    new DateTime()).getYears();
-            global.put("age", age);
+            global.put("age", memberObject.getAge());
             return jsonObject.toString();
         } catch (JSONException e) {
             Timber.e(e);
