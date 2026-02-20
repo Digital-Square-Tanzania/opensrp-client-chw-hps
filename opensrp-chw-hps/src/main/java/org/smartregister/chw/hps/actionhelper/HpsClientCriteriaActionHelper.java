@@ -46,6 +46,22 @@ public class HpsClientCriteriaActionHelper implements BaseHpsVisitAction.HpsVisi
         this.memberObject = memberObject;
     }
 
+    private String normalizeSex(String sex) {
+        if (StringUtils.isBlank(sex)) {
+            return "";
+        }
+
+        if ("male".equalsIgnoreCase(sex) || "m".equalsIgnoreCase(sex)) {
+            return "male";
+        }
+
+        if ("female".equalsIgnoreCase(sex) || "f".equalsIgnoreCase(sex)) {
+            return "female";
+        }
+
+        return sex;
+    }
+
     /**
      * This method will modify the json form after being loaded
      * @param jsonPayload the json form
@@ -79,7 +95,7 @@ public class HpsClientCriteriaActionHelper implements BaseHpsVisitAction.HpsVisi
 
             JSONObject global = jsonObject.getJSONObject("global");
 
-            global.put("sex", memberObject.getGender());
+            global.put("sex", normalizeSex(memberObject.getGender()));
 
             global.put("age", memberObject.getAge());
             return jsonObject.toString();
