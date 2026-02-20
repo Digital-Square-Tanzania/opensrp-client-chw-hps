@@ -94,6 +94,8 @@ public interface Constants {
         String FAMILY_PLANNING_PILLS = "family_planning_pills";
         String IRON_FOLIC_TABLETS = "iron_folic_tablets";
         String HIV_SELF_TEST_KITS = "hiv_self_test_kits";
+        String TYPE_OF_EDUCATION_PROVIDED = "type_of_education_provided";
+
 
     }
 
