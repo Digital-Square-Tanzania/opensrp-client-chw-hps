@@ -88,11 +88,13 @@ public interface Constants {
         String HPS_PROFILE = "hps_profile";
     }
 
-    interface AGE_GENDER_ELIGIBILITY {
-        String FIELD_PREVENTIVE_SERVICES_ABOVE_5_BELOW_18 = "preventive_services_above_5_years_below_18_years";
-        String FIELD_PREVENTIVE_SERVICES_ABOVE_18 = "preventive_services_above_18_years";
-        String OPTION_FAMILY_PLANNING_PILLS = "family_planning_pills";
-        String OPTION_IRON_FOLIC_TABLETS = "iron_folic_tablets";
+    interface OPTIONS_FIELDS {
+        String PREVENTIVE_SERVICES_ABOVE_5_BELOW_18 = "preventive_services_above_5_years_below_18_years";
+        String PREVENTIVE_SERVICES_ABOVE_18 = "preventive_services_above_18_years";
+        String FAMILY_PLANNING_PILLS = "family_planning_pills";
+        String IRON_FOLIC_TABLETS = "iron_folic_tablets";
+        String HIV_SELF_TEST_KITS = "hiv_self_test_kits";
+
     }
 
 }

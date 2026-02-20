@@ -4,10 +4,11 @@ import static com.vijay.jsonwizard.constants.JsonFormConstants.FIELDS;
 import static com.vijay.jsonwizard.constants.JsonFormConstants.KEY;
 import static com.vijay.jsonwizard.constants.JsonFormConstants.VALUE;
 import static org.smartregister.AllConstants.OPTIONS;
-import static org.smartregister.chw.hps.util.Constants.AGE_GENDER_ELIGIBILITY.FIELD_PREVENTIVE_SERVICES_ABOVE_18;
-import static org.smartregister.chw.hps.util.Constants.AGE_GENDER_ELIGIBILITY.FIELD_PREVENTIVE_SERVICES_ABOVE_5_BELOW_18;
-import static org.smartregister.chw.hps.util.Constants.AGE_GENDER_ELIGIBILITY.OPTION_FAMILY_PLANNING_PILLS;
-import static org.smartregister.chw.hps.util.Constants.AGE_GENDER_ELIGIBILITY.OPTION_IRON_FOLIC_TABLETS;
+import static org.smartregister.chw.hps.util.Constants.OPTIONS_FIELDS.HIV_SELF_TEST_KITS;
+import static org.smartregister.chw.hps.util.Constants.OPTIONS_FIELDS.PREVENTIVE_SERVICES_ABOVE_18;
+import static org.smartregister.chw.hps.util.Constants.OPTIONS_FIELDS.PREVENTIVE_SERVICES_ABOVE_5_BELOW_18;
+import static org.smartregister.chw.hps.util.Constants.OPTIONS_FIELDS.FAMILY_PLANNING_PILLS;
+import static org.smartregister.chw.hps.util.Constants.OPTIONS_FIELDS.IRON_FOLIC_TABLETS;
 import static org.smartregister.client.utils.constants.JsonFormConstants.STEP1;
 
 import android.content.Context;
@@ -64,8 +65,14 @@ public class HpsPreventiveServicesActionHelper implements BaseHpsVisitAction.Hps
 
                 if (!isFemaleAndAtLeast12()) {
                     JSONArray fieldsArray = jsonObject.getJSONObject(STEP1).getJSONArray(FIELDS);
-                    removeRestrictedOptions(fieldsArray, FIELD_PREVENTIVE_SERVICES_ABOVE_5_BELOW_18);
-                    removeRestrictedOptions(fieldsArray, FIELD_PREVENTIVE_SERVICES_ABOVE_18);
+                    removeRestrictedOptions(fieldsArray, PREVENTIVE_SERVICES_ABOVE_5_BELOW_18);
+                    removeRestrictedOptions(fieldsArray, PREVENTIVE_SERVICES_ABOVE_18);
+                }
+
+                if (isAgeBelow18()) {
+                    JSONArray fieldsArray = jsonObject.getJSONObject(STEP1).getJSONArray(FIELDS);
+                    removeOptionByKey(fieldsArray, PREVENTIVE_SERVICES_ABOVE_5_BELOW_18, HIV_SELF_TEST_KITS);
+                    removeOptionByKey(fieldsArray, PREVENTIVE_SERVICES_ABOVE_18, HIV_SELF_TEST_KITS);
                 }
             }
             return jsonObject.toString();
@@ -81,9 +88,13 @@ public class HpsPreventiveServicesActionHelper implements BaseHpsVisitAction.Hps
                 && "female".equalsIgnoreCase(memberObject.getGender());
     }
 
+    private boolean isAgeBelow18() {
+        return memberObject != null && memberObject.getAge() < 18;
+    }
+
     private void removeRestrictedOptions(JSONArray fieldsArray, String fieldKey) throws JSONException {
-        removeOptionByKey(fieldsArray, fieldKey, OPTION_FAMILY_PLANNING_PILLS);
-        removeOptionByKey(fieldsArray, fieldKey, OPTION_IRON_FOLIC_TABLETS);
+        removeOptionByKey(fieldsArray, fieldKey, FAMILY_PLANNING_PILLS);
+        removeOptionByKey(fieldsArray, fieldKey, IRON_FOLIC_TABLETS);
     }
 
     private void removeOptionByKey(JSONArray fieldsArray, String fieldKey, String optionKey) throws JSONException {
@@ -149,8 +160,16 @@ public class HpsPreventiveServicesActionHelper implements BaseHpsVisitAction.Hps
             if (!isFemaleAndAtLeast12()) {
                 for (int i = valuesList.size() - 1; i >= 0; i--) {
                     String selectedKey = valuesList.get(i);
-                    if (OPTION_FAMILY_PLANNING_PILLS.equals(selectedKey)
-                            || OPTION_IRON_FOLIC_TABLETS.equals(selectedKey)) {
+                    if (FAMILY_PLANNING_PILLS.equals(selectedKey)
+                            || IRON_FOLIC_TABLETS.equals(selectedKey)) {
+                        valuesList.remove(i);
+                    }
+                }
+            }
+
+            if (isAgeBelow18()) {
+                for (int i = valuesList.size() - 1; i >= 0; i--) {
+                    if (HIV_SELF_TEST_KITS.equals(valuesList.get(i))) {
                         valuesList.remove(i);
                     }
                 }
