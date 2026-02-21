@@ -8,8 +8,6 @@ import static org.smartregister.client.utils.constants.JsonFormConstants.STEP1;
 import android.content.Context;
 
 import org.apache.commons.lang3.StringUtils;
-import org.joda.time.DateTime;
-import org.joda.time.Period;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -55,18 +53,20 @@ public class HpsCurativeServicesActionHelper implements BaseHpsVisitAction.HpsVi
 
             global.put("gender", memberObject.getGender());
 
-            // Check age for client to have MUAC option
-            int age = new Period(new DateTime(memberObject.getAge()),
-                    new DateTime()).getYears();
+            // memberObject.getAge() already returns age in years.
+            int ageYears = memberObject.getAge();
+            global.put("age", ageYears);
             //Get key field and options
             JSONObject testConducted = JsonFormUtils.getFieldJSONObject(fieldsArray, "diseases_test_conducted");
             JSONArray testConductedOptions = testConducted.getJSONArray(OPTIONS);
 
-            if (age >= 5) {
+            // MUAC should be displayed for clients aged 0-5 years only.
+            if (ageYears > 5) {
                 for (int i = 0; i < testConductedOptions.length(); i++) {
                     JSONObject option = testConductedOptions.getJSONObject(i);
                     if (option.getString(KEY).equals("arm_circumference")) {
                         testConductedOptions.remove(i);
+                        break;
                     }
                 }
             }
@@ -75,11 +75,12 @@ public class HpsCurativeServicesActionHelper implements BaseHpsVisitAction.HpsVi
             JSONObject treatmentProvided = JsonFormUtils.getFieldJSONObject(fieldsArray, "treatment_provided");
             JSONArray treatmentProvidedOptions = treatmentProvided.getJSONArray(OPTIONS);
 
-            if (age >= 5) {
+            if (ageYears > 5) {
                 for (int i = 0; i < treatmentProvidedOptions.length(); i++) {
                     JSONObject option = treatmentProvidedOptions.getJSONObject(i);
                     if (option.getString(KEY).equals("food_supplements")) {
                         treatmentProvidedOptions.remove(i);
+                        break;
                     }
                 }
             }
