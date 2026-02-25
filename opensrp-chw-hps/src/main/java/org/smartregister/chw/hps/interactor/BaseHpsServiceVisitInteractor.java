@@ -2,11 +2,11 @@ package org.smartregister.chw.hps.interactor;
 
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
 import org.apache.commons.lang3.StringUtils;
+import org.json.JSONObject;
 import org.smartregister.chw.hps.HpsLibrary;
 import org.smartregister.chw.hps.R;
 import org.smartregister.chw.hps.actionhelper.HpsClientCriteriaActionHelper;
@@ -22,6 +22,7 @@ import org.smartregister.chw.hps.domain.VisitDetail;
 import org.smartregister.chw.hps.model.BaseHpsVisitAction;
 import org.smartregister.chw.hps.util.AppExecutors;
 import org.smartregister.chw.hps.util.Constants;
+import org.smartregister.chw.hps.util.JsonFormUtils;
 import org.smartregister.sync.helper.ECSyncHelper;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -134,7 +135,11 @@ public class BaseHpsServiceVisitInteractor extends BaseHpsVisitInteractor {
 
     private void evaluateCurativeServices(Map<String, List<VisitDetail>> details) throws BaseHpsVisitAction.ValidationException {
 
-        HpsCurativeServicesActionHelper actionHelper = new HpsCurativeServicesActionHelper(mContext, memberObject);
+        HpsCurativeServicesActionHelper actionHelper = new HpsCurativeServicesActionHelper(
+                mContext,
+                memberObject,
+                this::getLatestDiseaseSignsPayloadFromAction
+        );
         BaseHpsVisitAction action = getBuilder(context.getString(R.string.hps_curative_services))
                 .withOptional(false)
                 .withDetails(details)
@@ -142,6 +147,25 @@ public class BaseHpsServiceVisitInteractor extends BaseHpsVisitInteractor {
                 .withFormName(Constants.HPS_FOLLOWUP_FORMS.HPS_CURATIVE_SERVICES)
                 .build();
         actionList.put(context.getString(R.string.hps_curative_services), action);
+    }
+
+    private String getLatestDiseaseSignsPayloadFromAction() {
+        try {
+            BaseHpsVisitAction diseaseSignsAction = actionList.get(context.getString(R.string.hps_disease_signs));
+            if (diseaseSignsAction == null || StringUtils.isBlank(diseaseSignsAction.getJsonPayload())) {
+                return null;
+            }
+
+            JSONObject diseaseSignsJsonPayload = new JSONObject(diseaseSignsAction.getJsonPayload());
+            String hasDiseaseSigns = JsonFormUtils.getValue(diseaseSignsJsonPayload, Constants.HPS_DISEASE_SIGNS_FIELDS.HAS_DISEASE_SIGNS_AND_SYMPTOMS);
+            if (StringUtils.isBlank(hasDiseaseSigns)) {
+                return null;
+            }
+            return diseaseSignsAction.getJsonPayload();
+        } catch (Exception e) {
+            Timber.e(e);
+        }
+        return null;
     }
 
     private void evaluateReferralServices(Map<String, List<VisitDetail>> details) throws BaseHpsVisitAction.ValidationException {

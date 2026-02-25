@@ -31,6 +31,7 @@ import org.smartregister.chw.hps.interactor.BaseHpsVisitInteractor;
 import org.smartregister.chw.hps.model.BaseHpsVisitAction;
 import org.smartregister.chw.hps.presenter.BaseHpsVisitPresenter;
 import org.smartregister.chw.hps.util.Constants;
+import org.smartregister.chw.hps.util.JsonFormUtils;
 import org.smartregister.view.activity.SecuredActivity;
 
 import java.text.MessageFormat;
@@ -219,6 +220,7 @@ public class BaseHpsVisitActivity extends SecuredActivity implements BaseHpsVisi
 
     @Override
     public void startForm(BaseHpsVisitAction hpsHomeVisitAction) {
+        refreshCurativeServicesPayload(hpsHomeVisitAction);
         current_action = hpsHomeVisitAction.getTitle();
 
         if (StringUtils.isNotBlank(hpsHomeVisitAction.getJsonPayload())) {
@@ -233,6 +235,30 @@ public class BaseHpsVisitActivity extends SecuredActivity implements BaseHpsVisi
         } else {
             String locationId = HpsLibrary.getInstance().context().allSharedPreferences().getPreference(AllConstants.CURRENT_LOCATION_ID);
             presenter().startForm(hpsHomeVisitAction.getFormName(), memberObject.getBaseEntityId(), locationId);
+        }
+    }
+
+    private void refreshCurativeServicesPayload(BaseHpsVisitAction hpsHomeVisitAction) {
+        if (hpsHomeVisitAction == null
+                || !Constants.HPS_FOLLOWUP_FORMS.HPS_CURATIVE_SERVICES.equalsIgnoreCase(hpsHomeVisitAction.getFormName())
+                || hpsHomeVisitAction.getHpsVisitActionHelper() == null) {
+            return;
+        }
+
+        try {
+            if (StringUtils.isNotBlank(hpsHomeVisitAction.getJsonPayload())) {
+                JSONObject existingPayload = new JSONObject(hpsHomeVisitAction.getJsonPayload());
+                if (StringUtils.isNotBlank(JsonFormUtils.getValue(existingPayload, Constants.HPS_CURATIVE_SERVICES_FIELDS.TREATMENT_PROVIDED))) {
+                    return;
+                }
+            }
+
+            String refreshedJsonPayload = hpsHomeVisitAction.getHpsVisitActionHelper().getPreProcessed();
+            if (StringUtils.isNotBlank(refreshedJsonPayload)) {
+                hpsHomeVisitAction.setProcessedJsonPayload(refreshedJsonPayload);
+            }
+        } catch (Exception e) {
+            Timber.e(e);
         }
     }
 

@@ -88,4 +88,62 @@ public interface Constants {
         String HPS_PROFILE = "hps_profile";
     }
 
+    interface OPTIONS_FIELDS {
+        String PREVENTIVE_SERVICES_ABOVE_5_BELOW_18 = "preventive_services_above_5_years_below_18_years";
+        String PREVENTIVE_SERVICES_ABOVE_18 = "preventive_services_above_18_years";
+        String FAMILY_PLANNING_PILLS = "family_planning_pills";
+        String IRON_FOLIC_TABLETS = "iron_folic_tablets";
+        String HIV_SELF_TEST_KITS = "hiv_self_test_kits";
+        String TYPE_OF_EDUCATION_PROVIDED = "type_of_education_provided";
+        String DISEASE_SIGNS_MALE = "diseases_signs_and_symptoms_male";
+        String DISEASE_SIGNS_FEMALE = "diseases_signs_and_symptoms_female";
+        String CHILD_EXCESSIVE_CRYING = "child_excessive_crying";
+
+
+    }
+
+    interface JSON_FORM_KEYS {
+        String GLOBAL = "global";
+    }
+
+    interface HPS_DISEASE_SIGNS_FIELDS {
+        String HAS_DISEASE_SIGNS_AND_SYMPTOMS = "has_diseases_signs_and_symptoms";
+        String SYMPTOMS = "symptoms";
+        String DISEASE_SIGNS_AND_SYMPTOMS = "diseases_signs_and_symptoms";
+        String MALARIA_MRDT = "malaria_mrdt";
+        String MALARIA_MRDT_RESULT = "malaria_mrdt_result";
+        String MUAC_STATUS = "muac_status";
+        String MUAC_MM = "muac_mm";
+        String ARM_CIRCUMFERENCE = "arm_circumference";
+    }
+
+    interface HPS_SYMPTOM_KEYS {
+        String NAUSEA_AND_VOMITING = "nausea_and_vomiting";
+        String DIARRHOEA = "diarrhoea";
+        String DIFFICULT_IN_BREATHING = "difficult_in_breathing";
+        String COUGH = "cough";
+        String HEADACHE = "headache";
+        String FEVER = "fever";
+    }
+
+    interface HPS_CURATIVE_SERVICES_FIELDS {
+        String DISEASE_TESTS_CONDUCTED = "diseases_test_conducted";
+        String TREATMENT_PROVIDED = "treatment_provided";
+        String PROVISION_OF_CURATIVE_SERVICES = "provision_of_curative_services";
+        String TREATMENT_PROVIDED_MALARIA_POSITIVE = "treatment_provided_malaria_positive";
+    }
+
+    interface HPS_TREATMENT_OPTION_KEYS {
+        String ORAL_REHYDRATION_SOLUTIONS = "oral_rehydration_solutions";
+        String PED_ZINC = "ped_zinc";
+        String AMOXICILLIN_DT = "amoxicillin_dt";
+        String MALARIA_DRUGS = "malaria_drugs";
+        String ANTI_PAIN = "anti_pain";
+        String FOOD_SUPPLEMENTS = "food_supplements";
+    }
+
+    interface HPS_THRESHOLDS {
+        double MUAC_MALNOURISHED_THRESHOLD_MM = 125d;
+    }
+
 }
