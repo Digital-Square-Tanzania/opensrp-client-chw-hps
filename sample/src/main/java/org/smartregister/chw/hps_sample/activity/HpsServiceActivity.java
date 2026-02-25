@@ -29,7 +29,7 @@ public class HpsServiceActivity extends BaseHpsVisitActivity {
 
     @Override
     protected void registerPresenter() {
-        presenter = new BaseHpsVisitPresenter(memberObject, this, new HpsServiceVisitInteractor(Constants.EVENT_TYPE.HPS_SERVICES));
+        presenter = new BaseHpsVisitPresenter(memberObject, this, new HpsServiceVisitInteractor(Constants.EVENT_TYPE.HPS_CLIENT_ENROLLMENT));
     }
 
     @Override

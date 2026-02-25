@@ -116,7 +116,7 @@ public class HpsMemberProfileActivity extends BaseHpsProfileActivity {
                 JSONObject form = new JSONObject(jsonString);
                 String encounterType = form.getString(Constants.JSON_FORM_EXTRA.EVENT_TYPE);
                 switch (encounterType) {
-                    case Constants.EVENT_TYPE.HPS_SERVICES:
+                    case Constants.EVENT_TYPE.HPS_CLIENT_ENROLLMENT:
                         serviceVisit = new Visit();
                         serviceVisit.setProcessed(true);
                         serviceVisit.setJson(jsonString);
