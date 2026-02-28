@@ -262,7 +262,9 @@ public class HpsCurativeServicesActionHelper implements BaseHpsVisitAction.HpsVi
                 return sourceContext.symptoms.contains(Constants.HPS_SYMPTOM_KEYS.DIFFICULT_IN_BREATHING)
                         || sourceContext.symptoms.contains(Constants.HPS_SYMPTOM_KEYS.COUGH);
             case Constants.HPS_TREATMENT_OPTION_KEYS.MALARIA_DRUGS:
-                return !sourceContext.hasKnownMalariaResult || sourceContext.malariaPositive;
+                // Option-level visibility cannot react in-form; keep ALu available
+                // and enforce correctness in postProcess using malaria_mrdt_result.
+                return true;
             case Constants.HPS_TREATMENT_OPTION_KEYS.ANTI_PAIN:
                 return sourceContext.symptoms.contains(Constants.HPS_SYMPTOM_KEYS.HEADACHE)
                         || sourceContext.symptoms.contains(Constants.HPS_SYMPTOM_KEYS.FEVER);
@@ -368,7 +370,9 @@ public class HpsCurativeServicesActionHelper implements BaseHpsVisitAction.HpsVi
 
         sourceContext.symptoms = splitToSet(symptoms);
         sourceContext.malariaPositive = isMalariaMrdtPositive(effectiveMalariaResult);
-        sourceContext.hasKnownMalariaResult = StringUtils.isNotBlank(effectiveMalariaResult);
+        // Treat only the current curative form selection as "known" for UI gating.
+        // Historical/source values can be stale and should not lock out ALu selection.
+        sourceContext.hasKnownMalariaResult = StringUtils.isNotBlank(currentCurativeMalariaResult);
         sourceContext.rutfEligible = isRutfEligible(muacStatus, muacMm, armCircumference);
         sourceContext.hasData = StringUtils.isNotBlank(hasDiseaseSigns);
         return sourceContext;
