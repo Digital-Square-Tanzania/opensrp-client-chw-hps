@@ -311,6 +311,7 @@ public class HpsDao extends AbstractDao {
         @SuppressLint("Range")
         DataMap<HpsAdvertisementFeedbackModel> dataMap = cursor -> {
             HpsAdvertisementFeedbackModel model = new HpsAdvertisementFeedbackModel();
+            model.setSessionId(cursor.getString(cursor.getColumnIndex("id")));
             model.setDateOfAdvertisementFeedback(cursor.getString(cursor.getColumnIndex("date_of_advertisement_feedback")));
             model.setAreaWhereAdvertisementFeedbackTookPlace(cursor.getString(cursor.getColumnIndex("area_where_advertisement_feedback_took_place")));
             model.setNumberOfFemalesWhoAttended(cursor.getString(cursor.getColumnIndex("number_of_females_who_attended")));
