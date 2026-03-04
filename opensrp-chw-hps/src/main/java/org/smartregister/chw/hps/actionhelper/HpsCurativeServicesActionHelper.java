@@ -45,20 +45,12 @@ public class HpsCurativeServicesActionHelper implements BaseHpsVisitAction.HpsVi
 
     protected Map<String, List<VisitDetail>> details;
 
-    public HpsCurativeServicesActionHelper(Context context, MemberObject memberObject) {
-        this(context, memberObject, null, null);
-    }
+
 
     public HpsCurativeServicesActionHelper(Context context,
                                            MemberObject memberObject,
                                            DiseaseSignsPayloadProvider diseaseSignsPayloadProvider) {
         this(context, memberObject, null, diseaseSignsPayloadProvider);
-    }
-
-    public HpsCurativeServicesActionHelper(Context context,
-                                           MemberObject memberObject,
-                                           String diseaseSignsPayload) {
-        this(context, memberObject, diseaseSignsPayload, null);
     }
 
     private HpsCurativeServicesActionHelper(Context context,
