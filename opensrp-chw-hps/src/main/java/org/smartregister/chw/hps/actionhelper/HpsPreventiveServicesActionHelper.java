@@ -65,8 +65,8 @@ public class HpsPreventiveServicesActionHelper implements BaseHpsVisitAction.Hps
 
                 if (!isFemaleAndAtLeast12()) {
                     JSONArray fieldsArray = jsonObject.getJSONObject(STEP1).getJSONArray(FIELDS);
-                    removeRestrictedOptions(fieldsArray, PREVENTIVE_SERVICES_ABOVE_5_BELOW_18);
-                    removeRestrictedOptions(fieldsArray, PREVENTIVE_SERVICES_ABOVE_18);
+                    removeOptionByKey(fieldsArray,PREVENTIVE_SERVICES_ABOVE_5_BELOW_18,FAMILY_PLANNING_PILLS);
+                    removeOptionByKey(fieldsArray,PREVENTIVE_SERVICES_ABOVE_18,IRON_FOLIC_TABLETS);
                 }
 
                 if (isAgeBelow18()) {
@@ -92,10 +92,6 @@ public class HpsPreventiveServicesActionHelper implements BaseHpsVisitAction.Hps
         return memberObject != null && memberObject.getAge() < 18;
     }
 
-    private void removeRestrictedOptions(JSONArray fieldsArray, String fieldKey) throws JSONException {
-        removeOptionByKey(fieldsArray, fieldKey, FAMILY_PLANNING_PILLS);
-        removeOptionByKey(fieldsArray, fieldKey, IRON_FOLIC_TABLETS);
-    }
 
     private void removeOptionByKey(JSONArray fieldsArray, String fieldKey, String optionKey) throws JSONException {
         JSONObject fieldObject = JsonFormUtils.getFieldJSONObject(fieldsArray, fieldKey);
