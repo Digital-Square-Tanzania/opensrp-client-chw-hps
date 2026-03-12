@@ -45,20 +45,12 @@ public class HpsCurativeServicesActionHelper implements BaseHpsVisitAction.HpsVi
 
     protected Map<String, List<VisitDetail>> details;
 
-    public HpsCurativeServicesActionHelper(Context context, MemberObject memberObject) {
-        this(context, memberObject, null, null);
-    }
+
 
     public HpsCurativeServicesActionHelper(Context context,
                                            MemberObject memberObject,
                                            DiseaseSignsPayloadProvider diseaseSignsPayloadProvider) {
         this(context, memberObject, null, diseaseSignsPayloadProvider);
-    }
-
-    public HpsCurativeServicesActionHelper(Context context,
-                                           MemberObject memberObject,
-                                           String diseaseSignsPayload) {
-        this(context, memberObject, diseaseSignsPayload, null);
     }
 
     private HpsCurativeServicesActionHelper(Context context,
@@ -159,6 +151,73 @@ public class HpsCurativeServicesActionHelper implements BaseHpsVisitAction.HpsVi
 
     @Override
     public String postProcess(String jsonPayload) {
+        try {
+            JSONObject form = new JSONObject(jsonPayload);
+            String malariaResult = StringUtils.trimToNull(
+                    JsonFormUtils.getValue(form, Constants.HPS_DISEASE_SIGNS_FIELDS.MALARIA_MRDT_RESULT)
+            );
+
+            if (isMalariaMrdtPositive(malariaResult)) {
+                return null;
+            }
+
+            JSONArray fieldsArray = form.getJSONObject(STEP1).getJSONArray(FIELDS);
+            JSONObject treatmentProvided = JsonFormUtils.getFieldJSONObject(
+                    fieldsArray,
+                    Constants.HPS_CURATIVE_SERVICES_FIELDS.TREATMENT_PROVIDED
+            );
+            if (treatmentProvided == null) {
+                return null;
+            }
+
+            boolean updated = false;
+
+            JSONArray options = treatmentProvided.optJSONArray(OPTIONS);
+            if (options != null) {
+                for (int i = 0; i < options.length(); i++) {
+                    JSONObject option = options.optJSONObject(i);
+                    if (option != null
+                            && Constants.HPS_TREATMENT_OPTION_KEYS.MALARIA_DRUGS.equals(option.optString(KEY))
+                            && option.optBoolean("value", false)) {
+                        option.put("value", false);
+                        updated = true;
+                    }
+                }
+            }
+
+            Object valueObject = treatmentProvided.opt("value");
+            if (valueObject instanceof JSONArray) {
+                JSONArray filteredValues = new JSONArray();
+                JSONArray values = (JSONArray) valueObject;
+                for (int i = 0; i < values.length(); i++) {
+                    String value = values.optString(i);
+                    if (!Constants.HPS_TREATMENT_OPTION_KEYS.MALARIA_DRUGS.equals(value)) {
+                        filteredValues.put(value);
+                    } else {
+                        updated = true;
+                    }
+                }
+                if (updated) {
+                    treatmentProvided.put("value", filteredValues);
+                }
+            } else if (valueObject instanceof String) {
+                String value = (String) valueObject;
+                if (StringUtils.contains(value, Constants.HPS_TREATMENT_OPTION_KEYS.MALARIA_DRUGS)) {
+                    String filtered = Arrays.stream(value.split(","))
+                            .map(String::trim)
+                            .filter(StringUtils::isNotBlank)
+                            .filter(v -> !Constants.HPS_TREATMENT_OPTION_KEYS.MALARIA_DRUGS.equals(v))
+                            .reduce((a, b) -> a + ", " + b)
+                            .orElse("");
+                    treatmentProvided.put("value", filtered);
+                    updated = true;
+                }
+            }
+
+            return updated ? form.toString() : null;
+        } catch (Exception e) {
+            Timber.e(e);
+        }
         return null;
     }
 
@@ -195,7 +254,9 @@ public class HpsCurativeServicesActionHelper implements BaseHpsVisitAction.HpsVi
                 return sourceContext.symptoms.contains(Constants.HPS_SYMPTOM_KEYS.DIFFICULT_IN_BREATHING)
                         || sourceContext.symptoms.contains(Constants.HPS_SYMPTOM_KEYS.COUGH);
             case Constants.HPS_TREATMENT_OPTION_KEYS.MALARIA_DRUGS:
-                return sourceContext.malariaPositive;
+                // Option-level visibility cannot react in-form; keep ALu available
+                // and enforce correctness in postProcess using malaria_mrdt_result.
+                return true;
             case Constants.HPS_TREATMENT_OPTION_KEYS.ANTI_PAIN:
                 return sourceContext.symptoms.contains(Constants.HPS_SYMPTOM_KEYS.HEADACHE)
                         || sourceContext.symptoms.contains(Constants.HPS_SYMPTOM_KEYS.FEVER);
@@ -296,16 +357,37 @@ public class HpsCurativeServicesActionHelper implements BaseHpsVisitAction.HpsVi
                                                          String muacMm,
                                                          String armCircumference) {
         DiseaseSignsContext sourceContext = new DiseaseSignsContext();
+        String currentCurativeMalariaResult = getCurrentCurativeMalariaResult();
+        String effectiveMalariaResult = firstNonBlank(currentCurativeMalariaResult, malariaMrdt);
+
         sourceContext.symptoms = splitToSet(symptoms);
-        sourceContext.malariaPositive = isMalariaMrdtPositive(malariaMrdt);
+        sourceContext.malariaPositive = isMalariaMrdtPositive(effectiveMalariaResult);
+        // Treat only the current curative form selection as "known" for UI gating.
+        // Historical/source values can be stale and should not lock out ALu selection.
+        sourceContext.hasKnownMalariaResult = StringUtils.isNotBlank(currentCurativeMalariaResult);
         sourceContext.rutfEligible = isRutfEligible(muacStatus, muacMm, armCircumference);
         sourceContext.hasData = StringUtils.isNotBlank(hasDiseaseSigns);
         return sourceContext;
     }
 
+    private String getCurrentCurativeMalariaResult() {
+        try {
+            if (StringUtils.isBlank(this.jsonPayload)) {
+                return null;
+            }
+
+            JSONObject currentPayload = new JSONObject(this.jsonPayload);
+            return StringUtils.trimToNull(JsonFormUtils.getValue(currentPayload, Constants.HPS_DISEASE_SIGNS_FIELDS.MALARIA_MRDT_RESULT));
+        } catch (Exception e) {
+            Timber.e(e);
+        }
+        return null;
+    }
+
     private boolean isMalariaMrdtPositive(String malariaMrdt) {
         String normalized = normalizeToken(malariaMrdt);
-        return normalized.contains("positive");
+        return normalized.contains("positive")
+                || "positive_mrdt".equals(normalized);
     }
 
     private boolean isRutfEligible(String muacStatus, String muacMm, String armCircumference) {
@@ -441,6 +523,7 @@ public class HpsCurativeServicesActionHelper implements BaseHpsVisitAction.HpsVi
         private boolean hasData;
         private Set<String> symptoms = new HashSet<>();
         private boolean malariaPositive;
+        private boolean hasKnownMalariaResult;
         private boolean rutfEligible;
     }
 }
