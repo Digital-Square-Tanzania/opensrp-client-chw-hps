@@ -212,48 +212,7 @@ public class HpsPreventiveServicesActionHelper implements BaseHpsVisitAction.Hps
 
     @Override
     public String postProcess(String jsonPayload) {
-        try {
-            JSONObject jsonObject = new JSONObject(jsonPayload);
-            JSONArray fieldsArray = getFieldsArray(jsonObject);
-            if (fieldsArray == null) {
-                return jsonObject.toString();
-            }
-
-            JSONObject preventiveServices = JsonFormUtils.getFieldJSONObject(fieldsArray, PREVENTIVE_SERVICES);
-            if (preventiveServices == null) {
-                return jsonObject.toString();
-            }
-
-            String value = preventiveServices.optString(VALUE, "[]");
-
-            List<String> valuesList = new ArrayList<>();
-            JSONArray valuesArray = new JSONArray(value);
-
-            for (int i = 0; i < valuesArray.length(); i++) {
-                Object item = valuesArray.get(i);
-                if (item instanceof JSONObject) {
-                    valuesList.add(((JSONObject) item).optString(KEY));
-                } else if (item instanceof String) {
-                    valuesList.add((String) item);
-                }
-            }
-
-            if (memberObject != null) {
-                Set<String> allowedKeys = getAllowedPreventiveServiceKeys(memberObject);
-                for (int i = valuesList.size() - 1; i >= 0; i--) {
-                    if (!allowedKeys.contains(valuesList.get(i))) {
-                        valuesList.remove(i);
-                    }
-                }
-            }
-
-            preventiveServices.put(JsonFormConstants.VALUE, valuesList.toString());
-            return jsonObject.toString();
-        } catch (Exception e) {
-            Timber.e(e);
-            return null;
-        }
-
+        return null;
     }
 
     @Override
