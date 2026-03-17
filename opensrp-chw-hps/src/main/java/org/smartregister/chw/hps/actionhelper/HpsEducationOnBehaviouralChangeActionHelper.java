@@ -138,7 +138,7 @@ public class HpsEducationOnBehaviouralChangeActionHelper implements BaseHpsVisit
     public void onPayloadReceived(String jsonPayload) {
         try {
             JSONObject jsonObject = new JSONObject(jsonPayload);
-            healthEducationProvided = JsonFormUtils.getValue(jsonObject, "provision_of_preventive_services");
+            healthEducationProvided = JsonFormUtils.getValue(jsonObject, "provision_of_health_education");
         } catch (JSONException e) {
             Timber.e(e);
         }
