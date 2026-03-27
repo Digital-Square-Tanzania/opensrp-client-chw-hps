@@ -26,10 +26,10 @@
         android:title="@string/death_register"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_more_items"
+        android:id="@+id/action_annual_census_register"
         android:enabled="true"
-        android:icon="@drawable/more_horiz"
-        android:title="@string/hps_more"
+        android:icon="@mipmap/ic_add_family"
+        android:title="@string/hps_annual_census_menu"
         app:showAsAction="ifRoom" />
 
 </menu>

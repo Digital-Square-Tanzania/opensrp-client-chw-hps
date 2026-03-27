@@ -19,6 +19,7 @@ import org.smartregister.chw.hps.util.JsonFormUtils;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -26,6 +27,14 @@ import java.util.Set;
 import timber.log.Timber;
 
 public class HpsCurativeServicesActionHelper implements BaseHpsVisitAction.HpsVisitActionHelper {
+    private static final String VALUE = "value";
+    private static final String TEXT = "text";
+    private static final String OPENMRS_ENTITY = "openmrs_entity";
+    private static final String OPENMRS_ENTITY_ID = "openmrs_entity_id";
+    private static final String OPENMRS_ENTITY_PARENT = "openmrs_entity_parent";
+    private static final String MALARIA_DRUGS_TREATMENT = "malaria_drugs_treatment";
+    private static final String TREATMENT_PROVIDED_GUARD = "treatment_provided_guard";
+
     public interface DiseaseSignsPayloadProvider {
         String getDiseaseSignsPayload();
     }
@@ -119,6 +128,11 @@ public class HpsCurativeServicesActionHelper implements BaseHpsVisitAction.HpsVi
                 treatmentProvided.put(OPTIONS, filteredTreatmentOptions);
             }
 
+            JSONObject malariaTreatment = JsonFormUtils.getFieldJSONObject(fieldsArray, MALARIA_DRUGS_TREATMENT);
+            if (treatmentProvided != null && malariaTreatment != null) {
+                syncMalariaTreatmentSelection(treatmentProvided, malariaTreatment);
+            }
+
             return jsonObject.toString();
         } catch (JSONException e) {
             Timber.e(e);
@@ -153,65 +167,50 @@ public class HpsCurativeServicesActionHelper implements BaseHpsVisitAction.HpsVi
     public String postProcess(String jsonPayload) {
         try {
             JSONObject form = new JSONObject(jsonPayload);
+            JSONArray fieldsArray = form.getJSONObject(STEP1).getJSONArray(FIELDS);
             String malariaResult = StringUtils.trimToNull(
                     JsonFormUtils.getValue(form, Constants.HPS_DISEASE_SIGNS_FIELDS.MALARIA_MRDT_RESULT)
             );
 
-            if (isMalariaMrdtPositive(malariaResult)) {
-                return null;
-            }
-
-            JSONArray fieldsArray = form.getJSONObject(STEP1).getJSONArray(FIELDS);
             JSONObject treatmentProvided = JsonFormUtils.getFieldJSONObject(
                     fieldsArray,
                     Constants.HPS_CURATIVE_SERVICES_FIELDS.TREATMENT_PROVIDED
             );
-            if (treatmentProvided == null) {
+            JSONObject malariaTreatment = JsonFormUtils.getFieldJSONObject(fieldsArray, MALARIA_DRUGS_TREATMENT);
+            JSONObject guardField = JsonFormUtils.getFieldJSONObject(fieldsArray, TREATMENT_PROVIDED_GUARD);
+            if (treatmentProvided == null && malariaTreatment == null && guardField == null) {
                 return null;
             }
 
             boolean updated = false;
+            boolean malariaPositive = isMalariaMrdtPositive(malariaResult);
 
-            JSONArray options = treatmentProvided.optJSONArray(OPTIONS);
-            if (options != null) {
-                for (int i = 0; i < options.length(); i++) {
-                    JSONObject option = options.optJSONObject(i);
-                    if (option != null
-                            && Constants.HPS_TREATMENT_OPTION_KEYS.MALARIA_DRUGS.equals(option.optString(KEY))
-                            && option.optBoolean("value", false)) {
-                        option.put("value", false);
-                        updated = true;
-                    }
+            if (treatmentProvided != null) {
+                Set<String> selectedTreatments = extractSelectedKeys(treatmentProvided);
+                boolean malariaSelected = selectedTreatments.remove(Constants.HPS_TREATMENT_OPTION_KEYS.MALARIA_DRUGS);
+
+                if (malariaTreatment != null) {
+                    malariaSelected = extractSelectedKeys(malariaTreatment).contains(Constants.HPS_TREATMENT_OPTION_KEYS.MALARIA_DRUGS)
+                            || malariaSelected;
                 }
+
+                if (malariaPositive && malariaSelected) {
+                    ensureMalariaOption(treatmentProvided);
+                    selectedTreatments.add(Constants.HPS_TREATMENT_OPTION_KEYS.MALARIA_DRUGS);
+                } else {
+                    updated |= removeOptionByKey(treatmentProvided.optJSONArray(OPTIONS), Constants.HPS_TREATMENT_OPTION_KEYS.MALARIA_DRUGS);
+                }
+
+                updated |= writeSelections(treatmentProvided, selectedTreatments);
             }
 
-            Object valueObject = treatmentProvided.opt("value");
-            if (valueObject instanceof JSONArray) {
-                JSONArray filteredValues = new JSONArray();
-                JSONArray values = (JSONArray) valueObject;
-                for (int i = 0; i < values.length(); i++) {
-                    String value = values.optString(i);
-                    if (!Constants.HPS_TREATMENT_OPTION_KEYS.MALARIA_DRUGS.equals(value)) {
-                        filteredValues.put(value);
-                    } else {
-                        updated = true;
-                    }
-                }
-                if (updated) {
-                    treatmentProvided.put("value", filteredValues);
-                }
-            } else if (valueObject instanceof String) {
-                String value = (String) valueObject;
-                if (StringUtils.contains(value, Constants.HPS_TREATMENT_OPTION_KEYS.MALARIA_DRUGS)) {
-                    String filtered = Arrays.stream(value.split(","))
-                            .map(String::trim)
-                            .filter(StringUtils::isNotBlank)
-                            .filter(v -> !Constants.HPS_TREATMENT_OPTION_KEYS.MALARIA_DRUGS.equals(v))
-                            .reduce((a, b) -> a + ", " + b)
-                            .orElse("");
-                    treatmentProvided.put("value", filtered);
-                    updated = true;
-                }
+            if (malariaTreatment != null) {
+                updated |= writeSelections(malariaTreatment, new LinkedHashSet<>());
+            }
+
+            if (guardField != null && guardField.has(VALUE)) {
+                guardField.remove(VALUE);
+                updated = true;
             }
 
             return updated ? form.toString() : null;
@@ -219,6 +218,157 @@ public class HpsCurativeServicesActionHelper implements BaseHpsVisitAction.HpsVi
             Timber.e(e);
         }
         return null;
+    }
+
+    private boolean syncMalariaTreatmentSelection(JSONObject treatmentProvided, JSONObject malariaTreatment) throws JSONException {
+        Set<String> selectedTreatments = extractSelectedKeys(treatmentProvided);
+        boolean malariaSelected = selectedTreatments.remove(Constants.HPS_TREATMENT_OPTION_KEYS.MALARIA_DRUGS);
+
+        if (!malariaSelected) {
+            malariaSelected = extractSelectedKeys(malariaTreatment).contains(Constants.HPS_TREATMENT_OPTION_KEYS.MALARIA_DRUGS);
+        }
+
+        if (!malariaSelected) {
+            malariaSelected = splitToSet(getValueFromDetails(Constants.HPS_CURATIVE_SERVICES_FIELDS.TREATMENT_PROVIDED))
+                    .contains(Constants.HPS_TREATMENT_OPTION_KEYS.MALARIA_DRUGS);
+        }
+
+        boolean updated = removeOptionByKey(treatmentProvided.optJSONArray(OPTIONS), Constants.HPS_TREATMENT_OPTION_KEYS.MALARIA_DRUGS);
+        updated |= writeSelections(treatmentProvided, selectedTreatments);
+
+        if (malariaSelected) {
+            updated |= writeSelections(malariaTreatment, singleSelection(Constants.HPS_TREATMENT_OPTION_KEYS.MALARIA_DRUGS));
+        } else {
+            updated |= writeSelections(malariaTreatment, new LinkedHashSet<>());
+        }
+
+        return updated;
+    }
+
+    private Set<String> extractSelectedKeys(JSONObject field) {
+        LinkedHashSet<String> selectedKeys = new LinkedHashSet<>();
+        if (field == null) {
+            return selectedKeys;
+        }
+
+        Object value = field.opt(VALUE);
+        if (value instanceof JSONArray) {
+            JSONArray valueArray = (JSONArray) value;
+            for (int i = 0; i < valueArray.length(); i++) {
+                addToken(selectedKeys, valueArray.optString(i));
+            }
+        } else if (value instanceof String) {
+            String[] parts = ((String) value).split(",");
+            for (String part : parts) {
+                addToken(selectedKeys, part);
+            }
+        }
+
+        JSONArray options = field.optJSONArray(OPTIONS);
+        if (options != null) {
+            for (int i = 0; i < options.length(); i++) {
+                JSONObject option = options.optJSONObject(i);
+                if (option != null && option.optBoolean(VALUE, false)) {
+                    addToken(selectedKeys, option.optString(KEY));
+                }
+            }
+        }
+
+        return selectedKeys;
+    }
+
+    private boolean writeSelections(JSONObject field, Set<String> selectedKeys) throws JSONException {
+        if (field == null) {
+            return false;
+        }
+
+        boolean updated = false;
+        JSONArray options = field.optJSONArray(OPTIONS);
+        if (options != null) {
+            for (int i = 0; i < options.length(); i++) {
+                JSONObject option = options.optJSONObject(i);
+                if (option == null) {
+                    continue;
+                }
+
+                boolean shouldBeSelected = selectedKeys.contains(option.optString(KEY));
+                if (option.optBoolean(VALUE, false) != shouldBeSelected) {
+                    option.put(VALUE, shouldBeSelected);
+                    updated = true;
+                }
+            }
+        }
+
+        if (selectedKeys.isEmpty()) {
+            if (field.has(VALUE)) {
+                field.remove(VALUE);
+                updated = true;
+            }
+        } else {
+            field.put(VALUE, toJsonArray(selectedKeys));
+            updated = true;
+        }
+
+        return updated;
+    }
+
+    private JSONArray toJsonArray(Set<String> values) {
+        JSONArray array = new JSONArray();
+        for (String value : values) {
+            array.put(value);
+        }
+        return array;
+    }
+
+    private void addToken(Set<String> selectedKeys, String token) {
+        String cleaned = StringUtils.trimToNull(token);
+        if (cleaned != null) {
+            selectedKeys.add(cleaned);
+        }
+    }
+
+    private Set<String> singleSelection(String value) {
+        LinkedHashSet<String> selection = new LinkedHashSet<>();
+        selection.add(value);
+        return selection;
+    }
+
+    private boolean removeOptionByKey(JSONArray options, String optionKey) {
+        if (options == null || StringUtils.isBlank(optionKey)) {
+            return false;
+        }
+
+        for (int i = options.length() - 1; i >= 0; i--) {
+            JSONObject option = options.optJSONObject(i);
+            if (option != null && optionKey.equals(option.optString(KEY))) {
+                options.remove(i);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void ensureMalariaOption(JSONObject treatmentField) throws JSONException {
+        JSONArray options = treatmentField.optJSONArray(OPTIONS);
+        if (options == null) {
+            options = new JSONArray();
+            treatmentField.put(OPTIONS, options);
+        }
+
+        for (int i = 0; i < options.length(); i++) {
+            JSONObject option = options.optJSONObject(i);
+            if (option != null && Constants.HPS_TREATMENT_OPTION_KEYS.MALARIA_DRUGS.equals(option.optString(KEY))) {
+                return;
+            }
+        }
+
+        JSONObject option = new JSONObject();
+        option.put(KEY, Constants.HPS_TREATMENT_OPTION_KEYS.MALARIA_DRUGS);
+        option.put(TEXT, "Malaria drugs (ALu)");
+        option.put(OPENMRS_ENTITY_PARENT, "");
+        option.put(OPENMRS_ENTITY, "concept");
+        option.put(OPENMRS_ENTITY_ID, Constants.HPS_TREATMENT_OPTION_KEYS.MALARIA_DRUGS);
+        options.put(option);
     }
 
     @Override
@@ -254,9 +404,7 @@ public class HpsCurativeServicesActionHelper implements BaseHpsVisitAction.HpsVi
                 return sourceContext.symptoms.contains(Constants.HPS_SYMPTOM_KEYS.DIFFICULT_IN_BREATHING)
                         || sourceContext.symptoms.contains(Constants.HPS_SYMPTOM_KEYS.COUGH);
             case Constants.HPS_TREATMENT_OPTION_KEYS.MALARIA_DRUGS:
-                // Option-level visibility cannot react in-form; keep ALu available
-                // and enforce correctness in postProcess using malaria_mrdt_result.
-                return true;
+                return sourceContext.malariaPositive;
             case Constants.HPS_TREATMENT_OPTION_KEYS.ANTI_PAIN:
                 return sourceContext.symptoms.contains(Constants.HPS_SYMPTOM_KEYS.HEADACHE)
                         || sourceContext.symptoms.contains(Constants.HPS_SYMPTOM_KEYS.FEVER);
