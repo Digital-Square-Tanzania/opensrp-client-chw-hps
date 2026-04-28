@@ -406,8 +406,7 @@ public class HpsCurativeServicesActionHelper implements BaseHpsVisitAction.HpsVi
             case Constants.HPS_TREATMENT_OPTION_KEYS.MALARIA_DRUGS:
                 return sourceContext.malariaPositive;
             case Constants.HPS_TREATMENT_OPTION_KEYS.ANTI_PAIN:
-                return sourceContext.symptoms.contains(Constants.HPS_SYMPTOM_KEYS.HEADACHE)
-                        || sourceContext.symptoms.contains(Constants.HPS_SYMPTOM_KEYS.FEVER);
+                return !sourceContext.symptoms.isEmpty();
             case Constants.HPS_TREATMENT_OPTION_KEYS.FOOD_SUPPLEMENTS:
                 return sourceContext.rutfEligible;
             default:
