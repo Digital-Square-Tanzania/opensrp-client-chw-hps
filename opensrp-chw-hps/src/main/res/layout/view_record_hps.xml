@@ -223,6 +223,9 @@
                 android:layout_alignParentEnd="true"
                 android:padding="10dp"
                 android:text="@string/edit"
+                android:maxWidth="120dp"
+                android:maxLines="5"
+                android:ellipsize="end"
                 android:textColor="@color/primary" />
 
         </RelativeLayout>

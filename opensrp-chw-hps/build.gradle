@@ -42,7 +42,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            testCoverageEnabled true
+            testCoverageEnabled false
         }
         debug {
             debuggable
@@ -122,7 +122,9 @@ publishing {
             groupId 'org.smartregister' // Library groupID
             artifactId getArtificatId()
             version getVersionName()
-            artifact("$buildDir/outputs/aar/opensrp-chw-hps-release.aar")
+            artifact("$buildDir/outputs/aar/opensrp-chw-hps-release.aar") {
+                builtBy { tasks.findByName('assembleRelease') }
+            }
 
             //This is to carter for transitive dependencies within this library
             pom.withXml {
@@ -148,9 +150,12 @@ publishing {
                         }
                     }
                 }
-                configurations.compile.getDependencies().each { dep -> addDependency(dep, 'compile') }
-                configurations.api.getDependencies().each { dep -> addDependency(dep, 'compile') }
-                configurations.implementation.getDependencies().each { dep -> addDependency(dep, 'compile') }
+                ['compile', 'api', 'implementation'].each { configurationName ->
+                    def configuration = configurations.findByName(configurationName)
+                    if (configuration != null) {
+                        configuration.getDependencies().each { dep -> addDependency(dep, 'compile') }
+                    }
+                }
             }
 
         }

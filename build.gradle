@@ -6,8 +6,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.11.0"
-        classpath 'com.android.tools.build:gradle:4.2.2'
+        classpath 'com.android.tools.build:gradle:7.1.0'
     }
 }
 
@@ -31,7 +30,7 @@ subprojects {
 
     group = 'org.smartregister'
 
-    ext.androidToolsBuildGradle     = '4.2.2'
+    ext.androidToolsBuildGradle     = '7.1.0'
     ext.androidBuildToolsVersion    = '30.0.3'
     ext.androidMinSdkVersion        = 21
     ext.androidCompileSdkVersion    = 33
@@ -64,7 +63,6 @@ subprojects {
 
 apply plugin : 'java'
 apply plugin : 'build-dashboard'
-apply plugin: 'io.codearte.nexus-staging'
 
 buildDashboard {
     reports.html.setDestination(file("build/"))
