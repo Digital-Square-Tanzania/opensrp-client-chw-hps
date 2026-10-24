@@ -3,23 +3,22 @@
     android:id="@+id/register_columns"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white">
+    android:minHeight="68dp"
+    android:background="@color/white"
+    android:foreground="?android:attr/selectableItemBackground">
 
     <LinearLayout
         android:id="@+id/patient_column"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="@dimen/register_list_item_margin"
-        android:layout_marginLeft="@dimen/register_list_item_margin"
-        android:layout_marginTop="@dimen/register_list_top_bottom_margin"
-        android:layout_marginEnd="@dimen/register_list_item_margin"
-        android:layout_marginRight="@dimen/register_list_item_margin"
-        android:layout_marginBottom="@dimen/register_list_top_bottom_margin"
-        android:layout_toStartOf="@+id/due_button_wrapper"
-        android:layout_toLeftOf="@+id/due_button_wrapper"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        android:layout_toStartOf="@+id/hps_register_row_chevron"
         android:orientation="vertical">
 
         <org.smartregister.view.customcontrols.CustomFontTextView
@@ -34,53 +33,61 @@
             android:textSize="@dimen/register_list_title_size"
             android:visibility="gone" />
 
-        <org.smartregister.view.customcontrols.CustomFontTextView
+        <TextView
             android:id="@+id/patient_name_age"
-            style="@style/CustomFontTextViewStyle.ClientList"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:text="Patient Name, Age"
-            android:textColor="@color/text_black"
-            android:textSize="@dimen/register_list_title_size" />
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/hps_register_text"
+            android:textSize="14.5sp" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="3dp"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/text_view_village"
-                style="@style/CustomFontTextViewStyle.ClientList.Light"
+            <TextView
+                android:id="@+id/text_view_gender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lavingtone #445"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/register_member_village_size" />
+                android:textColor="@color/primary"
+                android:textSize="12sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/register_dot_separator_margin"
+                android:importantForAccessibility="no"
+                android:paddingStart="6dp"
+                android:paddingEnd="6dp"
                 android:text="@string/interpunct"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/hps_register_secondary"
+                android:textSize="12sp" />
 
-            <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/text_view_gender"
-                style="@style/CustomFontTextViewStyle.ClientList.Light"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/text_view_village"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Male"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/register_member_village_size" />
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="@color/hps_register_secondary"
+                android:textSize="12sp" />
         </LinearLayout>
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/hps_register_row_chevron"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="14dp"
+        android:contentDescription="@null"
+        android:importantForAccessibility="no"
+        android:src="@drawable/hps_register_row_chevron" />
 
     <LinearLayout
         android:id="@+id/due_button_wrapper"

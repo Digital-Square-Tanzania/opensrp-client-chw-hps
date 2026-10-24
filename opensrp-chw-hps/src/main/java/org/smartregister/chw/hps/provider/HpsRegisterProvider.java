@@ -91,10 +91,8 @@ public class HpsRegisterProvider implements RecyclerViewProvider<HpsRegisterProv
             viewHolder.dueButton.setOnClickListener(onClickListener);
             viewHolder.dueButton.setTag(pc);
             viewHolder.dueButton.setTag(R.id.VIEW_ID, BaseHpsRegisterFragment.FOLLOW_UP_VISIT);
-            viewHolder.registerColumns.setOnClickListener(onClickListener);
 
             viewHolder.registerColumns.setOnClickListener(v -> viewHolder.patientColumn.performClick());
-            viewHolder.registerColumns.setOnClickListener(v -> viewHolder.dueButton.performClick());
 
         } catch (Exception e) {
             Timber.e(e);
