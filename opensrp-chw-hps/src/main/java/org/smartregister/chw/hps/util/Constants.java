@@ -13,6 +13,8 @@ public interface Constants {
         String JSON = "json";
         String ENCOUNTER_TYPE = "encounter_type";
         String EVENT_TYPE = "eventType";
+        String DELETE_EVENT_ID = "deleted_event_id";
+        String DELETE_FORM_SUBMISSION_ID = "deleted_form_submission_id";
     }
 
     interface EVENT_TYPE {
@@ -21,6 +23,7 @@ public interface Constants {
         String HPS_CLIENT_FOLLOW_UP_VISIT = "HPS Client Follow-up Visit";
         String HPS_HOUSEHOLD_VISIT = "HPS Household Services";
         String VOID_EVENT = "Void Event";
+        String DELETE_EVENT = "Delete Event";
         String CLOSE_HPS_SERVICE = "Close Hps Service";
         String HPS_MOBILIZATION = "HPS Mobilization";
         String HPS_DEATH_REGISTRATION = "HPS Death Registration";
