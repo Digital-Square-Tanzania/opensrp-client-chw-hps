@@ -27,4 +27,7 @@
 
     <color name="grey">#9e9e9e</color>
 
+    <color name="hps_register_text">#0F1A26</color>
+    <color name="hps_register_secondary">#6A7686</color>
+    <color name="hps_register_chevron">#C0C0C0</color>
 </resources>

@@ -5,11 +5,14 @@ import static org.mockito.Mockito.validateMockitoUsage;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -17,9 +20,11 @@ import org.mockito.internal.stubbing.answers.DoesNothing;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.reflect.Whitebox;
 import org.smartregister.chw.hps.R;
+import org.smartregister.chw.hps.fragment.BaseHpsRegisterFragment;
 import org.smartregister.chw.hps.util.DBConstants;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -110,6 +115,35 @@ public class BaseHpsRegisterProviderTest {
         Assert.assertEquals(resources.getString(R.string.male), Whitebox.invokeMethod(provider, "updateMemberGender", commonPersonObjectClient));
     }
 
+
+    @Test
+    public void rowBackgroundOpensTheClientProfile() {
+        Activity activity = Mockito.mock(Activity.class);
+        Resources resources = Mockito.mock(Resources.class);
+        Mockito.when(activity.getResources()).thenReturn(resources);
+        Mockito.when(resources.getString(R.string.male)).thenReturn("Male");
+        HpsRegisterProvider provider = new HpsRegisterProvider(activity, listener, listener, Collections.emptySet());
+        Map<String, String> columns = new HashMap<>();
+        columns.put(DBConstants.KEY.FIRST_NAME, "Test");
+        columns.put(DBConstants.KEY.LAST_NAME, "Client");
+        columns.put(DBConstants.KEY.DOB, "1990-01-01");
+        columns.put(DBConstants.KEY.GENDER, "Male");
+        Mockito.when(commonPersonObjectClient.getColumnmaps()).thenReturn(columns);
+        viewHolder.patientName = Mockito.mock(TextView.class);
+        viewHolder.textViewGender = Mockito.mock(TextView.class);
+        viewHolder.textViewVillage = Mockito.mock(TextView.class);
+        viewHolder.patientColumn = Mockito.mock(View.class);
+        viewHolder.registerColumns = Mockito.mock(View.class);
+        viewHolder.dueButton = Mockito.mock(Button.class);
+
+        provider.getView(null, commonPersonObjectClient, viewHolder);
+
+        ArgumentCaptor<View.OnClickListener> click = ArgumentCaptor.forClass(View.OnClickListener.class);
+        Mockito.verify(viewHolder.registerColumns).setOnClickListener(click.capture());
+        click.getValue().onClick(viewHolder.registerColumns);
+        Mockito.verify(viewHolder.patientColumn).performClick();
+        Mockito.verify(viewHolder.patientColumn).setTag(R.id.VIEW_ID, BaseHpsRegisterFragment.CLICK_VIEW_NORMAL);
+    }
 
     @Test(expected = Exception.class)
     public void getView() throws Exception {
