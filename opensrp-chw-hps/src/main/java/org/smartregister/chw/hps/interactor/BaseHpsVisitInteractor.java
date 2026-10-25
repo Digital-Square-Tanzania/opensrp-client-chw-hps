@@ -37,6 +37,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.UUID;
 
 import timber.log.Timber;
 
@@ -311,24 +312,27 @@ public class BaseHpsVisitInteractor implements BaseHpsVisitContract.Interactor {
         AllSharedPreferences allSharedPreferences = HpsLibrary.getInstance().context().allSharedPreferences();
         Visit visit = visitRepository().getVisitByVisitId(visitID);
         if (visit == null || !visit.getProcessed()) return;
-        //TODO: implement if needed
+
+        Event processedEvent = HpsDao.getEventByFormSubmissionId(visit.getFormSubmissionId());
+        if (processedEvent == null) return;
+
+        deleteSavedEvent(allSharedPreferences, baseEntityId, processedEvent.getEventId(), processedEvent.getFormSubmissionId(), "event");
+        HpsLibrary.getInstance().visitRepository().deleteVisit(visitID);
     }
 
     protected void deleteSavedEvent(AllSharedPreferences allSharedPreferences, String baseEntityId, String eventId, String formSubmissionId, String type) {
         Event event = (Event) new Event()
                 .withBaseEntityId(baseEntityId)
                 .withEventDate(new Date())
-                .withEventType(Constants.EVENT_TYPE.VOID_EVENT)
+                .withEventType(Constants.EVENT_TYPE.DELETE_EVENT)
                 .withLocationId(HpsJsonFormUtils.locationId(allSharedPreferences))
                 .withProviderId(allSharedPreferences.fetchRegisteredANM())
                 .withEntityType(type)
-                .withFormSubmissionId(formSubmissionId)
-                .withVoided(true)
-                .withVoider(new User(null, allSharedPreferences.fetchRegisteredANM(), null, null))
-                .withVoidReason("Edited Event")
-                .withDateVoided(new Date());
+                .withFormSubmissionId(UUID.randomUUID().toString())
+                .withDateCreated(new Date());
 
-        event.setSyncStatus(SyncStatus.PENDING.value());
+        event.addDetails(Constants.JSON_FORM_EXTRA.DELETE_EVENT_ID, eventId);
+        event.addDetails(Constants.JSON_FORM_EXTRA.DELETE_FORM_SUBMISSION_ID, formSubmissionId);
 
         try {
             syncHelper.addEvent(event.getBaseEntityId(), new JSONObject(HpsJsonFormUtils.gson.toJson(event)));

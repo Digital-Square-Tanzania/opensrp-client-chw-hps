@@ -2,12 +2,16 @@ package org.smartregister.chw.hps.dao;
 
 import android.annotation.SuppressLint;
 
-import org.smartregister.chw.hps.domain.HpsAnnualCensusRegisterModel;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.smartregister.chw.hps.HpsLibrary;
 import org.smartregister.chw.hps.domain.HpsAdvertisementFeedbackModel;
+import org.smartregister.chw.hps.domain.HpsAnnualCensusRegisterModel;
 import org.smartregister.chw.hps.domain.HpsDeathRegisterModel;
 import org.smartregister.chw.hps.domain.HpsMobilizationSessionModel;
 import org.smartregister.chw.hps.domain.MemberObject;
 import org.smartregister.chw.hps.util.Constants;
+import org.smartregister.clientandeventmodel.Event;
 import org.smartregister.dao.AbstractDao;
 
 import java.text.SimpleDateFormat;
@@ -193,7 +197,7 @@ public class HpsDao extends AbstractDao {
                 "  mr.id " +
                 " FROM ec_family f " +
                 " INNER JOIN ec_family_member fh ON fh.base_entity_id = f.family_head " +
-                " INNER JOIN " + Constants.TABLES.HPS_HOUSEHOLD_REGISTER +" mr " + "  ON mr.base_entity_id = f.base_entity_id " +
+                " INNER JOIN " + Constants.TABLES.HPS_HOUSEHOLD_REGISTER + " mr " + "  ON mr.base_entity_id = f.base_entity_id " +
                 " LEFT JOIN ec_family_member pcg " + "  ON pcg.base_entity_id = f.primary_caregiver " +
                 " WHERE mr.is_closed = 0 AND f.base_entity_id = '" + baseEntityID + "'";
         List<MemberObject> res = readData(sql, memberObjectMap);
@@ -329,7 +333,7 @@ public class HpsDao extends AbstractDao {
 
 
     public static List<HpsDeathRegisterModel> getHpsDeathRegisterRecords() {
-        String sql = "SELECT * FROM " + Constants.TABLES.HPS_DEATH_REGISTER+" WHERE is_closed = 0 AND dod IS NOT NULL AND dob IS NOT NULL";
+        String sql = "SELECT * FROM " + Constants.TABLES.HPS_DEATH_REGISTER + " WHERE is_closed = 0 AND dod IS NOT NULL AND dob IS NOT NULL";
 
         @SuppressLint("Range")
         DataMap<HpsDeathRegisterModel> dataMap = cursor -> {
@@ -1538,6 +1542,23 @@ public class HpsDao extends AbstractDao {
         DataMap<Integer> countMap = cursor -> getCursorIntValue(cursor, "count");
         List<Integer> countResults = readData(sql, countMap);
         return !countResults.isEmpty() && countResults.get(0) > 0;
+    }
+
+    public static Event getEventByFormSubmissionId(String formSubmissionId) {
+        String sql = "select json from event where formSubmissionId = '" + formSubmissionId + "'";
+        AbstractDao.DataMap dataMap = (c) -> {
+            Event event;
+            try {
+                event = (Event) HpsLibrary.getInstance().getEcSyncHelper().convert(new JSONObject(getCursorValue(c, "json")), Event.class);
+            } catch (JSONException e) {
+                Timber.e(e);
+                return null;
+            }
+
+            return event;
+        };
+
+        return (Event) AbstractDao.readSingleValue(sql, dataMap);
     }
 
 
